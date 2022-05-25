@@ -1,23 +1,40 @@
 import express from 'express'
 // import lusca from 'lusca' will be used later
 import dotenv from 'dotenv'
+import morgan from 'morgan'
+import cors from 'cors'
+import 'dotenv/config'
+import keys from './config/keys'
 
-import movieRouter from './routers/movie'
+//Initialization
+const app = express()
+
+// Importing routes
+import productRoutes from './routers/product'
+import userRoutes from './routers/user'
+import adminRoutes from './routers/admin'
+//More routes
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
 
-dotenv.config({ path: '.env' })
-const app = express()
-
 // Express configuration
-app.set('port', process.env.PORT || 3000)
+app.set('port', keys.PORT || 4000)
 
 // Global middleware
 app.use(apiContentType)
 app.use(express.json())
+//Other middlewares
+app.use(morgan('dev'))
+app.use(cors())
+app.use(express.json())
 
 // Set up routers
-app.use('/api/v1/movies', movieRouter)
+app.get('/', (req, res) => {
+  res.send('Hello World')
+})
+app.use('/products', productRoutes)
+app.use('/users', userRoutes)
+app.use(adminRoutes)
 
 // Custom API error handler
 app.use(apiErrorHandler)
