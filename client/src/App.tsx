@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import { useDispatch } from 'react-redux';
 import { fetchAllProducts } from './redux/actions/products.action';
+import ProductId from './components/Products/productById';
 
 
 export default function App() {
@@ -14,12 +15,14 @@ export default function App() {
   const dispatch = useDispatch()
 
 useEffect(() => {
-  dispatch(fetchAllProducts())
+  fetchAllProducts()(dispatch)
+  // dispatch(fetchAllProducts())
   }, [dispatch])
   return (
     <div className={theme === 'light' ? 'Principal': 'Principal-Dark'}>
       <Navbar/>
      <Routes>
+       <Route path="/products/:productId" element={<ProductId/>}/>
       <Route path="/admin" element={<Admin />} />  
       <Route  path="/" element={<Home />}/>
     </Routes>  
