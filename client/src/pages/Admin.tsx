@@ -1,8 +1,8 @@
 import React from 'react'
-
+import '../styles/pages/Admin.scss'
 const Admin = () => {
   return (
-    <div>Admin</div>
+    <div className="admin">Admin</div>
   )
 }
 
