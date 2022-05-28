@@ -5,7 +5,7 @@ const Products = ({product}:any) => {
   return (
     <div className="single_product"  >
       <div className="image">
-        <img style={{width: '100px', height: '80%'}} src="https://res.cloudinary.com/dqaerysgb/image/upload/v1648218398/istockphoto-1132926013-612x612_t1xwec.jpg" alt={product.name}/>
+        <img src="https://res.cloudinary.com/dqaerysgb/image/upload/v1648218398/istockphoto-1132926013-612x612_t1xwec.jpg" alt={product.name}/>
       </div>
       <div className="info">
         <span>Category: {product.category}</span>
@@ -19,10 +19,14 @@ const Products = ({product}:any) => {
         <p>{product.price}</p>
      </div>
      </div>
-     
-      <Link to={`/products/${product._id}`}>
-        <button>Details</button>
+     <div className="buttons">
+      <button className="btn btn-add">Add to cart</button>
+
+       <Link to={`/products/${product._id}`}>
+        <button className="btn btn-details">Details</button>
       </Link>
+     </div>
+      
       </div>
     </div>
   )
