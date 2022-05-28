@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import { useDispatch } from 'react-redux';
 import { fetchAllProducts } from './redux/actions/products.action';
 import ProductId from './components/Products/productById';
+import Login from './pages/Login';
 
 
 export default function App() {
@@ -24,6 +25,7 @@ useEffect(() => {
      <Routes>
        <Route path="/products/:productId" element={<ProductId/>}/>
       <Route path="/admin" element={<Admin />} />  
+      <Route path="/login" element={<Login />} />
       <Route  path="/" element={<Home />}/>
     </Routes>  
     </div>
