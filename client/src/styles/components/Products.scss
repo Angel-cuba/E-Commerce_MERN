@@ -46,23 +46,11 @@
     width: 90%;
     height: 60px;
     border-radius: 8px;
+    display: flex;
+    justify-content: space-around;
      small{
     color: #8c8c8c;
     }
-.left{
-  position: absolute;
-  top: 5%;
-  left: 0;
-  width: 50%;
-  height: 100%;
-}
-.right{
-  position: absolute;
-  top: 5%;
-  right: 0;
-  width: 50%;
-  height: 100%;
-}
 }
 .buttons{
   width: 100%;

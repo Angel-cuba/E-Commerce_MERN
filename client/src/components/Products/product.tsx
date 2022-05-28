@@ -18,6 +18,10 @@ const Products = ({product}:any) => {
         <small>Price</small>
         <p>{product.price}</p>
      </div>
+      <div className="right">
+        <small>Rating</small>
+        <p>4.5</p>
+     </div>
      </div>
      <div className="buttons">
       <button className="btn btn-add">Add to cart</button>
