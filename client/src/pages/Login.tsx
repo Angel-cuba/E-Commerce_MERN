@@ -1,16 +1,29 @@
 import React, { useState } from 'react'
-import { FaGoogle, FaGooglePlusSquare } from 'react-icons/fa'
+import { FaGooglePlusSquare } from 'react-icons/fa'
 import { Input } from '../components/Input'
 import '../styles/pages/Login.scss'
 
 
+const emailValidator = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+
 const Login = () => {
-  const [email, setEmail] = useState<any | null>('')
+  const [email, setEmail] = useState<any | null>({
+    error: false,
+    value: '',
+  })
   const [password, setPassword] = useState<any | null>('')
 
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
+    //Trim value and convert to lower case
+    const value = e.target.value.trim().toLocaleLowerCase()
+    //Test if is valid
+    const isValid = emailValidator.test(value)
+    setEmail({
+      error: !isValid,
+      value,
+      })
   }
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
@@ -20,7 +33,8 @@ const Login = () => {
     <div  className="login">
       <div className="login-form">
           <h1>Login</h1>
-            <Input type='text' name='email' placeholder='Enter email' value={email} onChange={handleEmail} style={styles}/>
+            <Input type='text' name='email' placeholder='Enter email' value={email.value} onChange={handleEmail} style={styles}/>
+            {email.error && <p>Please enter a valid email address.</p>}
             <Input type='password' name='password' placeholder='Enter password' value={password} onChange={handlePassword} style={styles}/>
             <button className="btn btn-login">Login</button>
     
