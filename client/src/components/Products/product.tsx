@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaCartPlus } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 const Products = ({product}:any) => {
@@ -24,8 +25,13 @@ const Products = ({product}:any) => {
      </div>
      </div>
      <div className="buttons">
-      <button className="btn btn-add">Add to cart</button>
-
+     <Link to={`/product/${product._id}/editing`}>
+ <button className="btn btn-add">
+       {/* <FaCartPlus/> */}
+         {/* Add to cart  */}
+         Edit
+        </button>
+        </Link>
        <Link to={`/products/${product._id}`}>
         <button className="btn btn-details">Details</button>
       </Link>

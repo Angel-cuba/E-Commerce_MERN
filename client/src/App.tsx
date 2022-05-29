@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { fetchAllProducts } from './redux/actions/products.action';
 import ProductId from './components/Products/productById';
 import Login from './pages/Login';
+import ProductForm from './components/Admin/ProductForm';
 
 
 export default function App() {
@@ -26,6 +27,8 @@ useEffect(() => {
        <Route path="/products/:productId" element={<ProductId/>}/>
       <Route path="/admin" element={<Admin />} />  
       <Route path="/login" element={<Login />} />
+      <Route path="/product" element={<ProductForm />} />
+      <Route path="/product/:id/editing" element={<ProductForm />} />
       <Route  path="/" element={<Home />}/>
     </Routes>  
     </div>

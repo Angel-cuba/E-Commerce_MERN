@@ -8,13 +8,10 @@ export interface IProducts {
 }
 
 
-export type CartItem = {
-  // product: IProducts;
-   id: number;
+export type IProduct= {
   name: string;
-  price: number;
   description: string;
   image: string;
   category: string;
-  quantity: number;
+  price: number;
 }

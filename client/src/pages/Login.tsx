@@ -33,9 +33,9 @@ const Login = () => {
     <div  className="login">
       <div className="login-form">
           <h1>Login</h1>
-            <Input type='text' name='email' placeholder='Enter email' value={email.value} onChange={handleEmail} style={styles}/>
+            <Input type='text' name='email' placeholder='Enter email' value={email.value} onChange={handleEmail} style={Styles}/>
             {email.error && <p>Please enter a valid email address.</p>}
-            <Input type='password' name='password' placeholder='Enter password' value={password} onChange={handlePassword} style={styles}/>
+            <Input type='password' name='password' placeholder='Enter password' value={password} onChange={handlePassword} style={Styles}/>
             <button className="btn btn-login">Login</button>
     
       <div className="line">or</div>
@@ -51,7 +51,7 @@ const Login = () => {
 export default Login
 
 
-const styles = {
+export const Styles = {
   width: '300px',
   height: '40px',
   borderRadius: '15px',

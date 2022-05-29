@@ -4,7 +4,7 @@ type InputProps = {
   type: string,
   name: string
   placeholder: string,
-  value: string,
+  value?: string,
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
   // onBlur: (event: React.FocusEvent<HTMLInputElement>) => void,
   // onFocus: (event: React.FocusEvent<HTMLInputElement>) => void,
@@ -12,12 +12,15 @@ type InputProps = {
   className?: string,
   // error: string,
   // touched: boolean,
+  min?: string,
+  max?: string,
+
 }
 
 
 
-export const Input = ({ type, name, placeholder, value, onChange, style }: InputProps) => {
+export const Input = ({ type, name, placeholder, value, onChange, style}: InputProps) => {
   return (
-    <input type="text" name={name} placeholder={placeholder} value={value} style={style} onChange={onChange} />
+    <input type={type} name={name} placeholder={placeholder} value={value} style={style} onChange={onChange} />
   )
 }
