@@ -1,36 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { NewProduct } from '../../api/requests'
+import { EditingProduct, NewProduct } from '../../api/requests'
 import { Styles } from '../../pages/Login'
 import { fetchProductById } from '../../redux/actions/products.action'
 import '../../styles/components/Admin/ProductForm.scss'
 import { AppState } from '../../types/ActionsType'
+import { handleToast } from '../../util/helpers'
 import { Input } from '../Input'
 import View from './View'
 
 const ProductForm = () => {
+const {id}: any =useParams()
+  const {product} = useSelector((state: AppState) => state.products)
+  console.log(product)
+
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [image, setImage] = useState<string>('')
   const [category, setCategory] = useState<string>('')
-  const [price, setPrice] =useState<number>(0)
+  const [price, setPrice] =useState<number>( 0)
+
+  // const [disabledButton, setDisabledButton] = useState<boolean>(true)
   const body = {name, description, image, category, price}
   console.log(body)
 
   const dispatch = useDispatch()
 
   
-const {id}: any =useParams()
 console.log('id',id)
 useEffect(() => {
   if(id) {
     fetchProductById(id)(dispatch)
   }
 },[id, dispatch])
-useSelector((state: AppState) => console.log(state))
-  const {product} = useSelector((state: AppState) => state.products)
-  console.log(product)
+
 
 
   const handleName= (e: React.ChangeEvent<HTMLInputElement>)=> {
@@ -61,9 +65,16 @@ useSelector((state: AppState) => console.log(state))
 //   setCategory(product.category)
 //   setPrice(product.price)
 // }
+const test = () => {
+  console.log('test')
+handleToast('Empty fields')
+}
 
   const handleSubmit = () => {
-    NewProduct(body)
+  if(id) {
+    EditingProduct(id, body)
+  } else
+   {  NewProduct(body)}
   }
   return (
     <div  className="productForm">
@@ -71,12 +82,14 @@ useSelector((state: AppState) => console.log(state))
         <div className="form">
         <h1>New Product</h1>
 
-          <Input type="text" name="name" placeholder='Name of product' value={product ? product.name : name} onChange={handleName} style={Styles}/>
-           <Input type="text" name="description" placeholder='Some description' value={product ? product.description : description} onChange={handleDescription} style={Styles}/>
-             <Input type="text" name="image" placeholder='Image' value={product ? product.image : image} onChange={handleImage} style={Styles}/> 
-             <Input type="text" name="category" placeholder='Category' value={product ? product.category : category} onChange={handleCategory} style={Styles}/>
-              <Input type="number" name="price" placeholder={id ? `The price is ${product?.price} €`: 'Price'} min='1' max='100'  onChange={handlePrice} style={Styles}/>
-             <button onClick={handleSubmit}>{id ? 'Editing' : 'Save'}</button>
+          <Input type="text" name="name" placeholder={!id ? 'Name' : `${product?.name}`} value={name}onChange={handleName} style={Styles} message={id && product?.name}/>
+           <Input type="text" name="description" placeholder={!id ? 'Description' : `${product?.description}`} value={description}onChange={handleDescription} style={Styles} message={id && product?.description}/>
+             <Input type="text" name="image" placeholder={!id  ? 'Image' : `${product?.image}`} value={image} onChange={handleImage} style={Styles} message={id && product?.image}/> 
+             <Input type="text" name="category" placeholder={!id  ? 'Category' : `${product?.category}`} value={category} onChange={handleCategory} style={Styles} message={id && product?.category}/>
+              <Input type="number" name="price" placeholder={id ? `The price is ${product?.price} €`: 'Price'} onChange={handlePrice} style={Styles} message={id && `${product?.price} €`}/>
+             {  
+               (id )&&( !name || !description || !image || !category || !price ) ? <button onClick={test}>Button disabled</button> : <button onClick={handleSubmit}>{id ? 'Editing' : 'Save'}</button> 
+             }
         </div>
         <div className="view">
 <h1>

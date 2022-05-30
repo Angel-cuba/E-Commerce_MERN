@@ -12,15 +12,26 @@ type InputProps = {
   className?: string,
   // error: string,
   // touched: boolean,
-  min?: string,
-  max?: string,
-
+  message?: string
 }
 
 
 
-export const Input = ({ type, name, placeholder, value, onChange, style}: InputProps) => {
+export const Input = ({ type, name, placeholder, value, onChange, style, message}: InputProps) => {
   return (
-    <input type={type} name={name} placeholder={placeholder} value={value} style={style} onChange={onChange} />
+    <>
+    <label style={{color: 'red', width: '80%', fontSize: '18px'}} htmlFor={name}>{name[0].toLocaleUpperCase() + name.slice(1)}: {message}</label>
+      <input type={type} name={name} placeholder={placeholder} value={value} style={style} onChange={onChange} />
+    </>
+  
+  )
+}
+
+export const InputLogin = ({ type, name, placeholder, value, onChange, style}: InputProps) => {
+  return (
+    <>
+      <input type={type} name={name} placeholder={placeholder} value={value} style={style} onChange={onChange} />
+    </>
+  
   )
 }
