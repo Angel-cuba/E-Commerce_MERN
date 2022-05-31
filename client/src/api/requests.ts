@@ -43,5 +43,13 @@ export const EditingProduct = async (id:string,product: IProduct) => {
       const data = await response.json()
       console.log(data)
       return data
+}
 
+export const DeletingProduct = async (id:string) => {
+      const response = await fetch(`http://localhost:3001/products/${id}/delete`, {
+            method: 'DELETE'
+      })
+      const data = await response.json()
+      console.log(data)
+      return data
 }

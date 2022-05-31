@@ -12,8 +12,9 @@ import View from './View'
 
 const ProductForm = () => {
 const {id}: any =useParams()
+const dispatch = useDispatch()
+
   const {product} = useSelector((state: AppState) => state.products)
-  console.log(product)
 
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
@@ -21,14 +22,9 @@ const {id}: any =useParams()
   const [category, setCategory] = useState<string>('')
   const [price, setPrice] =useState<number>( 0)
 
-  // const [disabledButton, setDisabledButton] = useState<boolean>(true)
-  const body = {name, description, image, category, price}
-  console.log(body)
-
-  const dispatch = useDispatch()
+const body = {name, description, image, category, price}
 
   
-console.log('id',id)
 useEffect(() => {
   if(id) {
     fetchProductById(id)(dispatch)
@@ -36,7 +32,7 @@ useEffect(() => {
 },[id, dispatch])
 
 
-
+//Value handlers
   const handleName= (e: React.ChangeEvent<HTMLInputElement>)=> {
     setName(e.target.value)
   }
@@ -52,21 +48,8 @@ useEffect(() => {
   const handlePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPrice(Number(e.target.value))
   }
-// const handleProductValues = ({target: {name, value}}: React.ChangeEvent<HTMLInputElement>) => {
-//   setProduct({
-//     ...product,
-//     [name]: value as any
-//   })
-// }
-// if(product) {
-//   setName(product.name)
-//   setDescription(product.description)
-//   setImage(product.image)
-//   setCategory(product.category)
-//   setPrice(product.price)
-// }
+
 const test = () => {
-  console.log('test')
 handleToast('Empty fields')
 }
 
@@ -80,7 +63,7 @@ handleToast('Empty fields')
     <div  className="productForm">
       <div className="container">
         <div className="form">
-        <h1>New Product</h1>
+        <h1>{id ? 'Editing Product' : 'New Product'}</h1>
 
           <Input type="text" name="name" placeholder={!id ? 'Name' : `${product?.name}`} value={name}onChange={handleName} style={Styles} message={id && product?.name}/>
            <Input type="text" name="description" placeholder={!id ? 'Description' : `${product?.description}`} value={description}onChange={handleDescription} style={Styles} message={id && product?.description}/>

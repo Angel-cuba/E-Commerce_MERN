@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FaGooglePlusSquare } from 'react-icons/fa'
-import { Input } from '../components/Input'
+import { InputLogin } from '../components/Input'
 import '../styles/pages/Login.scss'
 
 
@@ -33,9 +33,9 @@ const Login = () => {
     <div  className="login">
       <div className="login-form">
           <h1>Login</h1>
-            <Input type='text' name='email' placeholder='Enter email' value={email.value} onChange={handleEmail} style={Styles}/>
+            <InputLogin type='text' name='email' placeholder='Enter email' value={email.value} onChange={handleEmail} style={Styles}/>
             {email.error && <p>Please enter a valid email address.</p>}
-            <Input type='password' name='password' placeholder='Enter password' value={password} onChange={handlePassword} style={Styles}/>
+            <InputLogin type='password' name='password' placeholder='Enter password' value={password} onChange={handlePassword} style={Styles}/>
             <button className="btn btn-login">Login</button>
     
       <div className="line">or</div>

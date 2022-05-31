@@ -4,7 +4,7 @@ import { Toaster } from 'react-hot-toast'
 const View = ({body}: any) => {
   return (
     <div>
-      <h2>{body.name ? body.name : 'Missing data'}</h2>
+      <h2>{body.name ? body.name : 'Missing name'}</h2>
       <h2>{body.description ? body.description : 'Missing description'}</h2>
       <h2>{body.image ? body.image : 'Missing image'}</h2>
       <h2>{body.category ? body.category : 'Missing category'}</h2>
