@@ -10,13 +10,13 @@ export const signUp = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { name, lastname, email, password, role } = req.body
+  const { name, lastname, picture, email, role } = req.body
 
   const user = new User({
     name,
     lastname,
+    picture,
     email,
-    password,
     role,
   })
   try {
@@ -67,30 +67,13 @@ export const deletingUser = async (
   }
 }
 
-//Login
-// export const signIn = async(req: Request, res: Response, next: NextFunction) => {
-//     const {email, password} = req.body
-//     try {
-//         //Checking if user exists
-//     const user = await userService.loginUser(email);
-//      if(!user)return  res.status(404).send(`User with email: ${email} not found`)
-//      //Checking if password is correct
-//  //const isMatch = user.comparePassword(req.body.password)
-//   const isMatch = await bcrypt.compareSync(password, user.password);
-//     if(!isMatch) {
-//         return res.status(404).send(`Password ${password} is incorrect`)
-//         }else {
-//             //Generate token
-//     const userToken = await jwt.sign(
-//         {email: user.email},
-//          keys.PRIVATE_KEY as string,
-//          {
-//         expiresIn: 86400 // expires in 24 hours
-//     })
-//     res.status(200).json({message: "User logged in successfully", token:userToken, user});
-//         }
 
-//     } catch (error) {
-//         res.status(400).send(error)
-//     }
-// }
+export const login = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.log('req.user', req.user)
+  const message = 'Login'
+  res.json({ message })
+}

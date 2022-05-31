@@ -8,6 +8,10 @@ const getUserById = async (id: string): Promise<IUser | null> => {
   return User.findById(id)
 }
 
+const getUserByEmail = async (email: string): Promise<IUser | null> => {
+  return User.findOne({ email })
+}
+
 const updateAnUser = async (id: string, user: IUser): Promise<IUser | null> => {
   return User.findByIdAndUpdate(id, user)
 }
@@ -23,6 +27,7 @@ const getAllUsers = async (): Promise<IUser[]> => {
 export default {
   createUser,
   getUserById,
+  getUserByEmail,
   updateAnUser,
   deleteAnUser,
   getAllUsers,

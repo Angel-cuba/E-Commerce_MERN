@@ -1,5 +1,5 @@
 import express from 'express'
-// import lusca from 'lusca' will be used later
+import passport from 'passport' 
 import dotenv from 'dotenv'
 import morgan from 'morgan'
 import cors from 'cors'
@@ -16,6 +16,7 @@ import adminRoutes from './routers/admin'
 //More routes
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
+import loginWithGoogle from './passport/GoogleStrategy'
 
 // Express configuration
 app.set('port', keys.PORT || 4000)
@@ -27,6 +28,9 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 app.use(express.json())
+//Passport middleware
+app.use(passport.initialize())
+passport.use(loginWithGoogle())
 
 // Set up routers
 app.get('/', (req, res) => {
