@@ -14,6 +14,7 @@ const ProductId = () => {
   }, [productId, dispatch])
 
 console.log(product)
+
   return (
    <>
     {product && 
@@ -21,7 +22,9 @@ console.log(product)
         <div className="product">
           {product.name}
         </div>
+        
       </div>
+
     }
    </>
   )

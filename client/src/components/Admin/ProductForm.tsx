@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { FaTrashAlt } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { EditingProduct, NewProduct } from '../../api/requests'
+import { useNavigate, useParams } from 'react-router-dom'
+import { DeletingProduct, EditingProduct, NewProduct } from '../../api/requests'
 import { Styles } from '../../pages/Login'
-import { fetchProductById } from '../../redux/actions/products.action'
+import { fetchAllProducts, fetchProductById } from '../../redux/actions/products.action'
 import '../../styles/components/Admin/ProductForm.scss'
 import { AppState } from '../../types/ActionsType'
 import { handleToast } from '../../util/helpers'
@@ -13,8 +14,10 @@ import View from './View'
 const ProductForm = () => {
 const {id}: any =useParams()
 const dispatch = useDispatch()
+const navigate = useNavigate()
 
   const {product} = useSelector((state: AppState) => state.products)
+  console.log(product)
 
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
@@ -59,6 +62,22 @@ handleToast('Empty fields')
   } else
    {  NewProduct(body)}
   }
+
+    const handleDelete = (id: any) => {
+    console.log('delete with id: ' + id)
+    DeletingProduct(id)
+  fetchAllProducts()(dispatch)
+  handleToast('Hold')
+  }
+
+  const handleMessage = () => {
+    handleToast('Message')
+    setTimeout(() => {
+      navigate('/')
+    }, 3500)
+  }
+    
+  // navigate('/')
   return (
     <div  className="productForm">
       <div className="container">
@@ -80,8 +99,14 @@ handleToast('Empty fields')
 </h1>
         <View body={body}/>
           </div>
+       <div className="" onClick={handleMessage}>
+      <button className="btn-delete" onClick={() =>handleDelete(id && product?._id)}>
+        <FaTrashAlt/>
+     
+      </button>
+      </div> 
       </div>
-    </div>
+    </div> 
   )
 }
 

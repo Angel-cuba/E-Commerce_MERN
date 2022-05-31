@@ -1,7 +1,9 @@
 import React from 'react'
+import { FaTrashAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 const Products = ({product}:any) => {
+
   return (
     <div className="single_product"  >
       <div className="image">
@@ -37,6 +39,7 @@ const Products = ({product}:any) => {
      </div>
       
       </div>
+      
     </div>
   )
 }

@@ -7,6 +7,7 @@ import '../../styles/components/Products.scss'
 
 const ProductsView = () => {
  const {allProducts} = useSelector((state: AppState) => state.products)
+ console.log(allProducts)
 
   return (
     <div className="product_container">
