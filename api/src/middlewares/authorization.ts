@@ -1,18 +1,26 @@
-import jwt from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express'
+import jwt from 'jsonwebtoken'
+import { ForbiddenError } from '../helpers/apiError'
+import keys from '../config/keys'
 
-
-
-export default function verifyAuth(req: Request, res: Response, next: NextFunction) {
-  const tokenFromRequest = req.headers.authorization || '';
-  if (!tokenFromRequest) return res.status(401).send('Access denied. No token provided.');
+export default function verifyAuth(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const auth = req.headers.authorization || ''
+  console.log(req.headers)
 
   try {
-    const token = tokenFromRequest.split(' ')[1];
-    const verifiedUser = jwt.verify(token, process.env.TOKEN_SECRET  as string);
-    req.user = verifiedUser;
-    next();
-  } catch (err) {
-    res.status(400).send('Invalid token.');
+    const token = auth.split(' ')[1]
+    console.log('token-', token)
+    const PRIVATE_KEY = keys.PRIVATE_KEY as string
+
+    //  const verify = jwt.verify(token, PRIVATE_KEY)
+    //   console.log('verify', verify);
+
+    next()
+  } catch (error) {
+    console.log('error: ', error)
   }
 }

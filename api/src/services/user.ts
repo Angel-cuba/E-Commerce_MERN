@@ -1,26 +1,29 @@
-import User, { IUser } from '../models/User'
+import User, { UserInterface } from '../models/User'
 
-const createUser = async (user: IUser): Promise<IUser> => {
+const createUser = async (user: UserInterface): Promise<UserInterface> => {
   return user.save()
 }
 
-const getUserById = async (id: string): Promise<IUser | null> => {
+const getUserById = async (id: string): Promise<UserInterface | null> => {
   return User.findById(id)
 }
 
-const getUserByEmail = async (email: string): Promise<IUser | null> => {
+const getUserByEmail = async (email: string): Promise<UserInterface | null> => {
   return User.findOne({ email })
 }
 
-const updateAnUser = async (id: string, user: IUser): Promise<IUser | null> => {
+const updateAnUser = async (
+  id: string,
+  user: UserInterface
+): Promise<UserInterface | null> => {
   return User.findByIdAndUpdate(id, user)
 }
 
-const deleteAnUser = async (id: string): Promise<IUser | null> => {
+const deleteAnUser = async (id: string): Promise<UserInterface | null> => {
   return User.findByIdAndDelete(id)
 }
 
-const getAllUsers = async (): Promise<IUser[]> => {
+const getAllUsers = async (): Promise<UserInterface[]> => {
   return User.find({ role: 'USER' })
 }
 

@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import verifyAuth from '../middlewares/authorization'
 const router = Router()
 
 import {
@@ -10,7 +11,7 @@ import {
   updateProduct,
 } from '../controllers/products'
 
-router.get('/all', allProducts)
+router.get('/all', verifyAuth, allProducts)
 router.get('/search', getProductsBySearch)
 router.post('/create', createProduct)
 /**Id is required */

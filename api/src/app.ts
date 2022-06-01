@@ -1,5 +1,5 @@
 import express from 'express'
-import passport from 'passport' 
+import passport from 'passport'
 import dotenv from 'dotenv'
 import morgan from 'morgan'
 import cors from 'cors'

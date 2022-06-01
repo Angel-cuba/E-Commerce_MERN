@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import User, { IUser } from '../models/User'
+import User, { UserInterface } from '../models/User'
 import userService from '../services/user'
 import * as bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -67,13 +67,21 @@ export const deletingUser = async (
   }
 }
 
-
 export const login = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  console.log('req.user', req.user)
+  console.log('from login on backend', req.user)
+  const user = req.user as { email: string }
   const message = 'Login'
-  res.json({ message })
+  const token = jwt.sign(
+    {
+      email: user.email,
+    },
+    keys.PRIVATE_KEY as string,
+    { expiresIn: '1h' }
+  )
+
+  res.json({ token })
 }
