@@ -1,9 +1,42 @@
 import { IProduct } from "../types/types"
+import axios from 'axios'
 
-export const AllProducts = async () => {
-     const response = await fetch('http://localhost:3001/products/all')
-      const data =  await response.json()
-      return data
+
+const API = axios.create({ baseURL: 'http://localhost:3001/products' })
+//Sending headers
+API.interceptors.request.use((req) => {
+      const HEADERS = req.headers as any
+      // const local= localStorage.getItem('token') as any
+      // const token = JSON.parse(local)
+      // console.log('token: ', token);
+      const localToken = JSON.parse(localStorage.getItem('token') as any)
+      console.log('localToken: ', localToken);
+      if(localToken) {
+           HEADERS.Authorization = `Bearer ${localToken}` 
+      }
+      console.log('HEADERS: ', HEADERS);
+      return req 
+})
+ export const sendHeaders = async()=> await axios.post('http://localhost:3001', 
+ {},
+ {headers: {
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('token') as any)}`
+      }})
+
+
+// export const AllProducts = async () => await fetch('http://localhost:3001/products/all').then((response) => response.json()).then((data) => data)
+ //export const AllProducts = async () => axios.get('http://localhost:3001/products/all').then((response) => response.data)
+export const AllProducts = async () =>{
+      let token = localStorage.getItem('token') as any
+      console.log('token: ', token);
+      await axios.get('http://localhost:3001/products/all', 
+       {
+           headers: {
+                  Authorization: `Bearer ${token}`
+            }
+     }
+     )
+      .then((response) => response.data)
 }
 
 export const ProductById = async (id: string) => {

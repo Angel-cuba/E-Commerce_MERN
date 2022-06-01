@@ -9,16 +9,17 @@ const Login = () => {
   const [token, setToken] = useState('')
 
   const handleGoogleResponse = async (response: any) => {
-    const googleToken = response.credential
-    console.log(googleToken);
+    const idToken = response.credential
 
   const res = await  axios.post('http://localhost:3001/users/signin-google', 
     {},
     { 
       headers: {
-        Authorization: `Bearer ${googleToken}`
+        Authorization: `Bearer ${idToken}`
       }
     })
+    localStorage.setItem('token', res.data.token)
+    console.log(res.data.token)
     setToken(res.data.token);
   }
 
