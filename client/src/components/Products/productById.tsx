@@ -6,11 +6,12 @@ import { AppState } from '../../types/ActionsType'
 import '../../styles/components/Products.scss'
 
 const ProductId = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<any>()
   const {productId}: any =useParams()
   const {product} = useSelector((state: AppState) => state.products)
+  
   useEffect(() => {
-    fetchProductById(productId)(dispatch)
+    dispatch(fetchProductById(productId))
   }, [productId, dispatch])
 
 console.log(product)

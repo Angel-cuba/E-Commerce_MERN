@@ -13,7 +13,7 @@ import View from './View'
 
 const ProductForm = () => {
 const {id}: any =useParams()
-const dispatch = useDispatch()
+const dispatch = useDispatch<any>()
 const navigate = useNavigate()
 
   const {product} = useSelector((state: AppState) => state.products)
@@ -30,7 +30,7 @@ const body = {name, description, image, category, price}
   
 useEffect(() => {
   if(id) {
-    fetchProductById(id)(dispatch)
+    dispatch(fetchProductById(id))
   }
 },[id, dispatch])
 
@@ -66,8 +66,8 @@ handleToast('Empty fields')
     const handleDelete = (id: any) => {
     console.log('delete with id: ' + id)
     DeletingProduct(id)
-  fetchAllProducts()(dispatch)
-  handleToast('Hold')
+    dispatch(fetchAllProducts())
+    handleToast('Hold')
   }
 
   const handleMessage = () => {

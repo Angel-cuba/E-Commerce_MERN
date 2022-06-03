@@ -21,3 +21,9 @@ export type DecodedUser = {
   iat: string
   exp: string
 }
+
+export type DataOfUser = {
+  name: string
+  picture: string
+  role: string
+}

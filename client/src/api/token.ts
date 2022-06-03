@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { DecodedUser } from '../types/types';
+import { DataOfUser, DecodedUser } from '../types/types';
 import { BASE_URL } from '../util/helpers';
 
 export const verifyToken = async () => {
@@ -18,9 +18,11 @@ export const verifyToken = async () => {
       }
     );
     const isVerified: boolean = response.data.isVerified;
-    const decodedUser: DecodedUser = response.data.user;
+    const decodedUser: DecodedUser = response.data.user.decodedUser;
+    const dataOfUser: DataOfUser = response.data.user.dataOfUser;
+    console.log(response.data.user);
 
-    return { isVerified, decodedUser };
+    return { isVerified, decodedUser, dataOfUser };
   } catch (error: any) {
     return { isVerified: false, decodedUser: null };
   }
