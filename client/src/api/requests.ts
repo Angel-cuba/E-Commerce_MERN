@@ -36,7 +36,7 @@ export const NewProduct = async (product: IProduct) => {
     },
   }
   );
-  console.log(response);
+  console.log(response.data);
   return response;
 };
 

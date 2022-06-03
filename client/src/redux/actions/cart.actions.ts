@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { ADD_CART, REMOVE_FROM_CART } from "../../types/ActionsType";
+import { ADD_CART, REMOVE_FROM_CART } from "../../types/CartActions";
 import { IProducts } from "../../types/types";
 
 

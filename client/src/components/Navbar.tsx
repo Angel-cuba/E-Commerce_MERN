@@ -1,9 +1,27 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import '../styles/components/Navbar.scss'
+// import { AppState } from '../types/ActionsType'
 import { ToggleTheme } from './ToggleTheme'
 
-const Navbar = () => {
+const Navbar = ({user}: any) => {
+  const [role, setRole] = React.useState('')
+
+  React.useEffect(() => {
+    if(user){
+      setRole(user[0])
+    }
+  }, [user])
+
+// const {allProducts } =useSelector((state :AppState)=> state.products)
+
+  const navigate = useNavigate()
+
+  const logoutUser = () => {
+    localStorage.clear()
+    navigate('/login')
+  }
   return (
     <div  className="navbar">
       <div className="navbar-container">
@@ -17,11 +35,19 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/admin">Admin</Link>
+              <Link to="/admin">{role === 'ADMIN' ? 'Admin' : 'Developer'}</Link>
             </li>
-            <li>
+            {
+              !user ?
+              <li>
               <Link to="/login">Login</Link>
             </li>
+            :
+            <li>
+              <Link to="/login" onClick={logoutUser}>Logout</Link>
+            </li>
+            
+            }
           </ul>
             </div>
             </div>

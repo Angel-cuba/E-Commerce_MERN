@@ -1,4 +1,4 @@
-import { ADD_CART, CartActions, CartState, REMOVE_FROM_CART } from "../../types/ActionsType";
+import { ADD_CART, CartActions, CartState, REMOVE_FROM_CART } from "../../types/CartActions"
 
 export const cartInitialState: CartState = {
   inCart: []
