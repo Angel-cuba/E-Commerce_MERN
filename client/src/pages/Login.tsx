@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {GoogleLogin, GoogleOAuthProvider} from '@react-oauth/google'
 import axios from 'axios'
 import '../styles/pages/Login.scss'
@@ -6,8 +6,6 @@ import '../styles/pages/Login.scss'
 
 
 const Login = () => {
-  const [token, setToken] = useState('')
-
   const handleGoogleResponse = async (response: any) => {
     const idToken = response.credential
 
@@ -19,8 +17,6 @@ const Login = () => {
       }
     })
     localStorage.setItem('token', res.data.token)
-    console.log(res.data.token)
-    setToken(res.data.token);
   }
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID

@@ -1,31 +1,34 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import ProductsView from '../components/Products/productsView'
-import { fetchAllProducts } from '../redux/actions/products.action'
-import '../styles/pages/Home.scss'
-import axios from 'axios'
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+import ProductsView from '../components/Products/productsView';
+import { fetchAllProducts } from '../redux/actions/products.action';
+import { verifyToken } from '../api/token';
+import '../styles/pages/Home.scss';
+
 
 const Home = () => {
-   const dispatch = useDispatch()
+  const dispatch = useDispatch<any>();
 
-useEffect(() => {
-  fetchAllProducts()(dispatch)
-  // dispatch(fetchAllProducts())
-  test()
-  }, [dispatch])
+  useEffect(() => {
+    // handleCheckValidation();
+    dispatch(fetchAllProducts())
+  }, [dispatch]);
 
-  const test = () => {
-    console.log('test')
-    axios.get('http://localhost:3001/products/all').then(res => {
-      console.log(res.data)
+
+  const handleCheckValidation = async () => {
+    const { isVerified, decodedUser } = await verifyToken();
     
-  })}
+    console.log('isVerified', isVerified);
+    console.log('user', decodedUser);
+  };
 
   return (
     <div className="home">
-      <ProductsView/>
+      <button onClick={handleCheckValidation}>CHECK VALIDATION</button>
+      <ProductsView />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

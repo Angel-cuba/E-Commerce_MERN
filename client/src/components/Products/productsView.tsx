@@ -6,7 +6,6 @@ import Products from './product'
 import '../../styles/components/Products.scss'
 
 const ProductsView = () => {
-  console.log(useSelector((state: AppState) => console.log(state)));
  const {allProducts} = useSelector((state: AppState) => state.products)
 //  console.log(allProducts)
 
