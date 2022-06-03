@@ -15,3 +15,9 @@ export type IProduct= {
   category: string;
   price: number;
 }
+
+export type DecodedUser = {
+  email: string
+  iat: string
+  exp: string
+}
