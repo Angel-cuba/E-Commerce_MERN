@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import User, { UserInterface } from '../models/User'
 import userService from '../services/user'
-import * as bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import keys from '../config/keys'
 
@@ -74,7 +73,6 @@ export const login = async (
 ) => {
   console.log('from login on backend', req.user)
   const user = req.user as { email: string }
-  const message = 'Login'
   const token = jwt.sign(
     {
       email: user.email,

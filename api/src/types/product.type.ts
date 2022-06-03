@@ -1,7 +1,7 @@
 import { Document } from 'mongoose'
 
 export type IProduct = Document & {
-  title: string
+  name: string
   price: number
   description: string
   image: string

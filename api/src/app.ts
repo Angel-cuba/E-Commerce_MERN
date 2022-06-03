@@ -17,6 +17,7 @@ import adminRoutes from './routers/admin'
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
 import loginWithGoogle from './passport/GoogleStrategy'
+import verifyAuth from './middlewares/authorization'
 
 // Express configuration
 app.set('port', keys.PORT || 4000)
@@ -33,8 +34,12 @@ app.use(passport.initialize())
 passport.use(loginWithGoogle())
 
 // Set up routers
-app.get('/', (req, res) => {
-  res.send('Hello World')
+app.post('/token/verify', verifyAuth, (req, res) => {
+  res.json({
+    status: 200,
+    isVerified: true,
+    user: req.user,
+  })
 })
 app.use('/products', productRoutes)
 app.use('/users', userRoutes)
