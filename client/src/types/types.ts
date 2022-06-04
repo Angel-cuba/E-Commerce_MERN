@@ -9,6 +9,7 @@ export interface IProducts {
 
 
 export type IProduct= {
+  _id?: string;
   name: string;
   description: string;
   image: string;

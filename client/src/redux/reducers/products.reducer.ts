@@ -1,4 +1,4 @@
-import {FetchActions, FETCH_PRODUCTS, FETCH_PRODUCT_BY_ID, ProductsState} from '../../types/ActionsType';
+import {ProductsActions, PRODUCTS, PRODUCT_BY_ID, NEW_PRODUCT, ProductsState, EDIT_PRODUCT, DELETE_PRODUCT} from '../../types/ActionsType';
 
 export const productsInitialState: ProductsState = {
   allProducts: [],
@@ -7,19 +7,40 @@ export const productsInitialState: ProductsState = {
 
 export default function countries(
   state = productsInitialState,
-  action: FetchActions
+  action: ProductsActions
 ){
   switch (action.type) {
-    case FETCH_PRODUCTS:
+    case PRODUCTS:
       return {
         ...state,
         allProducts: action.payload
       }
-    case FETCH_PRODUCT_BY_ID:
+    case PRODUCT_BY_ID:
       return {
         ...state,
         product: action.payload
       }
+    case NEW_PRODUCT:
+      return {
+        ...state,
+        allProducts: [...state.allProducts, action.payload]
+      }
+    case EDIT_PRODUCT:
+      return {
+        ...state,
+        allProducts: state.allProducts.map(product => {
+          if (product._id === action.payload._id) {
+            return action.payload
+          }
+          return product
+        })
+      }
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        allProducts: state.allProducts.filter(product => product._id !== action.payload._id)
+      }
+      
     default:
       return state
   }
