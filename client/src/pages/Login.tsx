@@ -6,6 +6,10 @@ import { useNavigate } from 'react-router-dom'
 
 
 const Login = () => {
+
+  React.useEffect(() => {
+    document.title = 'Login'
+  }, [])
   const navigate = useNavigate()
   const handleGoogleResponse = async (response: any) => {
     const idToken = response.credential

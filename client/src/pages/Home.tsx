@@ -15,20 +15,13 @@ const user = localStorage.getItem('token')
   const navigate = useNavigate()
 
 const [checkUser, setCheckUser] = React.useState<any>(false)
-
   useEffect(() => {
-    handleCheckValidation();
-    setTimeout(() => handlerUser(), 2000);
-  });
-  // useEffect(() => {
-  // })
-
-const handlerUser = () => {
-    if(user){
-      // setTimeout(() =>dispatch(fetchAllProducts()) , 1000)
-      dispatch(fetchAllProducts())
+    document.title = 'Home'
+   if(!user){
+      handleCheckValidation();
     }
-}
+    dispatch(fetchAllProducts());
+  });
 
   const handleCheckValidation = async () => {
     const { decodedUser, dataOfUser } = await verifyToken();
@@ -39,7 +32,7 @@ const handlerUser = () => {
     if(dataOfUser){
     localStorage.setItem('user', [dataOfUser?.role, dataOfUser?.name, dataOfUser?.picture ]as any )
     }
-    
+    return null
   };
 
   return (   

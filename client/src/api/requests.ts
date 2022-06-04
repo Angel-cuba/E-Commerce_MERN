@@ -6,7 +6,6 @@ import { BASE_URL } from '../util/helpers';
 
 export const AllProducts = async () => {
   let token = localStorage.getItem('token') as any;
-  console.log('token: ', token);
   const response = await axios.get(`${BASE_URL}/products/all`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -18,13 +17,12 @@ export const AllProducts = async () => {
 export const ProductById = async (id: string) => {
   let token = localStorage.getItem('token') as any;
 
-  const response = await fetch(`${BASE_URL}/products/${id}`, {
+  const response = await axios.get(`${BASE_URL}/products/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-  const data = await response.json();
-  return data;
+  return response.data;
 };
 
 export const NewProduct = async (product: IProduct) => {
@@ -37,7 +35,7 @@ export const NewProduct = async (product: IProduct) => {
   }
   );
   console.log(response.data);
-  return response;
+  return response.data;
 };
 
 export const EditingProduct = async (id: string, product: IProduct) => {

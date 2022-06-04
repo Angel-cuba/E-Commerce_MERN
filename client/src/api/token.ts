@@ -20,7 +20,7 @@ export const verifyToken = async () => {
     const isVerified: boolean = response.data.isVerified;
     const decodedUser: DecodedUser = response.data.user.decodedUser;
     const dataOfUser: DataOfUser = response.data.user.dataOfUser;
-    console.log(response.data.user);
+    console.log(response.data);
 
     return { isVerified, decodedUser, dataOfUser };
   } catch (error: any) {
