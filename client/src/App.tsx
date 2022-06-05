@@ -19,28 +19,25 @@ export default function App() {
 
   return (
     <div className={theme === 'light' ? 'Principal': 'Principal-Dark'}>
-       <Navbar user={userDetailsWithRole} userToken={userToken}/>
      <Routes>
        {
-          !userToken ?
-      <Route path="/login" element={<Login />} />
-          :
+          userToken ?
           <>
           
-          <Route path="admin" element={<Admin />} >
+      <Route path="admin" element={<Admin />} >
+          <Route path="newproduct" element={<ProductForm />} />
+          <Route path=":id/editing" element={<ProductForm />} />
+          <Route path="home" element={<Home />} />
+      </Route>  
 
-      <Route path="newproduct" element={<ProductForm />} />
-      <Route path=":id/editing" element={<ProductForm />} />
-      <Route path="home" element={<Home />} />
-          </Route>  
-
-     <Route path="/products/:productId" element={<ProductId/>}/>
-
-      <Route path="/notfound" element={<NotUserFound />} />
+     <Route path="products/:productId" element={<ProductId/>}/>
+      <Route path="notfound" element={<NotUserFound />} />
       <Route path="/" element={<Home />} />
-
-      <Route path="*" element={<Home/>}/>
+      <Route path="" element={<Home/>}/>
           </>
+          :
+      <Route path="login" element={<Login />} />
+
        }
 
        

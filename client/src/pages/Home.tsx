@@ -6,21 +6,37 @@ import { fetchAllProducts } from '../redux/actions/products.action';
 import { verifyToken } from '../api/token';
 import '../styles/pages/Home.scss';
 import { useNavigate } from 'react-router-dom';
-import NotUserFound from './NotUserFound';
+// import NotUserFound from './NotUserFound';
+import { verifyTokenExpiration } from '../util/decode';
+import Navbar from '../components/Navbar';
+import Login from './Login';
 
 
 const Home = () => {
-const user = localStorage.getItem('token')
+const userToken = localStorage.getItem('token') as string 
   const dispatch = useDispatch<any>();
   const navigate = useNavigate()
+
+   const userDetailsWithRole = localStorage.getItem('user')?.split(',') as any
+  console.log('user Role from backEnd: ',userDetailsWithRole)
+  // const userToken = localStorage.getItem('token')
 
   useEffect(() => {
     document.title = 'Home'
   //  if(!user){
-      handleCheckValidation();
+    handleCheckValidation();
     // }
+    // handleTokenValidation();
     dispatch(fetchAllProducts());
   });
+
+
+const handleTokenValidation = () => {
+    verifyTokenExpiration(userToken, navigate);
+
+    // verifyTokenExpiration(user, navigate)
+}
+
 
   const handleCheckValidation = async () => {
     const { decodedUser, dataOfUser } = await verifyToken();
@@ -35,8 +51,11 @@ const user = localStorage.getItem('token')
   };
 
   //if user is not found
-  if(!user){
-    return <NotUserFound/>
+  // if(!userToken){
+  //   return <NotUserFound/>
+  // }
+ if(!userToken){
+    return <Login/>
   }
 
   return (   
@@ -45,9 +64,12 @@ const user = localStorage.getItem('token')
       {/* !user || !checkUser ? <NotUserFound setCheckUser={setCheckUser}/> :   */}
       
       <div className="home">
+       <Navbar />
+
         {/* TODO: Remove this component  */}
-      {/* <button onClick={handleCheckValidation}>CHECK VALIDATION</button> */}
       <ProductsView />
+      <button onClick={handleTokenValidation}>CHECK VALIDATION</button>
+
     </div>
     
    </>

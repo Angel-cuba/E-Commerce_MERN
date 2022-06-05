@@ -22,11 +22,11 @@ const Login = () => {
         Authorization: `Bearer ${idToken}`
       }
     })
-    if(res.data.token){
-      navigate('/')
+    if(!res.data.token){
+      navigate('login')
     }
     else{
-      navigate('/login')
+      navigate('/')
     }
     localStorage.setItem('token', res.data.token)
   }

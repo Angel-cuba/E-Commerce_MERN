@@ -1,27 +1,33 @@
 import React from 'react'
-// import { useSelector } from 'react-redux'
+ import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import '../styles/components/Navbar.scss'
-// import { AppState } from '../types/ActionsType'
+ import { AppState } from '../types/ActionsType'
 import { ToggleTheme } from './ToggleTheme'
 
-const Navbar = ({user, userToken}: any) => {
+const Navbar = () => {
+   const userDetailsWithRole = localStorage.getItem('user')?.split(',') as any
+  const userToken = localStorage.getItem('token')
   const [role, setRole] = React.useState('')
+
+
+  console.log('user Role from backEnd: ',userDetailsWithRole)
   console.log('userRole: ', role);
 
   React.useLayoutEffect(() => {
-    if(user){
-      setRole(user[0])
+    if(userDetailsWithRole){
+      setRole(userDetailsWithRole[0])
     }
-  }, [ user])
+  }, [userDetailsWithRole])
 
 // const {allProducts } =useSelector((state :AppState)=> state.products)
+useSelector((state: AppState) => console.log('state: ', state))
 
   const navigate = useNavigate()
 
   const logoutUser = () => {
     localStorage.clear()
-    navigate('/login')
+    navigate('login')
   }
   return (
     <div  className="navbar">
@@ -34,23 +40,28 @@ const Navbar = ({user, userToken}: any) => {
           <ToggleTheme/>
           <ul>
            {
-           !userToken ?
+           !userToken &&
               <li>
               <Link to="/login">Login</Link>
             </li>
-            :
+            }
+            {
+              userToken &&
             <>
              <li>
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="admin/newproduct">New</Link>
+              <Link to="admin/newproduct">History</Link>
             </li>
             <li>    
-              <Link to="/admin">{role === 'ADMIN' ? 'Admin' : 'Developer'}</Link>
+              <Link to="/admin">{role === 'ADMIN' && 'Admin' }</Link>
+            </li>
+            
+            <li onClick={logoutUser}>
+              <Link to="/login">Logout</Link>
             </li>
             </>
-            
             }
                      
           </ul>
