@@ -5,14 +5,15 @@ import '../styles/components/Navbar.scss'
 // import { AppState } from '../types/ActionsType'
 import { ToggleTheme } from './ToggleTheme'
 
-const Navbar = ({user}: any) => {
+const Navbar = ({user, userToken}: any) => {
   const [role, setRole] = React.useState('')
+  console.log('userRole: ', role);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if(user){
       setRole(user[0])
     }
-  }, [user])
+  }, [ user])
 
 // const {allProducts } =useSelector((state :AppState)=> state.products)
 
@@ -27,27 +28,31 @@ const Navbar = ({user}: any) => {
       <div className="navbar-container">
         <div className="navbar-logo">
           <h1>Logo</h1>
+          <h2>Role: {role}</h2>
           </div>
         <div className="navbar-menu">
           <ToggleTheme/>
           <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/admin">{role === 'ADMIN' ? 'Admin' : 'Developer'}</Link>
-            </li>
-            {
-              !user ?
+           {
+           !userToken ?
               <li>
               <Link to="/login">Login</Link>
             </li>
             :
-            <li>
-              <Link to="/login" onClick={logoutUser}>Logout</Link>
+            <>
+             <li>
+              <Link to="/">Home</Link>
             </li>
+            <li>
+              <Link to="admin/newproduct">New</Link>
+            </li>
+            <li>    
+              <Link to="/admin">{role === 'ADMIN' ? 'Admin' : 'Developer'}</Link>
+            </li>
+            </>
             
             }
+                     
           </ul>
             </div>
             </div>

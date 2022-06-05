@@ -23,7 +23,7 @@ const Login = () => {
       }
     })
     if(res.data.token){
-      navigate('/home')
+      navigate('/')
     }
     else{
       navigate('/login')

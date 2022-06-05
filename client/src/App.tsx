@@ -14,23 +14,37 @@ import NotUserFound from './pages/NotUserFound';
 export default function App() {
   const {theme} = useTheme()
    const userDetailsWithRole = localStorage.getItem('user')?.split(',') as any
-  // console.log('user Role from backEnd: ',userDetailsWithRole?[0])
+  console.log('user Role from backEnd: ',userDetailsWithRole)
+  const userToken = localStorage.getItem('token')
 
   return (
     <div className={theme === 'light' ? 'Principal': 'Principal-Dark'}>
-       <Navbar user={userDetailsWithRole}/>
+       <Navbar user={userDetailsWithRole} userToken={userToken}/>
      <Routes>
+       {
+          !userToken ?
       <Route path="/login" element={<Login />} />
+          :
+          <>
+          
+          <Route path="admin" element={<Admin />} >
 
-       
-      <Route path="/admin" element={<Admin />} />  
-      <Route path="/product" element={<ProductForm />} />
+      <Route path="newproduct" element={<ProductForm />} />
+      <Route path=":id/editing" element={<ProductForm />} />
+      <Route path="home" element={<Home />} />
+          </Route>  
+
      <Route path="/products/:productId" element={<ProductId/>}/>
-      <Route path="/product/:id/editing" element={<ProductForm />} />
 
       <Route path="/notfound" element={<NotUserFound />} />
-      <Route path="/home" element={<Home />} />
+      <Route path="/" element={<Home />} />
+
       <Route path="*" element={<Home/>}/>
+          </>
+       }
+
+       
+      
 
        
     </Routes>  

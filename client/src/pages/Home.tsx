@@ -14,12 +14,11 @@ const user = localStorage.getItem('token')
   const dispatch = useDispatch<any>();
   const navigate = useNavigate()
 
-const [checkUser, setCheckUser] = React.useState<any>(false)
   useEffect(() => {
     document.title = 'Home'
-   if(!user){
+  //  if(!user){
       handleCheckValidation();
-    }
+    // }
     dispatch(fetchAllProducts());
   });
 
@@ -35,15 +34,22 @@ const [checkUser, setCheckUser] = React.useState<any>(false)
     return null
   };
 
+  //if user is not found
+  if(!user){
+    return <NotUserFound/>
+  }
+
   return (   
    <>
-    {
-      !user || !checkUser ? <NotUserFound setCheckUser={setCheckUser}/> :  <div className="home">
+    
+      {/* !user || !checkUser ? <NotUserFound setCheckUser={setCheckUser}/> :   */}
+      
+      <div className="home">
         {/* TODO: Remove this component  */}
       {/* <button onClick={handleCheckValidation}>CHECK VALIDATION</button> */}
       <ProductsView />
     </div>
-    }
+    
    </>
   );
 };

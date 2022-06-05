@@ -26,7 +26,7 @@ const Products = ({product}:any) => {
      </div>
      </div>
      <div className="buttons">
-     <Link to={`/product/${product._id}/editing`}>
+     <Link to={`/admin/${product._id}/editing`}>
  <button className="btn btn-add">
        {/* <FaCartPlus/> */}
          {/* Add to cart  */}
