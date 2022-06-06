@@ -11,6 +11,8 @@ const Login = () => {
     document.title = 'Login'
   }, [])
   const navigate = useNavigate()
+
+  //Login with google
   const handleGoogleResponse = async (response: any) => {
     const idToken = response.credential
     
@@ -22,13 +24,14 @@ const Login = () => {
         Authorization: `Bearer ${idToken}`
       }
     })
+    localStorage.setItem('token', res.data.token)
+
     if(!res.data.token){
       navigate('login')
     }
     else{
       navigate('/')
     }
-    localStorage.setItem('token', res.data.token)
   }
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID

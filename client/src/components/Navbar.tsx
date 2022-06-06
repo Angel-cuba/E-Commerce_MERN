@@ -14,7 +14,7 @@ const Navbar = () => {
   console.log('user Role from backEnd: ',userDetailsWithRole)
   console.log('userRole: ', role);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     if(userDetailsWithRole){
       setRole(userDetailsWithRole[0])
     }
@@ -27,14 +27,14 @@ useSelector((state: AppState) => console.log('state: ', state))
 
   const logoutUser = () => {
     localStorage.clear()
-    navigate('login')
+    navigate('/login')
   }
   return (
     <div  className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
           <h1>Logo</h1>
-          <h2>Role: {role && role}</h2>
+          <h2>Role: {role}</h2>
           </div>
         <div className="navbar-menu">
           <ToggleTheme/>
