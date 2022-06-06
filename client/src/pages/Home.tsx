@@ -9,7 +9,9 @@ import { useNavigate } from 'react-router-dom';
 // import NotUserFound from './NotUserFound';
 import { verifyTokenExpiration } from '../util/decode';
 import Navbar from '../components/Navbar';
-import Login from './Login';
+import { useSelector } from 'react-redux';
+import { AppState } from '../types/ProductType';
+import Loading from '../components/Loading';
 
 
 const Home = () => {
@@ -17,25 +19,16 @@ const userToken = localStorage.getItem('token') as string
   const dispatch = useDispatch<any>();
   const navigate = useNavigate()
 
-   const userDetailsWithRole = localStorage.getItem('user')?.split(',') as any
-  console.log('user Role from backEnd: ',userDetailsWithRole)
-  // const userToken = localStorage.getItem('token')
+  const {loading} =useSelector((state: AppState) =>  state.products)
 
   useEffect(() => {
+
     document.title = 'Home'
-  //  if(!user){
-    handleCheckValidation();
-    // }
-    // handleTokenValidation();
-    dispatch(fetchAllProducts());
-  });
-
-
-const handleTokenValidation = () => {
+   handleCheckValidation();
     verifyTokenExpiration(userToken, navigate);
 
-    // verifyTokenExpiration(user, navigate)
-}
+    dispatch(fetchAllProducts());
+  },[dispatch]);
 
 
   const handleCheckValidation = async () => {
@@ -50,27 +43,23 @@ const handleTokenValidation = () => {
     return null
   };
 
-  //if user is not found
-  // if(!userToken){
-  //   return <NotUserFound/>
-  // }
- if(!userToken){
-    return <Login/>
+
+
+  if(loading){
+    return <Loading/>
   }
 
   return (   
    <>
     
-      {/* !user || !checkUser ? <NotUserFound setCheckUser={setCheckUser}/> :   */}
+      {/* { loading ? <Loading/> : */}
       
       <div className="home">
        <Navbar />
 
-        {/* TODO: Remove this component  */}
       <ProductsView />
-      <button onClick={handleTokenValidation}>CHECK VALIDATION</button>
-
     </div>
+{/* } */}
     
    </>
   );

@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import { AppState } from '../types/ActionsType'
+import { AppState } from '../types/ProductType'
 import createRootReducer from './reducers'
 import { cartInitialState } from './reducers/cart.reducer'
 import { productsInitialState } from './reducers/products.reducer'

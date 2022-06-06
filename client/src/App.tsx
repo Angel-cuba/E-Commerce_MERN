@@ -12,15 +12,13 @@ import NotUserFound from './pages/NotUserFound';
 
 export default function App() {
   const {theme} = useTheme()
-   const userDetailsWithRole = localStorage.getItem('user')?.split(',') as any
-  console.log('user Role from backEnd: ',userDetailsWithRole)
   const userToken = localStorage.getItem('token')
 
   return (
     <div className={theme === 'light' ? 'Principal': 'Principal-Dark'}>
      <Routes>
        {
-          userToken ?
+          !userToken  &&  <Route path="login" element={<Login />} /> }
           <>
           
       <Route path="/admin" element={<Admin />} >
@@ -32,17 +30,8 @@ export default function App() {
      <Route path="/products/:productId" element={<ProductId/>}/>
       <Route path="/notfound" element={<NotUserFound />} />
       <Route path="/" element={<Home />} />
-      <Route path="" element={<Home/>}/>
-          </>
-          :
-      <Route path="/login" element={<Login />} />
-
-       }
-
-       
-      
-
-       
+      <Route path="*" element={<Home/>}/>
+          </>          
     </Routes>  
     </div>
   );

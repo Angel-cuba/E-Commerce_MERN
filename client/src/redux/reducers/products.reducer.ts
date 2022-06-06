@@ -1,4 +1,4 @@
-import {ProductsActions, PRODUCTS, PRODUCT_BY_ID, NEW_PRODUCT, ProductsState, EDIT_PRODUCT, DELETE_PRODUCT} from '../../types/ActionsType';
+import {ProductsActions, PRODUCTS, PRODUCT_BY_ID, NEW_PRODUCT, ProductsState, EDIT_PRODUCT, DELETE_PRODUCT, START_LOADING, STOP_LOADING} from '../../types/ProductType';
 
 export const productsInitialState: ProductsState = {
   loading: true,
@@ -11,6 +11,16 @@ export default function countries(
   action: ProductsActions
 ){
   switch (action.type) {
+    case START_LOADING:
+      return {
+        ...state,
+        loading: true
+      }
+    case STOP_LOADING:
+      return {
+        ...state,
+        loading: false
+      }
     case PRODUCTS:
       return {
         ...state,

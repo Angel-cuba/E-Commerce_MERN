@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchProductById } from '../../redux/actions/products.action'
-import { AppState } from '../../types/ActionsType'
+import { AppState } from '../../types/ProductType'
 import '../../styles/components/Products.scss'
 
 const ProductId = () => {

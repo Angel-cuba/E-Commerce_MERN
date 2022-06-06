@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { AppState } from '../../types/ActionsType'
+import { AppState } from '../../types/ProductType'
 import { IProducts } from '../../types/types'
 import Products from './product'
 import '../../styles/components/Products.scss'
