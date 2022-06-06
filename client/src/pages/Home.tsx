@@ -16,6 +16,7 @@ import Loading from '../components/Loading';
 
 const Home = () => {
 const userToken = localStorage.getItem('token') as string 
+
   const dispatch = useDispatch<any>();
   const navigate = useNavigate()
 
@@ -24,7 +25,7 @@ const userToken = localStorage.getItem('token') as string
   useEffect(() => {
 
     document.title = 'Home'
-   handleCheckValidation();
+    handleCheckValidation();
     verifyTokenExpiration(userToken, navigate);
 
     dispatch(fetchAllProducts());
@@ -55,7 +56,7 @@ const userToken = localStorage.getItem('token') as string
       {/* { loading ? <Loading/> : */}
       
       <div className="home">
-       <Navbar />
+       <Navbar userToken={userToken} />
 
       <ProductsView />
     </div>

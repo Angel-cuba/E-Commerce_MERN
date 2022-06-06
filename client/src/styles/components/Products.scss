@@ -64,10 +64,9 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.392);
     padding: 5px;
     width: 90px;
-    height: 30px;
     cursor: pointer;
   }
-.btn-add{
+.btn-edit{
   background-color: #063d00;
     border: 1px solid #004be1e0;
     &:hover{
@@ -89,6 +88,32 @@
     color: #004be1e0;
     backdrop-filter: blur(15.4px);
     -webkit-backdrop-filter: blur(15.4px);
+  }
+}
+.btn-add{
+  width: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .fa-plus{
+    color: #bfbfbfe0;
+    font-size: 20px;
+    background-color: #004902e0;
+    padding: 3px;
+    border-radius: 5px;
+    &:hover{
+      box-shadow: 0 1px 5px 1px rgba(169, 245, 214, 0.31);
+    }
+  }
+  .fa-minus{
+    color: #bfbfbfe0;
+    font-size: 20px;
+    background-color: #a20000e0;
+    padding: 3px;
+    border-radius: 5px;
+    &:hover{
+      box-shadow: 0 1px 5px 1px rgba(245, 169, 169, 0.31);
+    }
   }
 }
 }

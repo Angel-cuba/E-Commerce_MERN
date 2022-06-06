@@ -1,8 +1,17 @@
 import React from 'react'
 // import { FaTrashAlt } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import UserButtons from './UserButtons'
 
 const Products = ({product}:any) => {
+  const location = useLocation()
+  const [adminLocation, setLocation] = React.useState(false)
+
+React.useEffect(() => {
+  if (location.pathname === '/admin/home') {
+    setLocation(true)
+  }
+}, [location])
 
   return (
     <div className="single_product"  >
@@ -26,16 +35,18 @@ const Products = ({product}:any) => {
      </div>
      </div>
      <div className="buttons">
+
+      {!adminLocation ? <UserButtons/> :
      <Link to={`/admin/${product._id}/editing`}>
- <button className="btn btn-add">
-       {/* <FaCartPlus/> */}
-         {/* Add to cart  */}
+      <button className="btn btn-edit">
          Edit
         </button>
         </Link>
+}
        <Link to={`/products/${product._id}`}>
         <button className="btn btn-details">Details</button>
       </Link>
+ 
      </div>
       
       </div>

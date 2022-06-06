@@ -1,24 +1,24 @@
 import React from 'react'
  import { useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import '../styles/components/Navbar.scss'
  import { AppState } from '../types/ProductType'
 import { ToggleTheme } from './ToggleTheme'
 
-const Navbar = () => {
+const Navbar = ({userToken}: any) => {
    const userDetailsWithRole = localStorage.getItem('user')?.split(',') as any
-  const userToken = localStorage.getItem('token')
-  const [role, setRole] = React.useState('')
 
+  // const location = useLocation()
+  const [role, setRole] = React.useState('')
 
   console.log('user Role from backEnd: ',userDetailsWithRole)
   console.log('userRole: ', role);
 
   React.useEffect(() => {
-    if(userDetailsWithRole){
+    if(userToken){
       setRole(userDetailsWithRole[0])
     }
-  }, [userDetailsWithRole])
+  }, [userToken,userDetailsWithRole])
 
 // const {allProducts } =useSelector((state :AppState)=> state.products)
 useSelector((state: AppState) => console.log('state: ', state))
