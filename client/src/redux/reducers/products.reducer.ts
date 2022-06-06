@@ -1,6 +1,7 @@
 import {ProductsActions, PRODUCTS, PRODUCT_BY_ID, NEW_PRODUCT, ProductsState, EDIT_PRODUCT, DELETE_PRODUCT} from '../../types/ActionsType';
 
 export const productsInitialState: ProductsState = {
+  loading: true,
   allProducts: [],
   product: null
 }

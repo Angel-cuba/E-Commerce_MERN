@@ -4,7 +4,6 @@ import './styles/App.scss';
 import { Routes, Route } from 'react-router-dom';
 import Admin from './pages/Admin';
 import Home from './pages/Home';
-import Navbar from './components/Navbar';
 import ProductId from './components/Products/productById';
 import Login from './pages/Login';
 import ProductForm from './components/Admin/ProductForm';
@@ -24,19 +23,19 @@ export default function App() {
           userToken ?
           <>
           
-      <Route path="admin" element={<Admin />} >
+      <Route path="/admin" element={<Admin />} >
           <Route path="newproduct" element={<ProductForm />} />
           <Route path=":id/editing" element={<ProductForm />} />
           <Route path="home" element={<Home />} />
       </Route>  
 
-     <Route path="products/:productId" element={<ProductId/>}/>
-      <Route path="notfound" element={<NotUserFound />} />
+     <Route path="/products/:productId" element={<ProductId/>}/>
+      <Route path="/notfound" element={<NotUserFound />} />
       <Route path="/" element={<Home />} />
       <Route path="" element={<Home/>}/>
           </>
           :
-      <Route path="login" element={<Login />} />
+      <Route path="/login" element={<Login />} />
 
        }
 

@@ -11,6 +11,7 @@ const ProductId = () => {
   const {product} = useSelector((state: AppState) => state.products)
   
   useEffect(() => {
+    document.title = "Product"
     dispatch(fetchProductById(productId))
   }, [productId, dispatch])
 

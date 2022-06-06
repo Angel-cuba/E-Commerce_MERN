@@ -34,7 +34,7 @@ useSelector((state: AppState) => console.log('state: ', state))
       <div className="navbar-container">
         <div className="navbar-logo">
           <h1>Logo</h1>
-          <h2>Role: {role}</h2>
+          <h2>Role: {role && role}</h2>
           </div>
         <div className="navbar-menu">
           <ToggleTheme/>
@@ -52,12 +52,13 @@ useSelector((state: AppState) => console.log('state: ', state))
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="admin/newproduct">History</Link>
+              <Link to="">History</Link>
             </li>
+            {role === 'ADMIN' &&
             <li>    
-              <Link to="/admin">{role === 'ADMIN' && 'Admin' }</Link>
+              <Link to="/admin">Admin</Link>
             </li>
-            
+             }
             <li onClick={logoutUser}>
               <Link to="/login">Logout</Link>
             </li>
