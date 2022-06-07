@@ -3,9 +3,13 @@ import {GoogleLogin, GoogleOAuthProvider} from '@react-oauth/google'
 import axios from 'axios'
 import '../styles/pages/Login.scss'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { signIn } from '../redux/actions/user.actions'
 
 
 const Login = () => {
+
+  const dispatch = useDispatch<any>()
 
   React.useEffect(() => {
     document.title = 'Login'
@@ -24,14 +28,18 @@ const Login = () => {
         Authorization: `Bearer ${idToken}`
       }
     })
-    localStorage.setItem('token', res.data.token)
+    console.log(res.data)
+    const user  = res.data.user
+    localStorage.setItem('user', JSON.stringify(user))
 
-    if(!res.data.token){
-      navigate('login')
-    }
-    else{
+    localStorage.setItem('token', res.data.token) 
+
+    // if(!res.data.token){
+    //   navigate('login')
+    // }
+    // else{
       navigate('/')
-    }
+    // }
   }
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID

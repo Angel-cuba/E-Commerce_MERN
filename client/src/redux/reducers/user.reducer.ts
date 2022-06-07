@@ -1,6 +1,11 @@
-import {LOGIN_USER, LOGOUT_USER} from '../../types/UserActions'
+import {LOGIN_USER, LOGOUT_USER, UserActions} from '../../types/UserActions'
+import {UserState} from '../../types/UserActions'
 
-const authReducer = (state = {authData: null}, action: any) => {
+export const userInitialState: UserState = {
+  user: null
+}
+
+export default function authReducer(state = userInitialState, action: UserActions) {
   switch (action.type) {
     case LOGIN_USER:
       return {
@@ -8,10 +13,11 @@ const authReducer = (state = {authData: null}, action: any) => {
         user: action.payload
       }
     case LOGOUT_USER:
-      return {}
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+      return { ...state, user: null }
     default:
       return state
   }
 }
 
-export default authReducer

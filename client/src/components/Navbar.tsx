@@ -22,7 +22,7 @@ const Navbar = ({userToken}: any) => {
 
   React.useEffect(() => {
     if(userDetailsWithRole){
-      setRole(userDetailsWithRole[0])
+      setRole(userDetailsWithRole[1])
     }
   }, [userToken,userDetailsWithRole])
 

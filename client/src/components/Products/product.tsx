@@ -8,7 +8,7 @@ const Products = ({product}:any) => {
   const [adminLocation, setLocation] = React.useState(false)
 
 React.useEffect(() => {
-  if (location.pathname === '/admin/home') {
+  if (location.pathname === '/admin') {
     setLocation(true)
   }
 }, [location])

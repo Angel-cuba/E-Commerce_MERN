@@ -1,4 +1,29 @@
-export const signIn = (user: any) =>{
+import { Dispatch} from 'redux'
+import { verifyToken } from '../../api/token'
+import { LOGIN_USER, LOGOUT_USER } from '../../types/UserActions'
+
+export const signIn = () => async(dispatch: Dispatch)=>{
+  try{
+    const data = await verifyToken()
+    dispatch({
+      type: LOGIN_USER,
+      payload: data 
+    })
+  }catch(error){
+    console.log(error)
+  }
 }
 
-export const logOut = (user: any) => {}
+export const logOut = () => async(dispatch: Dispatch)=>{
+  try{
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    dispatch({
+      type: LOGOUT_USER
+      
+    })
+  }catch(error){
+    console.log(error)
+  
+}
+}

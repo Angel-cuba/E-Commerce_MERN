@@ -29,17 +29,19 @@ const userToken = localStorage.getItem('token') as string
     verifyTokenExpiration(userToken, navigate);
 
     dispatch(fetchAllProducts());
+    
   },[dispatch]);
 
 
   const handleCheckValidation = async () => {
-    const { decodedUser, dataOfUser } = await verifyToken();
+    const { name, role } = await verifyToken();
  
-   if(!decodedUser || !dataOfUser){
-    navigate('/login')
-    }
-    if(dataOfUser){
-    localStorage.setItem('user', [dataOfUser?.role, dataOfUser?.name, dataOfUser?.picture ]as any )
+  //  if(!decodedUser || !name){
+  //   navigate('/login')
+  //   }
+    if(name){
+      
+    localStorage.setItem('user', [name, role ]as any )
     }
     return null
   };
@@ -51,17 +53,12 @@ const userToken = localStorage.getItem('token') as string
   }
 
   return (   
-   <>
-    
-      {/* { loading ? <Loading/> : */}
-      
+   <>  
       <div className="home">
        <Navbar userToken={userToken} />
 
       <ProductsView />
-    </div>
-{/* } */}
-    
+    </div>    
    </>
   );
 };

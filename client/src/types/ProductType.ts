@@ -1,5 +1,6 @@
 import { CartState } from "./CartActions";
 import { IProducts } from "./types";
+import { UserState } from "./UserActions";
 
 
 //Product types
@@ -62,7 +63,10 @@ export type ProductsState = {
   product: IProducts | null
 }
 
+
 export type AppState = {
   products: ProductsState,
-  cart: CartState
+  cart: CartState,
+  user: UserState
+
 }
