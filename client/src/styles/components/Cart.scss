@@ -1,0 +1,24 @@
+.cart {
+  position: absolute;
+  top: 1.5rem;
+  right: -9rem;
+  color: rgb(218, 218, 218);
+  z-index: 111;
+  .fa-cart{
+    font-size: 2em;
+
+  }
+}
+
+.cartSide{
+  position: relative;
+  .basket{
+  width: 100px;
+  height: 100px;
+  background-color: #ff0000;
+  position: absolute;
+  top: 1rem;
+  left: -150px;
+  z-index: 200;
+}
+}
