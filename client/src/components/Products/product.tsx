@@ -5,11 +5,11 @@ import UserButtons from './UserButtons'
 
 const Products = ({product}:any) => {
   const location = useLocation()
-  const [adminLocation, setLocation] = React.useState(false)
+  const [adminLocation, setAdminLocation] = React.useState(false)
 
 React.useEffect(() => {
   if (location.pathname === '/admin') {
-    setLocation(true)
+    setAdminLocation(true)
   }
 }, [location])
 

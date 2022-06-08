@@ -15,6 +15,7 @@ const Home = () => {
   const dispatch = useDispatch<any>();
 
   const {loading} =useSelector((state: AppState) =>  state.products)
+  console.log('lodaing', loading)
 
   useEffect(() => {
 
@@ -25,16 +26,18 @@ const Home = () => {
   },[dispatch]);
 
 
-  if(loading){
-    return <Loading/>
-  }
+  // if(loading){
+  //   return <Loading/>
+  // }
 
   return (   
    <>  
       <div className="home">
        <Navbar  />
 
-      <ProductsView />
+      {
+        !loading ?  <ProductsView/> : <Loading />
+      }
     </div>    
    </>
   );

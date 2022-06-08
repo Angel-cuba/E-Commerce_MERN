@@ -1,40 +1,20 @@
 import React from 'react'
 import {GoogleLogin, GoogleOAuthProvider} from '@react-oauth/google'
-import axios from 'axios'
 import '../styles/pages/Login.scss'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { handleGoogleResponse } from '../api/signInWithGoogle'
 
 
 const Login = () => {
-
-
-  React.useEffect(() => {
-    document.title = 'Login'
-  }, [])
+  const dispatch = useDispatch<any>()
+  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
   const navigate = useNavigate()
 
-  //Login with google
-  const handleGoogleResponse = async (response: any) => {
-    const idToken = response.credential
-    
+React.useEffect(() => {
+    document.title = 'Login'
+  }, [])
 
-  const res = await  axios.post('http://localhost:3001/users/signin-google', 
-    {},
-    { 
-      headers: {
-        Authorization: `Bearer ${idToken}`
-      }
-    })
-    localStorage.setItem('token', res.data.token) 
-    // if(!res.data.token){
-    //   navigate('login')
-    // }
-    // else{
-       navigate('/')
-    // }
-  }
-
-const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
   return (
     <div  className="login">
@@ -42,7 +22,7 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
           <h1>Login</h1>
           <GoogleOAuthProvider clientId={`${clientId}`}> 
             <GoogleLogin
-              onSuccess={handleGoogleResponse}
+              onSuccess={(response) =>handleGoogleResponse(response,dispatch, navigate)}
             />
           </GoogleOAuthProvider>
       </div>

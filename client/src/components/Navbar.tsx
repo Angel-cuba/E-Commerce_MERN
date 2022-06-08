@@ -11,22 +11,13 @@ import UserHistory from './User/History'
 const Navbar = () => {
 const {user}: any = useSelector((state: AppState) => state.user)
 const {loading} = useSelector((state: AppState) => state.products)
-// console.log(user)
+console.log(user)
 const userToken = localStorage.getItem('token')
-  // const location = useLocation()
   const [history, openHistory] = React.useState(false)
 
  const handleHistory = () => {
     openHistory(!history)
   }
-
-  // React.useEffect(() => {
-  //   if(userDetailsWithRole){
-  //     setRole(userDetailsWithRole[1])
-  //   }
-  // }, [userToken,userDetailsWithRole])
-
-// const {allProducts } =useSelector((state :AppState)=> state.products)
 
   const navigate = useNavigate()
 
@@ -43,8 +34,6 @@ const userToken = localStorage.getItem('token')
     return <Loading/>
   }
   return (
-<>
-
 <div  className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
@@ -84,12 +73,7 @@ const userToken = localStorage.getItem('token')
             
         </div> 
        </div>
-    </div>
-
-    {/* <Cart/>    */}
-   
-</>
-    
+    </div>   
   )
 }
 

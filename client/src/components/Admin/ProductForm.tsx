@@ -100,10 +100,10 @@ handleToast('Empty fields')
         <View body={body}/>
           </div>
        <div className="" onClick={handleMessage}>
-      <button className="btn-delete" onClick={() =>handleDelete(id && product?._id)}>
+     {id &&  <button className="btn-delete" onClick={() =>handleDelete(id && product?._id)}>
         <FaTrashAlt/>
      
-      </button>
+      </button>}
       </div> 
       </div>
     </div> 

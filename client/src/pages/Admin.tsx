@@ -1,7 +1,6 @@
 import React from 'react'
-import { FaArrowCircleLeft } from 'react-icons/fa'
+import { FaWindowClose } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
-import { Link, Outlet} from 'react-router-dom'
 import ProductForm from '../components/Admin/ProductForm'
 import Loading from '../components/Loading'
 import Navbar from '../components/Navbar'
@@ -11,9 +10,8 @@ import { AppState } from '../types/ProductType'
 
 
 const Admin = () => {
-  const [openNewProduct, setOpenNewProduct] = React.useState<boolean>(false)
-  const [openProducts, setOpenProducts] = React.useState<boolean>(false)
-  console.log(openNewProduct)
+  const [openNewProduct, setOpenNewProduct] = React.useState(false)
+  const [openProducts, setOpenProducts] = React.useState(false)
   React.useEffect(() => {
     document.title = 'Admin'
   }, [])
@@ -34,30 +32,41 @@ const handleOpenProducts = () => {
   setOpenProducts(!openProducts)
 }
 
-if(loading){
-  return <Loading/>
+const handleClose = () => {
+  setOpenNewProduct(false)
+  setOpenProducts(false)
 }
 
+// if(loading){
+//   return <Loading/>
+// }
+
   return (
-    <>
+   <>
+   {!loading ?  <>
     
-     <div className="admin">
+     <div className={(!openProducts && !openNewProduct) ? 'admin-empty' : 'admin'}>
        <Navbar />
 
        <div className="admin_links">
-         <button onClick={handleNewProduct}>New Product</button>
-          <button onClick={handleOpenProducts}>Products</button>
-      {/* <Link to="/admin/home">List of Product</Link>
-      <Link to="/admin/newproduct">New Product</Link> */}
-      <Link to="/admin">
-        <FaArrowCircleLeft className="arrow"/>
-      </Link>
+         <button className="btn"onClick={handleNewProduct}>New Product</button>
+          <button className="btn"onClick={handleOpenProducts}>Products</button>
+       
+     <div className="btnClose">
+            {(openNewProduct || openProducts) &&
+        <FaWindowClose className="close" onClick={handleClose}/>
+          }
+     
+     </div>
+      
        </div>
     </div>
   {openNewProduct && <ProductForm/>}
   {openProducts && <ProductsView />}
-    {/* <Outlet /> */}
     </>
+    : <Loading/>
+    }
+   </>
    
   )
 }
