@@ -72,10 +72,13 @@ export const login = async (
   next: NextFunction
 ) => {
   console.log('from login on backend', req.user)
-  const user = req.user as { email: string }
+  // const user = req.user as { email: string }
+  const user = req.user as any
+
   const token = jwt.sign(
     {
       email: user.email,
+      role: user.role,
     },
     keys.PRIVATE_KEY as string,
     { expiresIn: '1h' }
