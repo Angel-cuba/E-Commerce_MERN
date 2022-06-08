@@ -2,8 +2,7 @@ import jwtDecode, {JwtPayload} from 'jwt-decode';
 
 
 export const verifyTokenExpiration = async (token: string, navigate: any)  =>{
-console.log('verifyTokenExpiration');
-console.log(token);
+
   try {
     const decoded: JwtPayload = jwtDecode(token);
     if((decoded.exp as any) * 1000 < new Date().getTime()){

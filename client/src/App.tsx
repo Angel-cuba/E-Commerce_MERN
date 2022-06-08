@@ -17,21 +17,20 @@ export default function App() {
   return (
     <div className={theme === 'light' ? 'Principal': 'Principal-Dark'}>
      <Routes>
-       {
-          !userToken  &&  <Route path="login" element={<Login />} /> }
-          <>
+           <Route path="/" element={!userToken ? <Login /> : <Home />} /> 
           
-      <Route path="/admin" element={<Admin />} >
-          <Route path="newproduct" element={<ProductForm />} />
-          <Route path=":id/editing" element={<ProductForm />} />
-          <Route path="home" element={<Home />} />
-      </Route>  
+          
+      <Route path="/admin" element={<Admin />} />
+      <Route path="newproduct" element={<ProductForm />} />
+      <Route path=":id/editing" element={<ProductForm />} />
+      <Route path="/login" element={<Login />} />
+            
 
      <Route path="/products/:productId" element={<ProductId/>}/>
       <Route path="/notfound" element={<NotUserFound />} />
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Home/>}/>
       <Route path="*" element={<Home/>}/>
-          </>          
+                    
     </Routes>  
     </div>
   );

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { DataOfUser, DecodedUser } from '../types/types';
+import { DecodedUser } from '../types/types';
 import { BASE_URL } from '../util/helpers';
 
 export const verifyToken = async () => {
@@ -17,12 +17,13 @@ export const verifyToken = async () => {
         },
       }
     );
-    const isVerified: boolean = response.data.isVerified;
+    // const isVerified: boolean = response.data.isVerified;
     const decodedUser: DecodedUser = response.data.user.decodedUser;
-    const dataOfUser: DataOfUser = response.data.user.dataOfUser;
-console.log(isVerified, decodedUser)
-const {name, role} = dataOfUser
-    return { name, role };
+    //const dataOfUser: DataOfUser = response.data.user.dataOfUser;
+   //Data sent from the server to the client(initial state of the reducer)
+   console.log(response.data);
+const {email, role} = decodedUser
+    return { email, role };
   } catch (error: any) {
     return { isVerified: false, decodedUser: null };
   }

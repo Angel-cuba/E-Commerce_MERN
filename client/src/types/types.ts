@@ -21,6 +21,7 @@ export type DecodedUser = {
   email: string
   iat: string
   exp: string
+  role: string
 }
 
 export type DataOfUser = {

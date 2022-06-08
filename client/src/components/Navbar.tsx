@@ -1,39 +1,46 @@
 import React from 'react'
  import { useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../styles/components/Navbar.scss'
  import { AppState } from '../types/ProductType'
+import Loading from './Loading'
 import Cart from './Products/Cart'
 import { ToggleTheme } from './ToggleTheme'
 import UserHistory from './User/History'
 
-const Navbar = ({userToken}: any) => {
-   const userDetailsWithRole = localStorage.getItem('user')?.split(',') as any
-
+const Navbar = () => {
+const {user}: any = useSelector((state: AppState) => state.user)
+const {loading} = useSelector((state: AppState) => state.products)
+// console.log(user)
+const userToken = localStorage.getItem('token')
   // const location = useLocation()
-  const [role, setRole] = React.useState('')
   const [history, openHistory] = React.useState(false)
 
-  console.log('user Role from backEnd: ',userDetailsWithRole)
-  console.log('userRole: ', role);
  const handleHistory = () => {
     openHistory(!history)
   }
 
-  React.useEffect(() => {
-    if(userDetailsWithRole){
-      setRole(userDetailsWithRole[1])
-    }
-  }, [userToken,userDetailsWithRole])
+  // React.useEffect(() => {
+  //   if(userDetailsWithRole){
+  //     setRole(userDetailsWithRole[1])
+  //   }
+  // }, [userToken,userDetailsWithRole])
 
 // const {allProducts } =useSelector((state :AppState)=> state.products)
-useSelector((state: AppState) => console.log('state: ', state))
 
   const navigate = useNavigate()
 
   const logoutUser = () => {
     localStorage.clear()
     navigate('/login')
+  }
+
+  if(loading){
+    return <Loading/>
+  }
+
+  if(!user){
+    return <Loading/>
   }
   return (
 <>
@@ -42,7 +49,7 @@ useSelector((state: AppState) => console.log('state: ', state))
       <div className="navbar-container">
         <div className="navbar-logo">
           <h1>Logo</h1>
-          <h2>Role: {role}</h2>
+          <h2>Role: {user && user.role}</h2>
           </div>
         <div className="navbar-menu">
           <ToggleTheme/>
@@ -60,7 +67,7 @@ useSelector((state: AppState) => console.log('state: ', state))
             <li>
               <button onClick={handleHistory}>History</button>
             </li>
-            {role === 'ADMIN' &&
+            {user && user.role === 'ADMIN' &&
             <li>    
               <Link to="/admin">Admin</Link>
             </li>

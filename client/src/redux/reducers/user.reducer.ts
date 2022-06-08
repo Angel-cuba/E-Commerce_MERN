@@ -14,7 +14,6 @@ export default function authReducer(state = userInitialState, action: UserAction
       }
     case LOGOUT_USER:
       localStorage.removeItem('token')
-      localStorage.removeItem('user')
       return { ...state, user: null }
     default:
       return state
