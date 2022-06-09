@@ -15,31 +15,24 @@ const Home = () => {
   const dispatch = useDispatch<any>();
 
   const {loading} =useSelector((state: AppState) =>  state.products)
-  console.log('lodaing', loading)
+  console.log('loading', loading)
 
   useEffect(() => {
-
     document.title = 'Home'
     // verifyTokenExpiration(userToken, navigate);
     dispatch(fetchAllProducts());
-    
   },[dispatch]);
 
 
-  // if(loading){
-  //   return <Loading/>
-  // }
+  if(loading){
+    return <Loading/>
+  }
 
   return (   
-   <>  
       <div className="home">
        <Navbar  />
-
-      {
-        !loading ?  <ProductsView/> : <Loading />
-      }
+      <ProductsView/> 
     </div>    
-   </>
   );
 };
 

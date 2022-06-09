@@ -6,6 +6,7 @@ import ProductForm from '../components/Admin/ProductForm'
 import Loading from '../components/Loading'
 import Navbar from '../components/Navbar'
 import ProductsView from '../components/Products/productsView'
+import Users from '../components/User/Users'
 import '../styles/pages/Admin.scss'
 import { AppState } from '../types/ProductType'
 
@@ -13,13 +14,19 @@ import { AppState } from '../types/ProductType'
 const Admin = () => {
   const [openNewProduct, setOpenNewProduct] = React.useState(false)
   const [openProducts, setOpenProducts] = React.useState(false)
+  const [openUsers, setOpenUsers] = React.useState(false)
+  console.log('openUsers', openUsers);
+
+  
   React.useEffect(() => {
     document.title = 'Admin'
+    if(!localStorage.getItem('token')){
+      window.location.href = '/'
+    }
   }, [])
 
 const {loading} = useSelector((state: AppState) => state.products)
-const  {user} = useSelector((state: AppState) => state.user)
-console.log(user?.email)
+
 
 const handleNewProduct = () => {
   if(openProducts){
@@ -38,17 +45,19 @@ const handleOpenProducts = () => {
 const handleClose = () => {
   setOpenNewProduct(false)
   setOpenProducts(false)
+  setOpenUsers(false)
 }
 
 const handleFetchUsers = () => {
-  getAllUsers(user?.email)
+  // getAllUsers(user?.email)
+  setOpenUsers(!openUsers)
 }
 
   return (
    <>
    {!loading ?  <>
     
-     <div className={(!openProducts && !openNewProduct) ? 'admin-empty' : 'admin'}>
+     <div className={(!openProducts && !openNewProduct && !openUsers) ? 'admin-empty' : 'admin'}>
        <Navbar />
 
        <div className="admin_links">
@@ -67,6 +76,7 @@ const handleFetchUsers = () => {
     </div>
   {openNewProduct && <ProductForm/>}
   {openProducts && <ProductsView />}
+  {openUsers && <Users/>}
     </>
     : <Loading/>
     }

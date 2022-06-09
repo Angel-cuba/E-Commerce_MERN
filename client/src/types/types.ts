@@ -31,3 +31,13 @@ export type DataOfUser = {
   role: string
 }
 
+export type IUser = {
+  _id: string;
+  name: string;
+  lastname: string;
+  email: string;
+  picture: string;
+  role: string;
+  band: boolean;
+
+}

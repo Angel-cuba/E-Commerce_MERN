@@ -11,7 +11,6 @@ import UserHistory from './User/History'
 const Navbar = () => {
 const {user}: any = useSelector((state: AppState) => state.user)
 const {loading} = useSelector((state: AppState) => state.products)
-console.log(user)
 const userToken = localStorage.getItem('token')
   const [history, openHistory] = React.useState(false)
 
