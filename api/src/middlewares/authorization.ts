@@ -24,11 +24,11 @@ export default async function verifyAuth(
     const fullUser = await userService.getUserByEmail(email)
 
     //Missing data in decodedUser to send to the frontend
-    const dataOfUser = {
-      name: fullUser?.name,
-      picture: fullUser?.picture,
-      role: fullUser?.role,
-    }
+    // const dataOfUser = {
+    //   name: fullUser?.name,
+    //   picture: fullUser?.picture,
+    //   role: fullUser?.role,
+    // }
     req.user = { decodedUser }
     next()
   } catch (error) {

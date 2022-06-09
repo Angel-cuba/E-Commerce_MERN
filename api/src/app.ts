@@ -43,7 +43,7 @@ app.post('/token/verify', verifyAuth, (req, res) => {
 })
 app.use('/products', productRoutes)
 app.use('/users', userRoutes)
-app.use(adminRoutes)
+app.use('/admin', adminRoutes)
 
 // Custom API error handler
 app.use(apiErrorHandler)

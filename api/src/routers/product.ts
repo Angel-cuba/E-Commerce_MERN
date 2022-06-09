@@ -10,13 +10,14 @@ import {
   getProductsBySearch,
   updateProduct,
 } from '../controllers/products'
+import { isAdmin } from '../middlewares/authAdmin'
 
 router.get('/all', verifyAuth, allProducts)
-router.get('/search', getProductsBySearch)
-router.post('/create', createProduct)
+router.get('/search', verifyAuth, getProductsBySearch)
+router.post('/create', isAdmin, createProduct)
 /**Id is required */
-router.get('/:id', getProduct)
-router.put('/:id/edit', updateProduct)
-router.delete('/:id/delete', deleteProduct)
+router.get('/:id', verifyAuth, getProduct)
+router.put('/:id/edit', isAdmin, updateProduct)
+router.delete('/:id/delete', isAdmin, deleteProduct)
 
 export default router

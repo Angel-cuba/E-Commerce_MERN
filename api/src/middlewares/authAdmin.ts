@@ -7,7 +7,7 @@ export const isAdmin = async (
   next: NextFunction
 ) => {
   try {
-    const user = await User.findOne({ email: req.body.email })
+    const user = await User.findOne({ email: req.headers.user } as any)
     if (user) {
       if (user.role === 'ADMIN') {
         next()

@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import passport from 'passport'
+import verifyAuth from '../middlewares/authorization'
 import {
   signUp,
   deletingUser,
@@ -10,11 +11,15 @@ import {
 const router = Router()
 
 router.post('/signup', signUp)
-router.get('/:id', getAnUser)
-router.put('/:id', updateAnUser)
-router.delete('/:id', deletingUser)
+router.get('/:id', verifyAuth, getAnUser)
+router.put('/:id', verifyAuth, updateAnUser)
+router.delete('/:id', verifyAuth, deletingUser)
 
 //Login user
-router.post('/signin-google', passport.authenticate('google-id-token', {session: false}) ,login)
+router.post(
+  '/signin-google',
+  passport.authenticate('google-id-token', { session: false }),
+  login
+)
 
 export default router

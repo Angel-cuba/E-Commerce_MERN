@@ -3,6 +3,6 @@ import { allUsersFromDatabase } from '../controllers/admin'
 import { isAdmin } from '../middlewares/authAdmin'
 const router = Router()
 
-router.get('/admin', allUsersFromDatabase)
+router.get('/allusers', isAdmin, allUsersFromDatabase)
 
 export default router
