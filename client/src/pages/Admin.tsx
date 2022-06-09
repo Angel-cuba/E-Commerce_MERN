@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaWindowClose } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
+import { getAllUsers } from '../api/admin'
 import ProductForm from '../components/Admin/ProductForm'
 import Loading from '../components/Loading'
 import Navbar from '../components/Navbar'
@@ -17,6 +18,8 @@ const Admin = () => {
   }, [])
 
 const {loading} = useSelector((state: AppState) => state.products)
+const  {user} = useSelector((state: AppState) => state.user)
+console.log(user?.email)
 
 const handleNewProduct = () => {
   if(openProducts){
@@ -37,9 +40,9 @@ const handleClose = () => {
   setOpenProducts(false)
 }
 
-// if(loading){
-//   return <Loading/>
-// }
+const handleFetchUsers = () => {
+  getAllUsers(user?.email)
+}
 
   return (
    <>
@@ -51,6 +54,7 @@ const handleClose = () => {
        <div className="admin_links">
          <button className="btn"onClick={handleNewProduct}>New Product</button>
           <button className="btn"onClick={handleOpenProducts}>Products</button>
+        <button className="btn"onClick={handleFetchUsers}>Users</button>
        
      <div className="btnClose">
             {(openNewProduct || openProducts) &&

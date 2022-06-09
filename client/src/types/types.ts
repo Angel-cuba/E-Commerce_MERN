@@ -25,7 +25,9 @@ export type DecodedUser = {
 }
 
 export type DataOfUser = {
-  name: string
-  picture: string
+  // name: string
+  // picture: string
+  email: string
   role: string
 }
+

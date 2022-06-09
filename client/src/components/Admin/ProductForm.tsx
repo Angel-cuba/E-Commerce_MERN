@@ -17,7 +17,6 @@ const dispatch = useDispatch<any>()
 const navigate = useNavigate()
 
   const {product} = useSelector((state: AppState) => state.products)
-  console.log(product)
 
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
