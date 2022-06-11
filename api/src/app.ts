@@ -13,6 +13,7 @@ const app = express()
 import productRoutes from './routers/product'
 import userRoutes from './routers/user'
 import adminRoutes from './routers/admin'
+import orderRoutes from './routers/orders'
 //More routes
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
@@ -41,7 +42,9 @@ app.post('/token/verify', verifyAuth, (req, res) => {
     user: req.user,
   })
 })
+
 app.use('/products', productRoutes)
+app.use('/orders', orderRoutes)
 app.use('/users', userRoutes)
 app.use('/admin', adminRoutes)
 
