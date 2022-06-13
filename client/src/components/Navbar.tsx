@@ -1,6 +1,8 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
  import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { signIn } from '../redux/actions/user.actions'
 import '../styles/components/Navbar.scss'
  import { AppState } from '../types/ProductType'
 import Loading from './Loading'
@@ -15,6 +17,8 @@ const userToken = localStorage.getItem('token')
   const [history, openHistory] = React.useState(false)
   console.log(user);
 
+  const dispatch = useDispatch<any>()
+
  const handleHistory = () => {
     openHistory(!history)
   }
@@ -26,9 +30,16 @@ const userToken = localStorage.getItem('token')
     navigate('/login')
   }
 
+  React.useEffect(() => {
+    dispatch(signIn())
+  }, [dispatch])
+
 
   if(!user){
     return <Loading/>
+  }
+  if(!userToken){
+    navigate('/login')
   }
   return (
 <div  className="navbar">

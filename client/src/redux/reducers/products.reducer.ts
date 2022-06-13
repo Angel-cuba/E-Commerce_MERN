@@ -47,7 +47,7 @@ export default function countries(
         })
       }
     case DELETE_PRODUCT:
-      return {
+      return {  
         ...state,
         allProducts: state.allProducts.filter(product => product._id !== action.payload._id)
       }

@@ -25,12 +25,14 @@ export const ProductById = async (id: string) => {
   return response.data;
 };
 
-export const NewProduct = async (product: IProduct) => {
+export const NewProduct = async (product: IProduct, email: any) => {
   let token = localStorage.getItem('token') as any;
+  console.log(product);
 
   const response = await axios.post(`${BASE_URL}/products/create`,  product, {
     headers: {
       Authorization: `Bearer ${token}`,
+      user: `${email}`,
     },
   }
   );
@@ -38,12 +40,13 @@ export const NewProduct = async (product: IProduct) => {
   return response.data;
 };
 
-export const EditingProduct = async (id: string, product: IProduct) => {
+export const EditingProduct = async (id: string, product: IProduct, email: any) => {
   console.log(id, product);
   const response = await axios.put(`${BASE_URL}/products/${id}/edit`, product,{
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
+      user: `${email}`,
     }},
   );
 
@@ -51,10 +54,12 @@ export const EditingProduct = async (id: string, product: IProduct) => {
   return response.data;
 };
 
-export const DeletingProduct = async (id: string) => {
+export const DeletingProduct = async (id: string, email: any) => {
+  console.log(id);
   const response = await axios.delete(`${BASE_URL}/products/${id}/delete`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
+      user: `${email}`,
     },
   });
   console.log(response.data);

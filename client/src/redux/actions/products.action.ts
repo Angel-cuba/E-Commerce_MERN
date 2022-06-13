@@ -40,11 +40,11 @@ export const fetchProductById = (id: string) => async (dispatch: Dispatch) => {
   }
 }
 
-export const fetchNewProduct = (product: IProduct) => async (dispatch: Dispatch) => {
+export const fetchNewProduct = (product: IProduct, email: any) => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: START_LOADING })
 
-    const response = await NewProduct(product)
+    const response = await NewProduct(product, email)
     dispatch({
       type: NEW_PRODUCT,
       payload: response
@@ -57,11 +57,11 @@ export const fetchNewProduct = (product: IProduct) => async (dispatch: Dispatch)
   }
 }
 
-export const fetchEditProduct = (id: string, product: IProduct) => async (dispatch: Dispatch) => {
+export const fetchEditProduct = (id: string, product: IProduct, email: any) => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: START_LOADING })
 
-    const response = await EditingProduct(id, product)
+    const response = await EditingProduct(id, product, email)
     dispatch({
       type: EDIT_PRODUCT,
       payload: response
@@ -74,12 +74,12 @@ export const fetchEditProduct = (id: string, product: IProduct) => async (dispat
   }
 }
 
-export const fetchDeleteProduct = (id: string) => async (dispatch: Dispatch) => {
+export const fetchDeleteProduct = (id: string, email: string) => async (dispatch: Dispatch) => {
   try {
-    const response = await DeletingProduct(id)
+    await DeletingProduct(id, email)
     dispatch({
       type: DELETE_PRODUCT,
-      payload: response
+      payload: id
     })
   } catch (error) {
     console.log(error)

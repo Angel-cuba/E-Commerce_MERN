@@ -8,7 +8,7 @@ import '../styles/pages/Home.scss';
 import Navbar from '../components/Navbar';
 import { useSelector } from 'react-redux';
 import { AppState } from '../types/ProductType';
-import Loading from '../components/Loading';
+// import Loading from '../components/Loading';
 
 
 const Home = () => {
@@ -24,9 +24,9 @@ const Home = () => {
   },[dispatch]);
 
 
-  if(loading){
-    return <Loading/>
-  }
+  // if(loading){
+  //   return <Loading/>
+  // }
 
   return (   
       <div className="home">

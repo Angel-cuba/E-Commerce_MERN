@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { FaTrashAlt } from 'react-icons/fa'
+import { Toaster } from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
-import { DeletingProduct, EditingProduct, NewProduct } from '../../api/requests'
+import { useParams } from 'react-router-dom'
+import { EditingProduct, NewProduct } from '../../api/requests'
 import { Styles } from '../../pages/FirsLoginPage'
-import { fetchAllProducts, fetchProductById } from '../../redux/actions/products.action'
+import { fetchProductById } from '../../redux/actions/products.action'
 import '../../styles/components/Admin/ProductForm.scss'
 import { AppState } from '../../types/ProductType'
 import { handleToast } from '../../util/helpers'
@@ -14,9 +14,10 @@ import View from './View'
 const ProductForm = () => {
 const {id}: any =useParams()
 const dispatch = useDispatch<any>()
-const navigate = useNavigate()
 
   const {product} = useSelector((state: AppState) => state.products)
+  const {user} = useSelector((state: AppState) => state.user)
+  console.log('user', user)
 
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
@@ -25,7 +26,11 @@ const navigate = useNavigate()
   const [price, setPrice] =useState<number>( 0)
 
 const body = {name, description, image, category, price}
+console.log(body)
 
+if(name === '' || description === '' || image === '' || category === '' || price === 0){
+  handleToast('Please fill all fields')
+}
   
 useEffect(() => {
   if(id) {
@@ -57,25 +62,12 @@ handleToast('Empty fields')
 
   const handleSubmit = () => {
   if(id) {
-    EditingProduct(id, body)
+    EditingProduct(id, body, user?.email)
   } else
-   {  NewProduct(body)}
+   {  NewProduct(body, user?.email)}
   }
 
-    const handleDelete = (id: any) => {
-    console.log('delete with id: ' + id)
-    DeletingProduct(id)
-    dispatch(fetchAllProducts())
-    handleToast('Hold')
-  }
-
-  const handleMessage = () => {
-    handleToast('Message')
-    setTimeout(() => {
-      navigate('/')
-    }, 3500)
-  }
-    
+ 
   // navigate('/')
   return (
     <div  className="productForm">
@@ -89,21 +81,25 @@ handleToast('Empty fields')
              <Input type="text" name="category" placeholder={!id  ? 'Category' : `${product?.category}`} value={category} onChange={handleCategory} style={Styles} message={id && product?.category}/>
               <Input type="number" name="price" placeholder={id ? `The price is ${product?.price} €`: 'Price'} onChange={handlePrice} style={Styles} message={id && `${product?.price} €`}/>
              {  
-               (id )&&( !name || !description || !image || !category || !price ) ? <button onClick={test}>Button disabled</button> : <button onClick={handleSubmit}>{id ? 'Editing' : 'Save'}</button> 
+                (
+                 (id )&&( !name || !description || !image || !category || !price )
+                 ) 
+                 ||
+                (!name || !description || !image || !category || !price) 
+                ?
+                 <button onClick={test}>Button disabled</button>
+                  :
+                 <button onClick={handleSubmit}>{id ? 'Editing' : 'Save'}</button> 
              }
         </div>
+        <Toaster/>
         <div className="view">
 <h1>
           This is how the new product will look like!
 </h1>
         <View body={body}/>
           </div>
-       <div className="" onClick={handleMessage}>
-     {id &&  <button className="btn-delete" onClick={() =>handleDelete(id && product?._id)}>
-        <FaTrashAlt/>
-     
-      </button>}
-      </div> 
+    
       </div>
     </div> 
   )

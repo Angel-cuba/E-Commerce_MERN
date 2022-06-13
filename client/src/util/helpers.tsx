@@ -1,4 +1,3 @@
-import React from 'react';
 import { toast } from 'react-hot-toast';
 
 export const BASE_URL =
@@ -19,7 +18,7 @@ const handleEmptyFields = () => {
       padding: '10px',
       textAlign: 'center',
     },
-    icon: '✔️',
+    icon: '👨🏾‍💻',
   });
 };
 const handleHold = () => {
@@ -27,8 +26,8 @@ const handleHold = () => {
     position: 'top-center',
     duration: 2000,
     style: {
-      background: '#00e832',
-      color: '#0f0f0f',
+      background: '#e80000',
+      color: '#9c9c9c',
       textShadow: '0px 0px 10px #c8c8c8c3',
       border: 'none',
       fontSize: '20px',
@@ -36,7 +35,7 @@ const handleHold = () => {
       padding: '10px',
       textAlign: 'center',
     },
-    icon: '✔️',
+    icon: '❌',
   });
 };
 const handleMessage = () => {
@@ -53,7 +52,7 @@ const handleMessage = () => {
       padding: '10px',
       textAlign: 'center',
     },
-    icon: '✔️',
+    icon: '✈️',
   });
 };
 
@@ -61,7 +60,7 @@ export const handleToast = (options: string) => {
   if (options === 'Empty fields') {
     handleEmptyFields();
   }
-  if (options === 'Hold') {
+  if (options === 'Deleting product') {
     handleHold();
   }
   if (options === 'Message') {

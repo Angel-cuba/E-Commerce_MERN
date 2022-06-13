@@ -10,13 +10,13 @@ import { signIn } from '../../redux/actions/user.actions'
 
 const ProductsView = () => {
  const {allProducts} = useSelector((state: AppState) => state.products)
-//  console.log(allProducts)
+ console.log(allProducts)
 const dispatch = useDispatch<any>()
 
 React.useEffect(() => {
-if(!localStorage.getItem('token')){
+// if(!localStorage.getItem('token')){
     dispatch(signIn())
-}
+// }
 }, [dispatch])
 
   return (
