@@ -22,3 +22,14 @@ export const getAnUser = async ( id: string) => {
   console.log(response.data);
   return response.data
 }
+
+export const updateAnUser = async (id: string, data: any) => {
+  let token = localStorage.getItem('token') as any;
+  const response = await axios.put(`${BASE_URL}/users/${id}`, data, {
+    headers: {
+      Authorization:  `Bearer ${token}`,
+    },
+  });
+  console.log(response.data);
+  return response.data
+}

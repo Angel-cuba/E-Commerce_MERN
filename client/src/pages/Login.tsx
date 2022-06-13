@@ -4,6 +4,7 @@ import '../styles/pages/Login.scss'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { handleGoogleResponse } from '../api/signInWithGoogle'
+import { Toaster } from 'react-hot-toast'
 
 
 const Login = () => {
@@ -24,6 +25,7 @@ React.useEffect(() => {
             <GoogleLogin
               onSuccess={(response) =>handleGoogleResponse(response,dispatch, navigate)}
             />
+            <Toaster/>
           </GoogleOAuthProvider>
       </div>
     </div>

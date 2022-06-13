@@ -1,16 +1,15 @@
 import React from 'react'
-import { getAnUser } from '../../api/admin'
+import { Toaster } from 'react-hot-toast'
+import { getAnUser, updateAnUser } from '../../api/admin'
+import { handleToast } from '../../util/helpers'
 
 const User = ({user}:any ) => {
-  console.log('click');
   const [openDialog, setOpenDialog] = React.useState<boolean>(false)
-  const [userId, setUserId] = React.useState<string>('')
-  const [bandUser, setBandUser] = React.useState<any>({})
-  console.log(bandUser);
+  const [banUser, setBanUser] = React.useState<any>({})
+  console.log(banUser);
 
-  const handleBand = (id:string) => {
-    // setUserId(id)
-    getAnUser(id).then(res =>setBandUser(res))
+  const handleBan = (id:string) => {
+    getAnUser(id).then(res =>setBanUser(res))
 
     setOpenDialog(!openDialog)
   }
@@ -26,28 +25,65 @@ const User = ({user}:any ) => {
     <div className="content">
       <div className="details">
         <p>{user.email}</p>
-      <button className="btn" onClick={()=>handleBand(user._id)}>Band {!user.band ? ' 🚀' : 'Disabled'}</button>
+      <button className="btn" onClick={()=>handleBan(user._id)}> {!user.ban ? 'Ban 🚀' : 'Banned'}</button>
       </div>
     </div>
-    {openDialog &&<UserBanded user={bandUser}/>}
+    {openDialog &&<UserBaned user={banUser} setOpenDialog={setOpenDialog}/>}
     </div>
   )
 }
 export default User
 
-const UserBanded = ({user}: any) => {
-  const [bandedUser, setBandedUser] = React.useState<any>([])
-  console.log('bandedUser', bandedUser);
-  
+const UserBaned = ({user, setOpenDialog}: any) => {
   console.log(user);
-  const handler = () => {
-    console.log('click');
-    setBandedUser([...bandedUser, user])
+  const [bannedUser, setBannedUser] = React.useState<any>({
+    name: user.name,
+    lastname: user.lastname,
+    email: user.email,
+    picture: user.picture,
+    ban: user.ban,
+    role: user.role
+  })
+   React.useEffect(() => {
+    // document.title = ''
+ 
+    }, [user])
+
+  console.log('bannedUser', bannedUser);
+  const handleChange = (e:any) => {
+   setBannedUser({
+          ...bannedUser,
+          ban: !bannedUser.ban
+        })
   }
+
+  const handleSubmit = (e:any) => {
+    e.preventDefault()
+   if((bannedUser.name === undefined || bannedUser.lastname === undefined || bannedUser.email === undefined || bannedUser.picture === undefined || bannedUser.ban === undefined || bannedUser.role === undefined )
+   && (bannedUser.name === '' || bannedUser.lastname === '' || bannedUser.email === '' || bannedUser.picture === '' || bannedUser.ban === '' || bannedUser.role === '')){
+     updateAnUser(user._id, bannedUser)
+    handleToast('Ban an user');
+    setTimeout(() => {
+      setOpenDialog(false)}, 3000)
+  }else{
+    handleToast('Error');
+    setOpenDialog(false)
+  }
+  }
+  
+
   return(
-    <div className="user_banded">
+    <div className={bannedUser.ban ? 'user_banned' : 'user_ban'}>
       
-      <button onClick={handler}>Band user</button>
+      <div className="user_banded_details">
+        <span>{bannedUser.ban ? 'Banned' : 'Not banned'}</span>
+        <input type="checkbox" value={bannedUser.ban} onChange={handleChange}/>
+        </div>
+        <div className="buttons">
+          <button className="btn btn-save" onClick={handleSubmit}>Save</button>
+        <button className="btn btn-cancel" onClick={() => setOpenDialog(false)}>Cancel</button>
+        </div>
+        <Toaster/>
     </div>
   )
 }
