@@ -20,7 +20,7 @@ type InputProps = {
 export const Input = ({ type, name, placeholder, value, onChange, style, message}: InputProps) => {
   return (
     <>
-    <label style={{color: 'red', width: '80%', fontSize: '18px'}} htmlFor={name}>{name[0].toLocaleUpperCase() + name.slice(1)}: {message}</label>
+    <label style={{color: 'silver', width: '80%', fontSize: '18px'}} htmlFor={name}>{name[0].toLocaleUpperCase() + name.slice(1)}: {message}</label>
       <input type={type} name={name} placeholder={placeholder} value={value} style={style} onChange={onChange} />
     </>
   

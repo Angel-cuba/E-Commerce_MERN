@@ -14,8 +14,9 @@ const ProductsView = () => {
 const dispatch = useDispatch<any>()
 
 React.useEffect(() => {
+if(!localStorage.getItem('token')){
     dispatch(signIn())
-
+}
 }, [dispatch])
 
   return (

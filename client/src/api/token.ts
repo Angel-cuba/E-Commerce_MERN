@@ -22,6 +22,7 @@ export const verifyToken = async () => {
     //const dataOfUser: DataOfUser = response.data.user.dataOfUser;
    //Data sent from the server to the client(initial state of the reducer)
   //  console.log(response.data);
+  console.log(decodedUser);
 const {email, role} = decodedUser
     return { email, role };
   } catch (error: any) {

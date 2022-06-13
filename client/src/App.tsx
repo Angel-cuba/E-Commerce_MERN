@@ -21,8 +21,8 @@ export default function App() {
           
           
       <Route path="/admin" element={<Admin />} />
-      <Route path="newproduct" element={<ProductForm />} />
-      <Route path=":id/editing" element={<ProductForm />} />
+      {/* <Route path="newproduct" element={<ProductForm />} /> */}
+      <Route path="admin/:id/editing" element={<ProductForm />} />
       <Route path="/login" element={<Login />} />
             
 

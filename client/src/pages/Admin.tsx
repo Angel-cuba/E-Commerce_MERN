@@ -1,20 +1,17 @@
 import React from 'react'
 import { FaWindowClose } from 'react-icons/fa'
-import { useSelector } from 'react-redux'
-import { getAllUsers } from '../api/admin'
 import ProductForm from '../components/Admin/ProductForm'
-import Loading from '../components/Loading'
 import Navbar from '../components/Navbar'
 import ProductsView from '../components/Products/productsView'
 import Users from '../components/User/Users'
 import '../styles/pages/Admin.scss'
-import { AppState } from '../types/ProductType'
 
 
 const Admin = () => {
   const [openNewProduct, setOpenNewProduct] = React.useState(false)
   const [openProducts, setOpenProducts] = React.useState(false)
   const [openUsers, setOpenUsers] = React.useState(false)
+  console.log('openProducts', openProducts)
   console.log('openUsers', openUsers);
 
   
@@ -25,20 +22,19 @@ const Admin = () => {
     }
   }, [])
 
-const {loading} = useSelector((state: AppState) => state.products)
 
 
 const handleNewProduct = () => {
-  if(openProducts){
     setOpenProducts(false)
-  }
+    setOpenUsers(false)
+  
   setOpenNewProduct(!openNewProduct)
 }
 
 const handleOpenProducts = () => {
-  if(openNewProduct){
     setOpenNewProduct(false)
-  }
+    setOpenUsers(false)
+
   setOpenProducts(!openProducts)
 }
 
@@ -49,15 +45,14 @@ const handleClose = () => {
 }
 
 const handleFetchUsers = () => {
-  // getAllUsers(user?.email)
+    setOpenNewProduct(false)
+    setOpenProducts(false)
   setOpenUsers(!openUsers)
 }
 
   return (
-   <>
-   {!loading ?  <>
-    
-     <div className={(!openProducts && !openNewProduct && !openUsers) ? 'admin-empty' : 'admin'}>
+  <>
+     <div className={(!openProducts && !openNewProduct && !openUsers) ? 'admin-empty' : 'admin'}> 
        <Navbar />
 
        <div className="admin_links">
@@ -66,22 +61,18 @@ const handleFetchUsers = () => {
         <button className="btn"onClick={handleFetchUsers}>Users</button>
        
      <div className="btnClose">
-            {(openNewProduct || openProducts) &&
+            {(openNewProduct || openProducts || openUsers) &&
         <FaWindowClose className="close" onClick={handleClose}/>
           }
      
      </div>
-      
-       </div>
     </div>
-  {openNewProduct && <ProductForm/>}
-  {openProducts && <ProductsView />}
-  {openUsers && <Users/>}
-    </>
-    : <Loading/>
-    }
-   </>
-   
+       </div>
+         {openNewProduct && <ProductForm/>}
+        {openProducts && <ProductsView />}
+       {openUsers && <Users/>}
+    </>  
+     
   )
 }
 

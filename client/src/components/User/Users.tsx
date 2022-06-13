@@ -4,25 +4,21 @@ import { getAllUsers } from '../../api/admin'
 import '../../styles/components/User/Users.scss'
 import { AppState } from '../../types/ProductType'
 import { IUser } from '../../types/types'
-import Loading from '../Loading'
 import User from './User'
 
 const Users = () => {
-  const [users, setUsers] = React.useState<IUser[] | any>([])
+  const [fetchUsers, setFetchUsers] = React.useState<IUser[] | any>([])
   const  {user} = useSelector((state: AppState) => state.user)
+  console.log('all users', fetchUsers)
 
   React.useEffect(() => {
-    getAllUsers(user?.email).then(res => setUsers(res.data))
+    getAllUsers(user?.email).then(res => setFetchUsers(res.data))
   }, [user])
 
 
-if(!user){
-  return <Loading />
-}
-
   return (
     <div className='users'>
-    {!users ? <Loading /> :  users?.map((user : IUser, index: number) => <User key={index} user={user}/>)}
+    { !fetchUsers ? <h1>Users here</h1> : fetchUsers?.map((u : IUser, index: number) => <User key={index} user={u}/>)}
     </div>
   )
 }

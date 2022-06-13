@@ -10,9 +10,10 @@ import UserHistory from './User/History'
 
 const Navbar = () => {
 const {user}: any = useSelector((state: AppState) => state.user)
-const {loading} = useSelector((state: AppState) => state.products)
+useSelector((state: AppState) => console.log(state))
 const userToken = localStorage.getItem('token')
   const [history, openHistory] = React.useState(false)
+  console.log(user);
 
  const handleHistory = () => {
     openHistory(!history)
@@ -25,9 +26,6 @@ const userToken = localStorage.getItem('token')
     navigate('/login')
   }
 
-  if(loading){
-    return <Loading/>
-  }
 
   if(!user){
     return <Loading/>

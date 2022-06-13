@@ -1,11 +1,19 @@
 import React from 'react'
+import { getAnUser } from '../../api/admin'
 
 const User = ({user}:any ) => {
+  console.log('click');
+  const [openDialog, setOpenDialog] = React.useState<boolean>(false)
+  const [userId, setUserId] = React.useState<string>('')
+  const [bandUser, setBandUser] = React.useState<any>({})
+  console.log(bandUser);
+
   const handleBand = (id:string) => {
-    console.log('id', id);
-    console.log('band', user);
+    // setUserId(id)
+    getAnUser(id).then(res =>setBandUser(res))
+
+    setOpenDialog(!openDialog)
   }
-  console.log('user', user);
   return (
     <div className="each_user">
     <div className="img">
@@ -21,8 +29,40 @@ const User = ({user}:any ) => {
       <button className="btn" onClick={()=>handleBand(user._id)}>Band {!user.band ? ' 🚀' : 'Disabled'}</button>
       </div>
     </div>
+    {openDialog &&<UserBanded user={bandUser}/>}
+    </div>
+  )
+}
+export default User
+
+const UserBanded = ({user}: any) => {
+  const [bandedUser, setBandedUser] = React.useState<any>([])
+  console.log('bandedUser', bandedUser);
+  
+  console.log(user);
+  const handler = () => {
+    console.log('click');
+    setBandedUser([...bandedUser, user])
+  }
+  return(
+    <div className="user_banded">
+      
+      <button onClick={handler}>Band user</button>
     </div>
   )
 }
 
-export default User
+export const Styles = {
+  width: 'fit-content',
+  height: '20px',
+  borderRadius: '15px',
+  border: '1px solid #cccccc22',
+  padding: '2px 5px',
+  fontSize: '16px',
+  marginBottom: '10px',
+  textAlign: 'center',
+  color: '#333',
+  backgroundColor: '#ffffff54',
+  outline: 'none',
+  fontWeight: 'bold'
+}
