@@ -43,7 +43,7 @@ const userSchema = new Schema({
     enum: ['USER', 'ADMIN'],
     default: 'USER',
   },
-  band: {
+  ban: {
     type: Boolean,
     default: false,
   },

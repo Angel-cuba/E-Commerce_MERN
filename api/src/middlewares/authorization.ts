@@ -10,9 +10,14 @@ export default async function verifyAuth(
   next: NextFunction
 ) {
   const auth = req.headers.authorization || ''
-  // if(auth === '' || auth.split(' ')[0] !== 'Bearer' || auth.split(' ')[1] === undefined) {
-  //   throw new ForbiddenError('No token provided')
-  // }
+  //Checking if the token is valid or expired
+  if (
+    auth === '' ||
+    auth.split(' ')[0] !== 'Bearer' ||
+    auth.split(' ')[1] === undefined
+  ) {
+    throw new ForbiddenError('No token provided')
+  }
   try {
     const token = auth.split(' ')[1]
     const PRIVATE_KEY = keys.PRIVATE_KEY as string
