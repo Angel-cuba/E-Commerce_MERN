@@ -1,5 +1,6 @@
 import axios from "axios"
 import { signIn } from "../redux/actions/user.actions"
+import { handleToast } from "../util/helpers"
 
 
 //Login with google
@@ -7,7 +8,8 @@ import { signIn } from "../redux/actions/user.actions"
    console.log('response from google: ', response)
     const idToken = response.credential
     
-  const res = await  axios.post('http://localhost:3001/users/signin-google', 
+try {
+    const res = await  axios.post('http://localhost:3001/users/signin-google', 
     {},
     { 
       headers: {
@@ -17,5 +19,15 @@ import { signIn } from "../redux/actions/user.actions"
     localStorage.setItem('token', res.data.token) //save token to local storage
 
     dispatch(signIn())
+
     navigate('/')
+} catch (error: any) {
+  if(error.code === "ERR_NETWORK"){
+      handleToast('Network error')
+  }else{
+    handleToast('Error')
+  }
+
+  console.log('error: ', error.code)
+}
   }

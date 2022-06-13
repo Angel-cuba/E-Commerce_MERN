@@ -56,6 +56,61 @@ const handleMessage = () => {
   });
 };
 
+const handleError = () => {
+  toast.success('Something went wrong, please try again', {
+    position: 'top-right',
+    duration: 3000,
+    style: {
+      background: '#360000',
+      color: '#ffffff',
+      textShadow: '0px 0px 10px #c8c8c8c3',
+      border: 'none',
+      fontSize: '20px',
+      fontWeight: 'bold',
+      padding: '10px',
+      textAlign: 'center',
+    },
+    icon: '⏳',
+  });
+};
+
+const handleNetworkError = () => {
+  toast.success('There is a network error, please try later', {
+    position: 'top-left',
+    duration: 3000,
+    style: {
+      background: '#360000',
+      color: '#ffffff',
+      textShadow: '0px 0px 10px #c8c8c8c3',
+      border: 'none',
+      fontSize: '20px',
+      fontWeight: 'bold',
+      padding: '10px',
+      textAlign: 'center',
+    },
+    icon: '📡',
+  });
+};
+
+const handleBan = () => {
+  toast.success('With this you will ban this user', {
+    position: 'top-left',
+    duration: 2000,
+    style: {
+      background: '#360000',
+      color: '#ffffff',
+      textShadow: '0px 0px 10px #c8c8c8c3',
+      border: 'none',
+      fontSize: '20px',
+      fontWeight: 'bold',
+      padding: '10px',
+      textAlign: 'center',
+    },
+    icon: '📡',
+  });
+};
+
+
 export const handleToast = (options: string) => {
   if (options === 'Empty fields') {
     handleEmptyFields();
@@ -65,5 +120,14 @@ export const handleToast = (options: string) => {
   }
   if (options === 'Message') {
     handleMessage();
+  }
+  if (options === 'Error') {
+    handleError();
+  }
+  if (options === 'Network error') {
+    handleNetworkError();
+  }
+  if (options === 'Ban an user') {
+    handleBan();
   }
 };

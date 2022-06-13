@@ -99,18 +99,54 @@
         }
       }
     }
-    .user_banded{
+    .user_banned{
       position: absolute;
-      width: 300px;
-      top: -2px;
-      right: -340px;
+      width: 230px;
+      top: 25px;
+      right: -280px;
       font-size: 20px;
       font-weight: bold;
       color: #000000;
       background-color: #e70c0c;
       border-radius: 10px;
-      transition: all 0.5s;
-      padding: 1rem;
+      transition: all 1s;
+      padding: .51rem 1rem;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &:hover{
+        color: #2a2a2ad0;
+      }
+      .btn{
+        border: none;
+        outline: none;
+        border-radius: 2px;
+        margin: 2px;
+        padding: .21rem .41rem;
+        &:hover{
+          box-shadow: 0 1px 6px 2px rgba(0, 0, 0, 0.392);
+        }
+      }
+    }
+    .user_ban{
+      position: absolute;
+      // width: 170px;
+      width: 260px;
+      top: 25px;
+      // right: -220px;
+      right: -300px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #000000;
+      background-color: #e70c0c;
+      border-radius: 10px;
+      transition: all 1s;
+      padding: .51rem 1rem;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       &:hover{
         color: #2a2a2ad0;
       }
