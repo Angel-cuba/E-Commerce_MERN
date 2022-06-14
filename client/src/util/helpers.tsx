@@ -110,6 +110,23 @@ const handleBan = () => {
   });
 };
 
+const handleSave = () => {
+  toast.success('Wait a second, we are saving...', {
+    position: 'top-left',
+    duration: 2000,
+    style: {
+      background: '#565b5a',
+      color: '#ffdcdc',
+      textShadow: '0px 0px 10px #5a5a5ac3',
+      border: 'none',
+      fontSize: '18px',
+      fontWeight: 'bold',
+      padding: '10px',
+      textAlign: 'center',
+    },
+    icon: '🚀',
+  });
+};
 
 export const handleToast = (options: string) => {
   if (options === 'Empty fields') {
@@ -129,5 +146,8 @@ export const handleToast = (options: string) => {
   }
   if (options === 'Ban an user') {
     handleBan();
+  }
+  if (options === 'Save') {
+    handleSave();
   }
 };

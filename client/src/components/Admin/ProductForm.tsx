@@ -70,6 +70,9 @@ handleToast('Empty fields')
   } else
    { 
      NewProduct(body, user?.email)
+     //Adding some animation
+     handleToast('Save')
+     //Setting all fields to default 
      setName('')
       setDescription('')
       setImage('')

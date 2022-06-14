@@ -22,9 +22,20 @@ console.log(product)
     {product && 
       <div  className="productById">
         <div className="product">
-          {product.name}
+                <div className="img_name">
+                  <div className="img">
+                  <img src={product.image} alt="product" />
+                  </div>
+                  <div className="name">{product.name}</div>
+                </div>
+          <p>{product.description}</p>
+
+        <div className="price">
+          <span>{product.rating} ⭐️</span>
+          <span> | </span>
+          <span>{product.price} €</span>
         </div>
-        
+        </div>
       </div>
 
     }
