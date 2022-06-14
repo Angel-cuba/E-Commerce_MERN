@@ -4,7 +4,7 @@ type InputProps = {
   type: string,
   name: string
   placeholder: string,
-  value?: string,
+  value?: string | number,
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
   // onBlur: (event: React.FocusEvent<HTMLInputElement>) => void,
   // onFocus: (event: React.FocusEvent<HTMLInputElement>) => void,

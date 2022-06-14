@@ -19,16 +19,17 @@ const dispatch = useDispatch<any>()
   const {user} = useSelector((state: AppState) => state.user)
   console.log('user', user)
 
-  const [name, setName] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
-  const [image, setImage] = useState<string>('')
-  const [category, setCategory] = useState<string>('')
-  const [price, setPrice] =useState<number>( 0)
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [image, setImage] = useState('')
+  const [category, setCategory] = useState('')
+  const [rating, setRating] = useState(0)
+  const [price, setPrice] =useState(0)
 
-const body = {name, description, image, category, price}
+const body = {name, description, image, category, rating, price}
 console.log(body)
 
-if(name === '' || description === '' || image === '' || category === '' || price === 0){
+if(name === '' || description === '' || image === '' || category === '' || rating === 0 || price === 0){
   handleToast('Please fill all fields')
 }
   
@@ -52,6 +53,9 @@ useEffect(() => {
   const handleCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(e.target.value)
   }
+  const handleRating = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRating(Number(e.target.value))
+  }
   const handlePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPrice(Number(e.target.value))
   }
@@ -64,7 +68,15 @@ handleToast('Empty fields')
   if(id) {
     EditingProduct(id, body, user?.email)
   } else
-   {  NewProduct(body, user?.email)}
+   { 
+     NewProduct(body, user?.email)
+     setName('')
+      setDescription('')
+      setImage('')
+      setCategory('')
+      setRating(0)
+      setPrice(0)
+     }
   }
 
  
@@ -79,13 +91,14 @@ handleToast('Empty fields')
            <Input type="text" name="description" placeholder={!id ? 'Description' : `${product?.description}`} value={description}onChange={handleDescription} style={Styles} message={id && product?.description}/>
              <Input type="text" name="image" placeholder={!id  ? 'Image' : `${product?.image}`} value={image} onChange={handleImage} style={Styles} message={id && product?.image}/> 
              <Input type="text" name="category" placeholder={!id  ? 'Category' : `${product?.category}`} value={category} onChange={handleCategory} style={Styles} message={id && product?.category}/>
-              <Input type="number" name="price" placeholder={id ? `The price is ${product?.price} €`: 'Price'} onChange={handlePrice} style={Styles} message={id && `${product?.price} €`}/>
+              <Input type="number" name="rating" placeholder={id  ? 'Rating' : `${product?.rating}`} value={rating} onChange={handleRating} style={Styles} message={id && product?.rating}/>
+              <Input type="number" name="price" placeholder={id ? `The price is ${product?.price} €`: 'Price'} value={price} onChange={handlePrice} style={Styles} message={id && `${product?.price} €`}/>
              {  
                 (
-                 (id )&&( !name || !description || !image || !category || !price )
+                 (id )&&( !name || !description || !image || !category || !rating || !price )
                  ) 
                  ||
-                (!name || !description || !image || !category || !price) 
+                (!name || !description || !image || !category || !rating || !price) 
                 ?
                  <button onClick={test}>Button disabled</button>
                   :

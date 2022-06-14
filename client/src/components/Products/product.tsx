@@ -39,14 +39,14 @@ React.useEffect(() => {
   return (
     <div className="single_product"  >
       <div className="image">
-        <img src="https://res.cloudinary.com/dqaerysgb/image/upload/v1648218398/istockphoto-1132926013-612x612_t1xwec.jpg" alt={product.name}/>
+        <img src={product ? product.image : "https://res.cloudinary.com/dqaerysgb/image/upload/v1648218398/istockphoto-1132926013-612x612_t1xwec.jpg"} alt={product.name}/>
       </div>
       <div className="info">
         <span>Category: {product.category}</span>
      <div className="info_small">
        <div className="left">
         <small>Name</small>
-        <p>{product.name}</p>
+        <p>{(product.name).split(' ')[0]}</p>
      </div>
       <div className="right">
         <small>Price</small>
@@ -54,7 +54,7 @@ React.useEffect(() => {
      </div>
       <div className="right">
         <small>Rating</small>
-        <p>4.5</p>
+        <p>{product.rating}</p>
      </div>
      </div>
      <div className="buttons">
