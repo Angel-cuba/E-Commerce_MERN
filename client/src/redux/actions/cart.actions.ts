@@ -1,10 +1,10 @@
 import { Dispatch } from "redux";
 import { ADD_CART, REMOVE_FROM_CART } from "../../types/CartActions";
-import { IProducts } from "../../types/types";
+import { ICartItem } from "../../types/types";
 
 
 
-export const addingToCart = (product: IProducts) => async (dispatch: Dispatch) => {
+export const addingToCart = (product: ICartItem) => async (dispatch: Dispatch) => {
   try {
     dispatch({
       type: ADD_CART,
@@ -15,7 +15,7 @@ export const addingToCart = (product: IProducts) => async (dispatch: Dispatch) =
   }
 }
 
-export const removeFromCart = (product: IProducts) => async (dispatch: Dispatch) => {
+export const removeFromCart = (product: ICartItem) => async (dispatch: Dispatch) => {
   try {
     dispatch({
       type: REMOVE_FROM_CART,

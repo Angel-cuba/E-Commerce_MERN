@@ -1,5 +1,5 @@
 export interface IProducts {
-  _id: number;
+  _id?: number;
   name: string;
   price: number;
   description: string;
@@ -8,15 +8,6 @@ export interface IProducts {
   category: string;
 }
 
-
-export type IProduct= {
-  _id?: string;
-  name: string;
-  description: string;
-  image: string;
-  category: string;
-  price: number;
-}
 
 export type DecodedUser = {
   email: string
@@ -40,5 +31,17 @@ export type IUser = {
   picture: string;
   role: string;
   band: boolean;
+}
 
+//Cart item properties
+export type ICartItem = {
+  _id?: number;
+  name: string;
+  price: number;
+  description: string;
+  image: string;
+  rating: number;
+  category: string;
+  amount: number;
+  total?: number;
 }

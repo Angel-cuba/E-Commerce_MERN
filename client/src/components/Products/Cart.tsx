@@ -1,10 +1,14 @@
 import React from 'react'
 import { FaCartPlus } from 'react-icons/fa'
+import { useSelector } from 'react-redux';
 import '../../styles/components/Cart.scss'
+import { AppState } from '../../types/ProductType';
 
 const Cart = () => {
   const [cart, setCart] = React.useState<boolean>(false);
   console.log('cart: ', cart);
+
+  useSelector((state: AppState) => console.log('state from cart: ', state));
   const toggleCart = () => {
     setCart(!cart);
   };

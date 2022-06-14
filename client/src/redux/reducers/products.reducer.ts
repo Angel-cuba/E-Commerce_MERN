@@ -39,7 +39,7 @@ export default function countries(
     case EDIT_PRODUCT:
       return {
         ...state,
-        allProducts: state.allProducts.map(product => {
+        allProducts: state.allProducts?.map(product => {
           if (product._id === action.payload._id) {
             return action.payload
           }

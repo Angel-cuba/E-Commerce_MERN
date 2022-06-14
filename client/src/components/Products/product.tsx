@@ -59,7 +59,7 @@ React.useEffect(() => {
      </div>
      <div className="buttons">
 
-      {!adminLocation ? <UserButtons/> :
+      {!adminLocation ? <UserButtons product={product}/> :
      <Link to={`/admin/${product._id}/editing`}>
       <button className="btn btn-edit">
          Edit

@@ -1,7 +1,7 @@
 import {Dispatch} from 'redux'
 import {AllProducts, DeletingProduct, EditingProduct, NewProduct, ProductById} from '../../api/requests'
 import { DELETE_PRODUCT, EDIT_PRODUCT, NEW_PRODUCT, PRODUCTS, PRODUCT_BY_ID, START_LOADING, STOP_LOADING } from '../../types/ProductType'
-import { IProduct } from '../../types/types'
+import { IProducts } from '../../types/types'
 
 
 export const fetchAllProducts = () => async (dispatch: Dispatch) => {
@@ -40,7 +40,7 @@ export const fetchProductById = (id: string) => async (dispatch: Dispatch) => {
   }
 }
 
-export const fetchNewProduct = (product: IProduct, email: any) => async (dispatch: Dispatch) => {
+export const fetchNewProduct = (product: IProducts, email: any) => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: START_LOADING })
 
@@ -57,7 +57,7 @@ export const fetchNewProduct = (product: IProduct, email: any) => async (dispatc
   }
 }
 
-export const fetchEditProduct = (id: string, product: IProduct, email: any) => async (dispatch: Dispatch) => {
+export const fetchEditProduct = (id: string, product: IProducts, email: any) => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: START_LOADING })
 

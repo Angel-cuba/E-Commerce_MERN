@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { IProduct } from '../types/types';
+import { IProducts } from '../types/types';
 import { BASE_URL } from '../util/helpers';
 
 
@@ -25,7 +25,7 @@ export const ProductById = async (id: string) => {
   return response.data;
 };
 
-export const NewProduct = async (product: IProduct, email: any) => {
+export const NewProduct = async (product: IProducts, email: any) => {
   let token = localStorage.getItem('token') as any;
   console.log(product);
 
@@ -40,7 +40,7 @@ export const NewProduct = async (product: IProduct, email: any) => {
   return response.data;
 };
 
-export const EditingProduct = async (id: string, product: IProduct, email: any) => {
+export const EditingProduct = async (id: string, product: IProducts, email: any) => {
   console.log(id, product);
   const response = await axios.put(`${BASE_URL}/products/${id}/edit`, product,{
     headers: {

@@ -1,23 +1,63 @@
 import { ADD_CART, CartActions, CartState, REMOVE_FROM_CART } from "../../types/CartActions"
 
 export const cartInitialState: CartState = {
-  inCart: []
+  inCart: null
 }
 export default function cart(
 state = cartInitialState,
 action: CartActions
 ){
   switch (action.type) {
-    case ADD_CART:
-      return{  ...state,
-        // cart: [...state.cart, action.payload]
+    case ADD_CART: {
+      if(!state.inCart){
+        return {...state, inCart: [action.payload]}
+        }
+    const duplicate = state.inCart.find((item) => item._id === action.payload._id)
+    if(duplicate){
+      return {
+        ...state,
+        inCart: state.inCart.map((item) => {
+          if(item._id === action.payload._id){
+            return {
+              ...item,
+              amount: item.amount && item.amount + 1
+            }
+          }
+          return item
+        })
       }
-    case REMOVE_FROM_CART:
-      return state
-      // {
-      //   ...state,
-      //   cart: state.cart.filter(product => product.id !== action.payload.id)
-      // }
+     }
+    const newProductInCart =  [...state.inCart,  { ...action.payload, amount : 1 }]
+    return{  ...state, inCart: newProductInCart
+      }
+      }
+    case REMOVE_FROM_CART: {
+     //Checking if  cart is empty
+      if(!state.inCart){
+        return {...state, inCart: [action.payload]}
+      }
+      const duplicate = state.inCart.find((item) => item._id === action.payload._id)
+      if(duplicate){
+        return {
+          ...state,
+          inCart: state.inCart.map((item) => {
+            if(item._id === action.payload._id){
+              // if(item.amount === 1){
+              //   return item
+              // }
+              return {
+                ...item,
+                amount: item.amount && item.amount - 1
+              }
+            }
+            return item
+          })
+        }
+      }
+      const newCart = state.inCart?.filter((item) => item._id !== action.payload._id) 
+      return {...state, inCart: newCart}
+      }
+
     default:
       return state
   }
