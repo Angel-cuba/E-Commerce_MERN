@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../../styles/components/Cart.scss'
 import { AppState } from '../../types/ProductType';
+import { ICartItem } from '../../types/types';
 
 const Cart = () => {
   const [cart, setCart] = React.useState<boolean>(false);
@@ -15,19 +16,7 @@ const Cart = () => {
     setCart(!cart);
   };
 
-   const calculateCart = (item: any) => {
-    // let total = 0;
-    // item.forEach((i: any) => {
-    //   total += i.price;
-    // }
-    // )
-    // console.log('total: ', total);
-    // return total;
-    return item.reduce((total: any, i: any) => {
-      return total + i.price;
-    }
-    , 0)
-  }
+   const amountToPay = (items: ICartItem[]) => items.reduce((sum, item) => sum + item.price * item.amount, 0)
   return (
     <div className="cart">
       <FaCartPlus className="fa-cart" onClick={toggleCart}/>
@@ -53,7 +42,7 @@ const Cart = () => {
         )
       } )
       }
-      {inCart?.length && <span className="total">Total: {inCart && calculateCart(inCart).toFixed(2)}</span>}
+      {inCart?.length && <span className="total">Total: {inCart && amountToPay(inCart).toFixed(2)}</span>}
     
   {inCart?.length && <Link style={{ position: 'absolute', bottom: '-64px', right: '-48px', backgroundColor: '#001a4f', color: '#e2e2e2e8', minWidth: '100px', padding:'.53rem .87rem', borderRadius: '6px', textDecoration:'none', margin:'3rem 1rem ', fontWeight: 'bold', textTransform: 'uppercase'}} to="/payment">Go to pay</Link>}
     </div> 
