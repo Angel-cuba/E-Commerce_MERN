@@ -4,7 +4,7 @@ import { orderHistory } from '../../api/orders'
 import { AppState } from '../../types/ProductType'
 import '../../styles/components/User/History.scss'
 
-const UserHistory = () => {
+const History = () => {
   const [open, setOpen] = React.useState<boolean>(false)
  const {user} = useSelector((state: AppState) =>state.user)
  const [history, setHistory] = React.useState<any>()
@@ -77,4 +77,4 @@ const UserHistory = () => {
   )
 }
 
-export default UserHistory
+export default History
