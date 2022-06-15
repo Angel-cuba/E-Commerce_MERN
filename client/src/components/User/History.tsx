@@ -4,7 +4,6 @@ import { orderHistory } from '../../api/orders'
 import { AppState } from '../../types/ProductType'
 import '../../styles/components/User/History.scss'
 
-// {history}: any
 const UserHistory = () => {
   const [open, setOpen] = React.useState<boolean>(false)
  const {user} = useSelector((state: AppState) =>state.user)
@@ -22,6 +21,17 @@ const UserHistory = () => {
    const handle = () => {
     setOpen(!open)
   }
+
+  const dateTime = (time: any) => {
+    const date = new Date(time)
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const year = date.getFullYear()
+    const hours = date.getHours()
+    const minutes = date.getMinutes()
+    const seconds = date.getSeconds()
+    return `${month}/${day}/${year} at ${hours}:${minutes}:${seconds}`
+  }
   return (
     <div className={open ? "history": "history_show"}>
     <div className="content">
@@ -35,17 +45,30 @@ const UserHistory = () => {
     {open && <div className="content-body">
         {history && history.map((product: any, index: number) => {
           return (
-          <>
-          <h1>Each product{product.createdAt}</h1>
+          <div key={index} className="each">
+          <div className="dateOfEachProd">
+            <h2>Date of purchase:
+
+          <span>{dateTime(product.createdAt)}</span>
+
+            </h2>
+          </div>
           {
               product.products.map((product: any, index: number) => {
               return (
-                <h1 key={index}>{product._id}</h1>
+                  <div key={index} className="product">
+                    <div className="product-image">
+                      <img src={product.image} alt="product" />
+                    </div>
+                    <div className="product-info">
+                      <h2>{product.name} </h2>
+                    </div>
+                  </div>
           )
         }
         )
           }
-          </>
+          </div>
       )
     }
     )}

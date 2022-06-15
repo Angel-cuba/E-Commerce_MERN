@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import ProductForm from './components/Admin/ProductForm';
 import NotUserFound from './pages/NotUserFound';
 import Payment from './components/Products/Payment';
+import UsersHistory from './components/Admin/UsersHistory';
 
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
             
 
      <Route path="/products/:productId" element={<ProductId/>}/>
+     <Route path="/history" element={<UsersHistory/>}/>
       <Route path="/payment" element={<Payment/>}/>
       <Route path="/notfound" element={<NotUserFound />} />
       <Route path="/" element={<Home/>}/>
