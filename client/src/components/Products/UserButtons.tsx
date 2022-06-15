@@ -6,19 +6,12 @@ import { addingToCart, removeFromCart } from '../../redux/actions/cart.actions'
 const UserButtons = ({product}: any) => {
 const dispatch = useDispatch<any>()
 
-// React.useEffect(() => {
-//   console.log('clicked')
-
-// }, [id])
 
   const addToCart = () => {
-    // fetchProductById(id)
      dispatch(addingToCart(product))
-    console.log('adding to cart', product)
   }
 
   const removingFromCart = () => {
-    console.log('Removed from cart', product)
     dispatch(removeFromCart(product))
   }
 

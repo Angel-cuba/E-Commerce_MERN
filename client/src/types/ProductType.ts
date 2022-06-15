@@ -52,9 +52,6 @@ export type DeleteProductAction = {
 export type ProductsActions = ProductsAction | ProductByIdAction | NewProductAction | EditProductAction |DeleteProductAction | StartLoadingAction | StopLoadingAction;
 
 //Loading type
-// export type loadProducts ={
-//   isLoading: boolean
-// }
 export type loadProducts = boolean
 //Initial state
 export type ProductsState = {

@@ -108,7 +108,6 @@ handleToast('Empty fields')
                  <button onClick={handleSubmit}>{id ? 'Editing' : 'Save'}</button> 
              }
         </div>
-        <Toaster/>
         <div className="view">
 <h1>
           This is how the new product will look like!
@@ -117,6 +116,8 @@ handleToast('Empty fields')
           </div>
     
       </div>
+        <Toaster/>
+
     </div> 
   )
 }

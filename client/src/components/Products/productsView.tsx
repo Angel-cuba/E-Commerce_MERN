@@ -5,8 +5,6 @@ import { IProducts } from '../../types/types'
 import Products from './product'
 import '../../styles/components/Products/Products.scss'
 import { signIn } from '../../redux/actions/user.actions'
-// import { useDispatch } from 'react-redux'
-// import { signIn } from '../../redux/actions/user.actions'
 
 const ProductsView = () => {
  const {allProducts} = useSelector((state: AppState) => state.products)
@@ -14,9 +12,7 @@ const ProductsView = () => {
 const dispatch = useDispatch<any>()
 
 React.useEffect(() => {
-// if(!localStorage.getItem('token')){
     dispatch(signIn())
-// }
 }, [dispatch])
 
   return (

@@ -9,7 +9,6 @@ import User from './User'
 const Users = () => {
   const [fetchUsers, setFetchUsers] = React.useState<IUser[] | any>([])
   const  {user} = useSelector((state: AppState) => state.user)
-  console.log('all users', fetchUsers)
 
   React.useEffect(() => {
     getAllUsers(user?.email).then(res => setFetchUsers(res.data))

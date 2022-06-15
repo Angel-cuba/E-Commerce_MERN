@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaWindowClose } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 import ProductForm from '../components/Admin/ProductForm'
 import Navbar from '../components/Navbar'
 import ProductsView from '../components/Products/productsView'
@@ -11,8 +12,6 @@ const Admin = () => {
   const [openNewProduct, setOpenNewProduct] = React.useState(false)
   const [openProducts, setOpenProducts] = React.useState(false)
   const [openUsers, setOpenUsers] = React.useState(false)
-  console.log('openProducts', openProducts)
-  console.log('openUsers', openUsers);
 
   
   React.useEffect(() => {
@@ -54,6 +53,7 @@ const handleFetchUsers = () => {
   <>
      <div className={(!openProducts && !openNewProduct && !openUsers) ? 'admin-empty' : 'admin'}> 
        <Navbar />
+       <Link style={{ position: 'absolute', left: 0, top: 0, textDecoration: 'none', backgroundColor: '#d3d3d3', padding:'.53rem .87rem', borderRadius: '6px', margin:'.51rem', fontWeight: 'bold'}} to="/history">All users history</Link>
 
        <div className="admin_links">
          <button className="btn"onClick={handleNewProduct}>New Product</button>
