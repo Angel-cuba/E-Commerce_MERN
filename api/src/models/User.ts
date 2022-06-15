@@ -1,5 +1,4 @@
 import { model, Schema, Document } from 'mongoose'
-// import * as bcrypt from 'bcrypt'
 
 export interface UserInterface extends Document {
   name: string
