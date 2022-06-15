@@ -7,6 +7,11 @@ export const sendOrder = async (order: any) => {
 }
 
 export const orderHistory = async (userId: any) => {
-  const response = await axios.get(`${BASE_URL}/orders/user`, userId);
+  console.log('userId', userId);
+  const response = await axios.get(`${BASE_URL}/orders/user`
+    // headers: {
+    //   user: userId
+    // }
+  );
   return response.data;
 }
