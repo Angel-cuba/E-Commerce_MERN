@@ -8,6 +8,7 @@ import ProductId from './components/Products/productById';
 import Login from './pages/Login';
 import ProductForm from './components/Admin/ProductForm';
 import NotUserFound from './pages/NotUserFound';
+import Payment from './components/Products/Payment';
 
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
             
 
      <Route path="/products/:productId" element={<ProductId/>}/>
+      <Route path="/payment" element={<Payment/>}/>
       <Route path="/notfound" element={<NotUserFound />} />
       <Route path="/" element={<Home/>}/>
       <Route path="*" element={<Home/>}/>

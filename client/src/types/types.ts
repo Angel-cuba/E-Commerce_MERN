@@ -10,6 +10,7 @@ export interface IProducts {
 
 
 export type DecodedUser = {
+  id: string;
   email: string
   iat: string
   exp: string
@@ -19,6 +20,7 @@ export type DecodedUser = {
 export type DataOfUser = {
   // name: string
   // picture: string
+  id: string
   email: string
   role: string
 }

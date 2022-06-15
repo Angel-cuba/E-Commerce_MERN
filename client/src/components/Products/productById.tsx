@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchProductById } from '../../redux/actions/products.action'
 import { AppState } from '../../types/ProductType'
-import '../../styles/components/Products.scss'
+import '../../styles/components/Products/Products.scss'
 
 const ProductId = () => {
   const dispatch = useDispatch<any>()

@@ -23,8 +23,8 @@ export const verifyToken = async () => {
    //Data sent from the server to the client(initial state of the reducer)
   //  console.log(response.data);
   console.log(decodedUser);
-const {email, role} = decodedUser
-    return { email, role };
+const {email, role, id} = decodedUser
+    return { email, role, id };
   } catch (error: any) {
     return { isVerified: false, decodedUser: null };
   }
