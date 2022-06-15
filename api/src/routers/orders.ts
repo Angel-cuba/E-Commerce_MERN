@@ -7,9 +7,9 @@ import verifyAuth from '../middlewares/authorization'
 const router = Router()
 
 //Posting sales
-router.post('/', userBuyProducts)
+router.post('/create', verifyAuth, userBuyProducts)
 
 //History method
-router.get('/', getUserHistoryOfProducts)
+router.get('/user', verifyAuth, getUserHistoryOfProducts)
 
 export default router

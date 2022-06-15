@@ -79,6 +79,7 @@ export const login = async (
     {
       email: user.email,
       role: user.role,
+      id: user._id,
     },
     keys.PRIVATE_KEY as string,
     { expiresIn: '1h' }

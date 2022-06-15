@@ -23,8 +23,12 @@ export const getUserHistoryOfProducts = async (
   res: Response,
   next: NextFunction
 ) => {
+  const user = req.user as any
+  const userId = user.decodedUser.id
   try {
-    const orders = await Order.find().populate('products').populate('user')
+    const orders = await Order.find({ user: userId })
+      .populate('products')
+      .populate('user')
     console.log('orders', orders)
     res.json(orders)
   } catch (error) {
