@@ -12,16 +12,8 @@ import UserHistory from './User/History'
 
 const Navbar = () => {
 const {user}: any = useSelector((state: AppState) => state.user)
-useSelector((state: AppState) => console.log(state))
 const userToken = localStorage.getItem('token')
-  const [history, openHistory] = React.useState(false)
-  console.log(user);
-
   const dispatch = useDispatch<any>()
-
- const handleHistory = () => {
-    openHistory(!history)
-  }
 
   const navigate = useNavigate()
 
@@ -46,7 +38,6 @@ const userToken = localStorage.getItem('token')
       <div className="navbar-container">
         <div className="navbar-logo">
           <h1>Logo</h1>
-          <h2>Role: {user && user.role}</h2>
           </div>
         <div className="navbar-menu">
           <ToggleTheme/>
@@ -61,9 +52,6 @@ const userToken = localStorage.getItem('token')
              <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
-              <button onClick={handleHistory}>History</button>
-            </li>
             {user && user.role === 'ADMIN' &&
             <li>    
               <Link to="/admin">Admin</Link>
@@ -76,11 +64,12 @@ const userToken = localStorage.getItem('token')
             <li>
             </li>
           </ul>
-          {history && <UserHistory/>}
               <Cart/>
             
         </div> 
        </div>
+        <UserHistory/>
+      
     </div>   
   )
 }

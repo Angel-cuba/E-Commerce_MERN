@@ -60,14 +60,14 @@ const UserBaned = ({user, setOpenDialog}: any) => {
   const handleSubmit = (e:any) => {
     e.preventDefault()
    if((bannedUser.name === undefined || bannedUser.lastname === undefined || bannedUser.email === undefined || bannedUser.picture === undefined || bannedUser.ban === undefined || bannedUser.role === undefined )
-   && (bannedUser.name === '' || bannedUser.lastname === '' || bannedUser.email === '' || bannedUser.picture === '' || bannedUser.ban === '' || bannedUser.role === '')){
+   || (bannedUser.name === '' || bannedUser.lastname === '' || bannedUser.email === '' || bannedUser.picture === '' || bannedUser.ban === '' || bannedUser.role === '')){
+    handleToast('Error');
+    setOpenDialog(false)
+  }else{
      updateAnUser(user._id, bannedUser)
     handleToast('Ban an user');
     setTimeout(() => {
       setOpenDialog(false)}, 3000)
-  }else{
-    handleToast('Error');
-    setOpenDialog(false)
   }
   }
   
