@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import '../../styles/components/Cart.scss'
 import { AppState } from '../../types/ProductType';
 import { ICartItem } from '../../types/types';
+import UserButtons from './UserButtons';
 
 const Cart = () => {
   const [cart, setCart] = React.useState<boolean>(false);
@@ -22,8 +23,16 @@ const Cart = () => {
       <FaCartPlus className="fa-cart" onClick={toggleCart}/>
         {!inCart?.length  ? null : <span className="cart-count">{inCart?.length}</span>}
       <div className="cartSide">
+            <>
+            {cart && <>
+            
+             {inCart?.length ? <Link style={{position:'absolute', zIndex: '300', top: '25.239rem', right: '482px', backgroundColor: '#001a4f', color: '#e2e2e2e8', minWidth: '100px', padding:'.53rem .87rem', borderRadius: '6px', textDecoration:'none', margin:'3rem 1rem ', fontWeight: 'bold', textTransform: 'uppercase'}} to="/payment">Go to pay</Link>: null} 
+              {inCart?.length ? <span style={{position:'absolute', zIndex: '300', top: '28.25rem', right: '215px', borderRadius: '6px', fontWeight: 'bold', backgroundColor: '#b33636', padding:'.5rem 1.92rem', display: 'flex'}}>{inCart && amountToPay(inCart).toFixed(2)}</span>: null}
+            </>}
+            </>
       {cart ? 
       <div className="basket">
+      
       {
         inCart?.map((item: any, index: number) => {
         return (
@@ -33,21 +42,24 @@ const Cart = () => {
             </div>
             <div className="basketItemInfo">
               <div className="basketItemInfoName">{item.name.split(' ')[0]}</div>
-              <span>{item.amount}</span>
+              <div className="buttons">
+                <span>{item.amount}</span>
+              <UserButtons product={item}/>
+              </div>
               <div className="basketItemInfoPrice">{(item.price * item.amount).toFixed(2)} €</div>
             </div>
           </div>
         )
       } )
       }
-      {inCart?.length ? <span className="total">Total: {inCart && amountToPay(inCart).toFixed(2)}</span>: null}
+     
     
-  {inCart?.length ? <Link style={{ position: 'absolute', bottom: '-64px', right: '-48px', backgroundColor: '#001a4f', color: '#e2e2e2e8', minWidth: '100px', padding:'.53rem .87rem', borderRadius: '6px', textDecoration:'none', margin:'3rem 1rem ', fontWeight: 'bold', textTransform: 'uppercase'}} to="/payment">Go to pay</Link>: null}
     </div> 
     : null}
-    
-        
       </div>
+
+      
+    
   
     </div>
   )

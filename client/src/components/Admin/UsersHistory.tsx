@@ -23,7 +23,6 @@ const UsersHistory = () => {
         <div className="user_content">
           {fetchHistory && fetchHistory.map((product: any, index: number) => {
             return (
-              <>
                <div key={index} className="user">
                 <div className="user-image">
                    <img src={product.user.picture} alt="user" />
@@ -31,13 +30,11 @@ const UsersHistory = () => {
                <div className="user-info">
                  <h1>{product.user.name} { product.user.lastname} </h1>
                </div>
-               </div>
-               {/* <div className="email">
+                 {/* <div className="email">
                   <h2>{product.user.email}</h2>
                   <span>{product.user.role}</span>
                </div> */}
-              </>
-             
+               </div>
             )
           }
           )}
