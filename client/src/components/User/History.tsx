@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { orderHistory } from '../../api/orders'
 import { AppState } from '../../types/ProductType'
 import '../../styles/components/User/History.scss'
-import { verifyTokenExpiration } from '../../util/tokenExpired'
 
 const History = () => {
   const [open, setOpen] = React.useState<boolean>(false)
@@ -11,15 +10,12 @@ const History = () => {
  const [history, setHistory] = React.useState<any>()
 
  React.useEffect(() => {
-  const token = localStorage.getItem('token') as any
-  //Check if token is expired
-  verifyTokenExpiration(token)
-  if(user){
-    orderHistory(user.id).then(res => {
+  if(open){
+    orderHistory(user?.id).then(res => {
       setHistory(res)
     })
   }
- }, [user])
+ }, [open, user])
 
    const handle = () => {
     setOpen(!open)
@@ -39,14 +35,13 @@ const History = () => {
     <div className={open ? "history": "history_show"}>
     <div className="content">
       <div className="content-header">
-        <h1>History</h1>
-      
+      <img src={user?.picture} alt={user?.email} />
         </div>
         <button className="btn"onClick={handle}>{open ? 'Hide' : 'Show'}</button>
 
     </div>
     {open && <div className="content-body">
-        {history && history.map((product: any, index: number) => {
+        {!history ? <h1>Loading</h1> : history.map((product: any, index: number) => {
           return (
           <div key={index} className="each">
           <div className="dateOfEachProd">

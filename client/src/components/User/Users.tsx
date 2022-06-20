@@ -11,7 +11,7 @@ const Users = () => {
   const  {user} = useSelector((state: AppState) => state.user)
 
   React.useEffect(() => {
-    getAllUsers(user?.email).then(res => setFetchUsers(res.data))
+    getAllUsers(user?.email).then(res => setFetchUsers(res?.data))
   }, [user])
 
 

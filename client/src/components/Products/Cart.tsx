@@ -1,10 +1,12 @@
 import React from 'react'
+import { Toaster } from 'react-hot-toast';
 import { FaCartPlus } from 'react-icons/fa'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../../styles/components/Cart.scss'
 import { AppState } from '../../types/ProductType';
 import { ICartItem } from '../../types/types';
+import { handleToast } from '../../util/helpers';
 import UserButtons from './UserButtons';
 
 const Cart = () => {
@@ -28,7 +30,9 @@ const Cart = () => {
               {inCart?.length ? <span style={{position:'absolute', zIndex: '300', top: '28.25rem', right: '215px', borderRadius: '6px', fontWeight: 'bold', backgroundColor: '#b33636', padding:'.5rem 1.92rem', display: 'flex'}}>{inCart && amountToPay(inCart).toFixed(2)}</span>: null}
             </>}
             </>
-      {cart ? 
+            {cart && !inCart ? handleToast('Empty cart') : null}
+            
+      {cart && inCart?.length ? 
       <div className="basket">
       
       {
@@ -56,6 +60,7 @@ const Cart = () => {
     : null}
       </div>
 
+    <Toaster/>
       
     
   

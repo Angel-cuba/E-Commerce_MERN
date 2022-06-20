@@ -128,6 +128,24 @@ const handleSave = () => {
   });
 };
 
+const handleEmpty = () => {
+  toast.success('Your cart is empty', {
+    position: 'top-center',
+    duration: 2000,
+    style: {
+      background: '#5c5876',
+      color: '#8a7878',
+      textShadow: '0px 0px 5px #40506532',
+      border: 'none',
+      fontSize: '18px',
+      fontWeight: 'bold',
+      padding: '10px',
+      textAlign: 'center',
+    },
+    icon: '🗽',
+  });
+};
+
 export const handleToast = (options: string) => {
   if (options === 'Empty fields') {
     handleEmptyFields();
@@ -149,5 +167,8 @@ export const handleToast = (options: string) => {
   }
   if (options === 'Save') {
     handleSave();
+  }
+  if (options === 'Empty cart') {
+    handleEmpty();
   }
 };
