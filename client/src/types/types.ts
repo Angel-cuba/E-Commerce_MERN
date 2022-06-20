@@ -15,6 +15,7 @@ export type DecodedUser = {
   iat: string
   exp: string
   role: string
+  picture: string
 }
 
 export type DataOfUser = {

@@ -12,8 +12,7 @@ import { AppState } from '../types/ProductType';
 const Home = () => {
   const dispatch = useDispatch<any>();
 
-  const {loading} =useSelector((state: AppState) =>  state.products)
-  console.log('loading', loading)
+  useSelector((state: AppState) =>  console.log(state))
 
   useEffect(() => {
     document.title = 'Home'

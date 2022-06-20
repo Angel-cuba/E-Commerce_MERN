@@ -2,7 +2,7 @@ import { Dispatch} from 'redux'
 import { verifyToken } from '../../api/token'
 import { LOGIN_USER, LOGOUT_USER } from '../../types/UserActions'
 
-export const signIn = () => async(dispatch: Dispatch)=>{
+export const signInSuccess = () => async(dispatch: Dispatch)=>{
   try{
     const data = await verifyToken()
     dispatch({

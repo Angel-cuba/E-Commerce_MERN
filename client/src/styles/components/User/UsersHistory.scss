@@ -1,7 +1,12 @@
+@import '../../mixins.scss';
 .users{
   width: 100%;
   min-height: 100vh;
   margin-top: 160px;
+  a{
+    @include link('rgb(237, 2, 2)');
+    // background-color: rgb(237, 2, 2);
+  }
   .user_content{
     display: flex;
     justify-content: space-around;

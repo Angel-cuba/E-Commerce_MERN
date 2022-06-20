@@ -1,3 +1,5 @@
+@import '../mixins.scss';
+
 .navbar{
   background-color: #233329;
   position: fixed;
@@ -54,18 +56,8 @@
     li{
       list-style: none;
       a{
-        text-decoration: none;
-        color: #ffffffc8;
-        font-size: 1.5rem;
-        font-weight: bold;
-        padding: 10px;
-        transition: 0.3s;
-        font-family: 'Smooch', cursive;
-        &:hover{
-          color: #cbd8fb;
-          border-bottom: 1px solid #cbd8fb4d;
-          border-radius: 5px;
-        }
+        @include link('#fff');
+        // background-color: ;
       }
        }
       }

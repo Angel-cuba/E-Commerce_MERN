@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
  import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { signIn } from '../redux/actions/user.actions'
+import { signInSuccess } from '../redux/actions/user.actions'
 import '../styles/components/Navbar.scss'
 import { AppState } from '../types/ProductType'
 import Loading from './Loading'
@@ -23,7 +23,7 @@ const userToken = localStorage.getItem('token')
   }
 
   React.useEffect(() => {
-    dispatch(signIn())
+    dispatch(signInSuccess())
   }, [dispatch])
 
 

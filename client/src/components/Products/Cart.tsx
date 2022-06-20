@@ -9,14 +9,12 @@ import UserButtons from './UserButtons';
 
 const Cart = () => {
   const [cart, setCart] = React.useState<boolean>(false);
-  console.log('cart: ', cart);
 
  const {inCart} = useSelector((state: AppState) => state.cart);
-  console.log('inCart: ', inCart);
   const toggleCart = () => {
     setCart(!cart);
   };
-
+  //Function to calculate the total price of the items in the cart
    const amountToPay = (items: ICartItem[]) => items.reduce((sum, item) => sum + item.price * item.amount, 0)
   return (
     <div className="cart">

@@ -1,0 +1,15 @@
+@mixin link($background-color){
+   text-decoration: none;
+        color: #ffffffc8;
+        font-size: 1.5rem;
+        font-weight: bold; 
+        padding: 10px;
+        transition: 0.3s;
+        font-family: 'Smooch', cursive;
+        background-color: $background-color;
+        &:hover{
+          color: #cbd8fb;
+          border-bottom: 1px solid #cbd8fb4d;
+          border-radius: 5px;
+        }
+}

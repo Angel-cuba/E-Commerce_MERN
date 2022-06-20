@@ -98,7 +98,7 @@ export const Styles = {
   marginBottom: '10px',
   textAlign: 'center',
   color: '#333',
-  backgroundColor: '#ffffff54',
+  backgroundColor: '#ffffffe6',
   outline: 'none',
-  fontWeight: 'bold'
+  fontWeight: 'bold',
 }

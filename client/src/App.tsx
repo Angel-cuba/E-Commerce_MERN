@@ -1,7 +1,7 @@
 import React from 'react';
 import {useTheme} from './context/ThemeProvider'
 import './styles/App.scss';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Admin from './pages/Admin';
 import Home from './pages/Home';
 import ProductId from './components/Products/productById';
@@ -15,6 +15,7 @@ import UsersHistory from './components/Admin/UsersHistory';
 export default function App() {
   const {theme} = useTheme()
   const userToken = localStorage.getItem('token')
+  const location = useLocation()
 
   return (
     <div className={theme === 'light' ? 'Principal': 'Principal-Dark'}>
@@ -26,12 +27,16 @@ export default function App() {
       {/* <Route path="newproduct" element={<ProductForm />} /> */}
       <Route path="admin/:id/editing" element={<ProductForm />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/#/login" element={<Login />} />
+
             
 
      <Route path="/products/:productId" element={<ProductId/>}/>
      <Route path="/history" element={<UsersHistory/>}/>
       <Route path="/payment" element={<Payment/>}/>
       <Route path="/notfound" element={<NotUserFound />} />
+      <Route path={location.pathname === "/home" && !userToken ? "/home": "/login"} element={<Login/>}/>
+
       <Route path="/" element={<Home/>}/>
       <Route path="*" element={<Home/>}/>
                     
