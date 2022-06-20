@@ -17,7 +17,7 @@ router.get('/search', verifyAuth, getProductsBySearch)
 router.post('/create', isAdmin, createProduct)
 /**Id is required */
 router.get('/:id', verifyAuth, getProduct)
-router.put('/:id/edit', isAdmin, updateProduct)
-router.delete('/:id/delete', isAdmin, deleteProduct)
+router.put('/:id', isAdmin, updateProduct)
+router.delete('/:id', isAdmin, deleteProduct)
 
 export default router
