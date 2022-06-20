@@ -2,10 +2,14 @@ import axios from 'axios';
 
 import { IProducts } from '../types/types';
 import { BASE_URL } from '../util/helpers';
+import { verifyTokenExpiration } from '../util/tokenExpired';
 
 
 export const AllProducts = async () => {
-  let token = localStorage.getItem('token') as any;
+  const token = localStorage.getItem('token') as any;
+  const { isVerified } = await verifyTokenExpiration(token)
+  if(!isVerified) return
+
   const response = await axios.get(`${BASE_URL}/products/all`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -16,6 +20,8 @@ export const AllProducts = async () => {
 
 export const ProductById = async (id: string) => {
   let token = localStorage.getItem('token') as any;
+  const { isVerified } = await verifyTokenExpiration(token)
+  if(!isVerified) return
 
   const response = await axios.get(`${BASE_URL}/products/${id}`, {
     headers: {
@@ -27,6 +33,8 @@ export const ProductById = async (id: string) => {
 
 export const NewProduct = async (product: IProducts, email: any) => {
   let token = localStorage.getItem('token') as any;
+  const { isVerified } = await verifyTokenExpiration(token)
+  if(!isVerified) return
   console.log(product);
 
   const response = await axios.post(`${BASE_URL}/products/create`,  product, {

@@ -3,11 +3,12 @@ import { Toaster } from 'react-hot-toast'
 import { FaTrashAlt } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { Link, useLocation} from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { DeletingProduct } from '../../api/requests'
 import { fetchAllProducts } from '../../redux/actions/products.action'
 import { AppState } from '../../types/ProductType'
 import { handleToast } from '../../util/helpers'
+import { verifyTokenExpiration } from '../../util/tokenExpired'
 import UserButtons from './UserButtons'
  
 const Products = ({product}:any) => {
@@ -17,7 +18,11 @@ const Products = ({product}:any) => {
 const {user} = useSelector((state: AppState) => state.user)
 
 React.useEffect(() => {
-  if (location.pathname === '/admin') {
+  //Check if token is valid
+  const token = localStorage.getItem('token') as any
+  verifyTokenExpiration(token)
+  //Check if user is admin
+  if(location.pathname.includes('admin')){
     setAdminLocation(true)
   }
 }, [location])

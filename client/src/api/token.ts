@@ -2,9 +2,13 @@ import axios from 'axios';
 
 import { DecodedUser } from '../types/types';
 import { BASE_URL } from '../util/helpers';
+import { verifyTokenExpiration } from '../util/tokenExpired';
 
 export const verifyToken = async () => {
   const token = localStorage.getItem('token') as string;
+
+  const { isVerified } = await verifyTokenExpiration(token)
+  if(!isVerified) return
 
   try {
     const response = await axios.post(
@@ -23,8 +27,8 @@ export const verifyToken = async () => {
    //Data sent from the server to the client(initial state of the reducer)
   //  console.log(response.data);
   console.log(decodedUser);
-const {email, role, id} = decodedUser
-    return { email, role, id };
+const {email, role, id , picture} = decodedUser
+    return { picture, email, role, id };
   } catch (error: any) {
     return { isVerified: false, decodedUser: null };
   }

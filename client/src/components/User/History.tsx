@@ -3,14 +3,17 @@ import { useSelector } from 'react-redux'
 import { orderHistory } from '../../api/orders'
 import { AppState } from '../../types/ProductType'
 import '../../styles/components/User/History.scss'
+import { verifyTokenExpiration } from '../../util/tokenExpired'
 
 const History = () => {
   const [open, setOpen] = React.useState<boolean>(false)
  const {user} = useSelector((state: AppState) =>state.user)
  const [history, setHistory] = React.useState<any>()
- console.log('the history state', history)
+
  React.useEffect(() => {
-  console.log('from history')
+  const token = localStorage.getItem('token') as any
+  //Check if token is expired
+  verifyTokenExpiration(token)
   if(user){
     orderHistory(user.id).then(res => {
       setHistory(res)

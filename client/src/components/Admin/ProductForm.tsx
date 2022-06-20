@@ -17,7 +17,6 @@ const dispatch = useDispatch<any>()
 
   const {product} = useSelector((state: AppState) => state.products)
   const {user} = useSelector((state: AppState) => state.user)
-  console.log('user', user)
 
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -27,8 +26,6 @@ const dispatch = useDispatch<any>()
   const [price, setPrice] =useState(0)
 
 const body = {name, description, image, category, rating, price}
-console.log(body)
-
 if(name === '' || description === '' || image === '' || category === '' || rating === 0 || price === 0){
   handleToast('Please fill all fields')
 }

@@ -4,6 +4,7 @@ import { getAllHistory } from '../../api/admin'
 import { AppState } from '../../types/ProductType'
 import Navbar from '../Navbar'
 import '../../styles/components/User/UsersHistory.scss'
+import { Link } from 'react-router-dom'
 
 const UsersHistory = () => {
   const  {user} = useSelector((state: AppState) => state.user)
@@ -19,9 +20,15 @@ const UsersHistory = () => {
     
     <div className="users">
     <Navbar />
-
+      {/* <div className="back"> */}
+        <Link to="/admin">Back</Link>
+      {/* </div> */}
         <div className="user_content">
-          {fetchHistory && fetchHistory.map((product: any, index: number) => {
+          {
+          !fetchHistory ? <h1>Loading.....</h1> : fetchHistory.map((product: any, index: number)=>  
+          // fetchHistory && fetchHistory.map((product: any, index: number) => 
+
+        {
             return (
                <div key={index} className="user">
                 <div className="user-image">

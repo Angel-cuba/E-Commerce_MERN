@@ -1,5 +1,5 @@
 import axios from "axios"
-import { signIn } from "../redux/actions/user.actions"
+import { signInSuccess } from "../redux/actions/user.actions"
 import { handleToast } from "../util/helpers"
 
 
@@ -17,10 +17,10 @@ try {
       }
     })
     localStorage.setItem('token', res.data.token) //save token to local storage
+    navigate('/home')
+    dispatch(signInSuccess())
 
-    dispatch(signIn())
-
-    navigate('/')
+  
 } catch (error: any) {
   if(error.code === "ERR_NETWORK"){
       handleToast('Network error')
