@@ -14,11 +14,11 @@ import productRoutes from './routers/product'
 import userRoutes from './routers/user'
 import adminRoutes from './routers/admin'
 import orderRoutes from './routers/orders'
+import tokenRoutes from './routers/token'
 //More routes
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
 import loginWithGoogle from './passport/GoogleStrategy'
-import verifyAuth from './middlewares/authorization'
 
 // Express configuration
 app.set('port', keys.PORT || 4000)
@@ -35,18 +35,12 @@ app.use(passport.initialize())
 passport.use(loginWithGoogle())
 
 // Set up routers
-app.post('/token/verify', verifyAuth, (req, res) => {
-  res.json({
-    status: 200,
-    isVerified: true,
-    user: req.user,
-  })
-})
 
 app.use('/products', productRoutes)
 app.use('/orders', orderRoutes)
 app.use('/users', userRoutes)
 app.use('/admin', adminRoutes)
+app.use('/token', tokenRoutes)
 
 // Custom API error handler
 app.use(apiErrorHandler)

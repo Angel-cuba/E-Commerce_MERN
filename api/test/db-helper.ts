@@ -12,7 +12,7 @@ const connect = async () => {
     useCreateIndex: true,
   }
 
-  await mongoose.connect(uri, mongooseOpts)
+ mongoose.connect(uri, mongooseOpts)
 
   return {
     closeDatabase: async () => {

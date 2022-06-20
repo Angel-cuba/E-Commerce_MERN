@@ -66,24 +66,24 @@ export const deletingUser = async (
   }
 }
 
+//Login and  token verification
 export const login = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  console.log('from login on backend', req.user)
-  // const user = req.user as { email: string }
   const user = req.user as any
 
   const token = jwt.sign(
     {
+      picture: user.picture,
       email: user.email,
       role: user.role,
+      name: user.name,
       id: user._id,
     },
     keys.PRIVATE_KEY as string,
     { expiresIn: '1h' }
   )
-
   res.json({ token })
 }

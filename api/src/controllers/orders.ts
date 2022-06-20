@@ -29,7 +29,6 @@ export const getUserHistoryOfProducts = async (
     const orders = await Order.find({ user: userId })
       .populate('products')
       .populate('user')
-    console.log('orders', orders)
     res.json(orders)
   } catch (error) {
     res.status(400).send(error)

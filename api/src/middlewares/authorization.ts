@@ -10,20 +10,12 @@ export default async function verifyAuth(
   next: NextFunction
 ) {
   const auth = req.headers.authorization || ''
-  //Checking if the token is valid or expired
-  if (
-    auth === '' ||
-    auth.split(' ')[0] !== 'Bearer' ||
-    auth.split(' ')[1] === undefined
-  ) {
-    throw new ForbiddenError('No token provided')
-  }
   try {
     const token = auth.split(' ')[1]
     const PRIVATE_KEY = keys.PRIVATE_KEY as string
 
     const decodedUser = jwt.verify(token, PRIVATE_KEY)
-
+    // console.log('decodedUser',decodedUser)
     //If i want to send more info from user
     const { email } = decodedUser as { email: string }
     const fullUser = await userService.getUserByEmail(email)
@@ -37,7 +29,7 @@ export default async function verifyAuth(
     req.user = { decodedUser }
     next()
   } catch (error) {
-    console.log(error)
+    console.log('error', error)
     throw new ForbiddenError()
   }
 }

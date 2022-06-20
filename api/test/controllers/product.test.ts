@@ -1,29 +1,30 @@
 import request from 'supertest'
 
-import { MovieDocument } from '../../src/models/Movie'
+import Product  from '../../src/models/Product'
 import app from '../../src/app'
 import connect, { MongodHelper } from '../db-helper'
+import { IProduct } from '../../src/types/product.type'
 
 const nonExistingMovieId = '5e57b77b5744fa0b461c7906'
 
-async function createMovie(override?: Partial<MovieDocument>) {
-  let movie = {
-    name: 'Angrybirds 2',
-    publishedYear: 2019,
+async function createProduct(override?: Partial<IProduct>) {
+  let product = {
+    name: 'test',
+    description: 'some description',
+    image: 'http://test.com',
+    category: 'wood',
     rating: 3.5,
-    duration: 120,
-    genres: ['Animation', 'Game'],
-    characters: ['Red', 'Chuck', 'Bomb'],
+    price: 10,
   }
 
   if (override) {
-    movie = { ...movie, ...override }
+product = { ...product, ...override }
   }
 
-  return await request(app).post('/api/v1/movies').send(movie)
+  return await request(app).post('/products/create').send(product)
 }
 
-describe('movie controller', () => {
+describe('product controller', () => {
   let mongodHelper: MongodHelper
 
   beforeAll(async () => {
@@ -38,8 +39,8 @@ describe('movie controller', () => {
     await mongodHelper.closeDatabase()
   })
 
-  it('should create a movie', async () => {
-    const res = await createMovie()
+  it('should create a product', async () => {
+    const res = await createProduct()
     expect(res.status).toBe(200)
     expect(res.body).toHaveProperty('_id')
     expect(res.body.name).toBe('Angrybirds 2')
@@ -61,21 +62,21 @@ describe('movie controller', () => {
   })
 
   it('should get back an existing movie', async () => {
-    let res = await createMovie()
+    let res = await createProduct()
     expect(res.status).toBe(200)
 
-    const movieId = res.body._id
-    res = await request(app).get(`/api/v1/movies/${movieId}`)
+    const productId = res.body._id
+    res = await request(app).get(`/api/v1/movies/${productId}`)
 
-    expect(res.body._id).toEqual(movieId)
+    expect(res.body._id).toEqual(productId)
   })
 
-  it('should not get back a non-existing movie', async () => {
-    const res = await request(app).get(`/api/v1/movies/${nonExistingMovieId}`)
+  it('should not get back a non-existing product', async () => {
+    const res = await request(app).get(`/products/${nonExistingMovieId}`)
     expect(res.status).toBe(404)
   })
 
-  it('should get back all movie', async () => {
+  it('should get back all products', async () => {
     const res1 = await createMovie({
       name: 'Angrybirds 1',
       publishedYear: 2016,
@@ -93,16 +94,16 @@ describe('movie controller', () => {
   })
 
   it('should update an existing movie', async () => {
-    let res = await createMovie()
+    let res = await createProduct()
     expect(res.status).toBe(200)
 
-    const movieId = res.body._id
+    const productId = res.body._id
     const update = {
       name: 'Angrybirds 1',
       publishedYear: 2016,
     }
 
-    res = await request(app).put(`/api/v1/movies/${movieId}`).send(update)
+    res = await request(app).put(`/api/v1/movies/${productId}`).send(update)
 
     expect(res.status).toEqual(200)
     expect(res.body.name).toEqual('Angrybirds 1')
@@ -110,15 +111,15 @@ describe('movie controller', () => {
   })
 
   it('should delete an existing movie', async () => {
-    let res = await createMovie()
+    let res = await createProduct()
     expect(res.status).toBe(200)
-    const movieId = res.body._id
+    const productId = res.body._id
 
-    res = await request(app).delete(`/api/v1/movies/${movieId}`)
+    res = await request(app).delete(`/api/v1/movies/${productId}`)
 
     expect(res.status).toEqual(204)
 
-    res = await request(app).get(`/api/v1/movies/${movieId}`)
+    res = await request(app).get(`/api/v1/movies/${productId}`)
     expect(res.status).toBe(404)
   })
 })
