@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { orderHistory } from '../../api/orders'
 import { AppState } from '../../types/ProductType'
 import '../../styles/components/User/History.scss'
+import Loading from '../Loading'
 
 const History = () => {
   const [open, setOpen] = React.useState<boolean>(false)
@@ -11,7 +12,7 @@ const History = () => {
 
  React.useEffect(() => {
   if(open){
-    orderHistory(user?.id).then(res => {
+    orderHistory().then(res => {
       setHistory(res)
     })
   }
@@ -41,7 +42,7 @@ const History = () => {
 
     </div>
     {open && <div className="content-body">
-        {!history ? <h1>Loading</h1> : history.map((product: any, index: number) => {
+        {!history ? <Loading/> : history.map((product: any, index: number) => {
           return (
           <div key={index} className="each">
           <div className="dateOfEachProd">

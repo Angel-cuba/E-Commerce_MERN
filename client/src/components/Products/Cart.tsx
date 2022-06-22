@@ -50,6 +50,8 @@ const Cart = () => {
               </div>
               <div className="basketItemInfoPrice">{(item.price * item.amount).toFixed(2)} €</div>
             </div>
+    <Toaster/>
+
           </div>
         )
       } )
@@ -60,7 +62,6 @@ const Cart = () => {
     : null}
       </div>
 
-    <Toaster/>
       
     
   

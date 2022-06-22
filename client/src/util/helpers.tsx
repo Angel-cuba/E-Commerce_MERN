@@ -3,7 +3,6 @@ import { toast } from 'react-hot-toast';
 export const BASE_URL =
   process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : process.env.ORIGIN;
 
-
 const handleEmptyFields = () => {
   toast.success('Make sure you have filled all the required', {
     position: 'top-left',
@@ -146,6 +145,24 @@ const handleEmpty = () => {
   });
 };
 
+const handleRedirect = () => {
+  toast.success('Your session has expired. Please try again to login again...', {
+    position: 'top-center',
+    duration: 2000,
+    style: {
+      background: '#360000',
+      color: '#ffffff',
+      textShadow: '0px 0px 10px #c8c8c8c3',
+      border: 'none',
+      fontSize: '20px',
+      fontWeight: 'bold',
+      padding: '10px',
+      textAlign: 'center',
+    },
+    icon: '🚀',
+  });
+};
+
 export const handleToast = (options: string) => {
   if (options === 'Empty fields') {
     handleEmptyFields();
@@ -170,5 +187,8 @@ export const handleToast = (options: string) => {
   }
   if (options === 'Empty cart') {
     handleEmpty();
+  }
+  if (options === 'Redirect') {
+    handleRedirect();
   }
 };
