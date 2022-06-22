@@ -1,56 +1,56 @@
-import React from 'react'
-import { FaWindowClose } from 'react-icons/fa'
-import { Link, useNavigate } from 'react-router-dom'
-import ProductForm from '../components/Admin/ProductForm'
-import Navbar from '../components/Navbar'
-import ProductsView from '../components/Products/productsView'
-import Users from '../components/User/Users'
-import '../styles/pages/Admin.scss'
-import { verifyTokenExpiration } from '../util/tokenExpired'
+import React from 'react';
+import { FaWindowClose } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import ProductForm from '../components/Admin/ProductForm';
+import Navbar from '../components/Navbar';
+import ProductsView from '../components/Products/productsView';
+import Users from '../components/User/Users';
+import '../styles/pages/Admin.scss';
+import { verifyTokenExpiration } from '../util/tokenExpired';
 
 const Admin = () => {
-  const [openNewProduct, setOpenNewProduct] = React.useState(false)
-  const [openProducts, setOpenProducts] = React.useState(false)
-  const [openUsers, setOpenUsers] = React.useState(false)
+  const [openNewProduct, setOpenNewProduct] = React.useState(false);
+  const [openProducts, setOpenProducts] = React.useState(false);
+  const [openUsers, setOpenUsers] = React.useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    document.title = 'Admin'
-    const token = localStorage.getItem('token') as any
+    document.title = 'Admin';
+    const token = localStorage.getItem('token') as any;
 
-    if(!token){
+    if (!token) {
       // window.location.href = '/'
-      navigate('/login')
+      navigate('/login');
     }
-    verifyTokenExpiration(token)
-  }, [navigate])
+    verifyTokenExpiration(token);
+  }, [navigate]);
 
   const handleNewProduct = () => {
-    setOpenProducts(false)
-    setOpenUsers(false)
+    setOpenProducts(false);
+    setOpenUsers(false);
 
-    setOpenNewProduct(!openNewProduct)
-  }
+    setOpenNewProduct(!openNewProduct);
+  };
 
   const handleOpenProducts = () => {
-    setOpenNewProduct(false)
-    setOpenUsers(false)
+    setOpenNewProduct(false);
+    setOpenUsers(false);
 
-    setOpenProducts(!openProducts)
-  }
+    setOpenProducts(!openProducts);
+  };
 
   const handleClose = () => {
-    setOpenNewProduct(false)
-    setOpenProducts(false)
-    setOpenUsers(false)
-  }
+    setOpenNewProduct(false);
+    setOpenProducts(false);
+    setOpenUsers(false);
+  };
 
   const handleFetchUsers = () => {
-    setOpenNewProduct(false)
-    setOpenProducts(false)
-    setOpenUsers(!openUsers)
-  }
+    setOpenNewProduct(false);
+    setOpenProducts(false);
+    setOpenUsers(!openUsers);
+  };
 
   return (
     <>
@@ -95,7 +95,7 @@ const Admin = () => {
       {openProducts && <ProductsView />}
       {openUsers && <Users />}
     </>
-  )
-}
+  );
+};
 
-export default Admin
+export default Admin;

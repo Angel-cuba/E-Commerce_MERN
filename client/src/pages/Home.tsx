@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import ProductsView from '../components/Products/productsView';
@@ -8,24 +8,22 @@ import Navbar from '../components/Navbar';
 import { useSelector } from 'react-redux';
 import { AppState } from '../types/ProductType';
 
-
 const Home = () => {
   const dispatch = useDispatch<any>();
 
-  useSelector((state: AppState) =>  console.log(state))
+  useSelector((state: AppState) => console.log(state));
 
   useEffect(() => {
-    document.title = 'Home'
+    document.title = 'Home';
     // verifyTokenExpiration(userToken, navigate);
     dispatch(fetchAllProducts());
-  },[dispatch]);
+  }, [dispatch]);
 
-
-  return (   
-      <div className="home">
-       <Navbar  />
-      <ProductsView/> 
-    </div>    
+  return (
+    <div className="home">
+      <Navbar />
+      <ProductsView />
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {useTheme} from './context/ThemeProvider'
+import { useTheme } from './context/ThemeProvider';
 import './styles/App.scss';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Admin from './pages/Admin';
@@ -11,38 +11,34 @@ import NotUserFound from './pages/NotUserFound';
 import Payment from './components/Products/Payment';
 import UsersHistory from './components/Admin/UsersHistory';
 
-
 export default function App() {
-  const {theme} = useTheme()
-  const userToken = localStorage.getItem('token')
-  const location = useLocation()
+  const { theme } = useTheme();
+  const userToken = localStorage.getItem('token');
+  const location = useLocation();
 
   return (
-    <div className={theme === 'light' ? 'Principal': 'Principal-Dark'}>
-     <Routes>
-           <Route path="/" element={!userToken ? <Login /> : <Home />} /> 
-          
-          
-      <Route path="/admin" element={<Admin />} />
-      {/* <Route path="newproduct" element={<ProductForm />} /> */}
-      <Route path="admin/:id/editing" element={<ProductForm />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/#/login" element={<Login />} />
+    <div className={theme === 'light' ? 'Principal' : 'Principal-Dark'}>
+      <Routes>
+        <Route path="/" element={!userToken ? <Login /> : <Home />} />
 
-            
+        <Route path="/admin" element={<Admin />} />
+        {/* <Route path="newproduct" element={<ProductForm />} /> */}
+        <Route path="admin/:id/editing" element={<ProductForm />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/#/login" element={<Login />} />
 
-     <Route path="/products/:productId" element={<ProductId/>}/>
-     <Route path="/history" element={<UsersHistory/>}/>
-      <Route path="/payment" element={<Payment/>}/>
-      <Route path="/notfound" element={<NotUserFound />} />
-      <Route path={location.pathname === "/home" && !userToken ? "/home": "/login"} element={<Login/>}/>
+        <Route path="/products/:productId" element={<ProductId />} />
+        <Route path="/history" element={<UsersHistory />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/notfound" element={<NotUserFound />} />
+        <Route
+          path={location.pathname === '/home' && !userToken ? '/home' : '/login'}
+          element={<Login />}
+        />
 
-      <Route path="/" element={<Home/>}/>
-      <Route path="*" element={<Home/>}/>
-                    
-    </Routes>  
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<Home />} />
+      </Routes>
     </div>
   );
 }
-
-

@@ -1,7 +1,7 @@
-import React from 'react'
-import { Toaster } from 'react-hot-toast'
+import React from 'react';
+import { Toaster } from 'react-hot-toast';
 
-const View = ({body}: any) => {
+const View = ({ body }: any) => {
   return (
     <div>
       <h2>{body.name ? body.name : 'Missing name'}</h2>
@@ -10,9 +10,9 @@ const View = ({body}: any) => {
       <h2>{body.category ? body.category : 'Missing category'}</h2>
       <h2>{body.rating ? body.rating : 'Missing category'}</h2>
       <h2>{body.price ? `${body.price} €` : 'Missing price'}</h2>
-<Toaster/>
+      <Toaster />
     </div>
-  )
-}
+  );
+};
 
-export default View
+export default View;

@@ -1,58 +1,65 @@
-import {ProductsActions, PRODUCTS, PRODUCT_BY_ID, NEW_PRODUCT, ProductsState, EDIT_PRODUCT, DELETE_PRODUCT, START_LOADING, STOP_LOADING} from '../../types/ProductType';
+import {
+  ProductsActions,
+  PRODUCTS,
+  PRODUCT_BY_ID,
+  NEW_PRODUCT,
+  ProductsState,
+  EDIT_PRODUCT,
+  DELETE_PRODUCT,
+  START_LOADING,
+  STOP_LOADING,
+} from '../../types/ProductType';
 
 export const productsInitialState: ProductsState = {
   loading: true,
   allProducts: [],
-  product: null
-}
+  product: null,
+};
 
-export default function countries(
-  state = productsInitialState,
-  action: ProductsActions
-){
+export default function countries(state = productsInitialState, action: ProductsActions) {
   switch (action.type) {
     case START_LOADING:
       return {
         ...state,
-        loading: true
-      }
+        loading: true,
+      };
     case STOP_LOADING:
       return {
         ...state,
-        loading: false
-      }
+        loading: false,
+      };
     case PRODUCTS:
       return {
         ...state,
-        allProducts: action.payload
-      }
+        allProducts: action.payload,
+      };
     case PRODUCT_BY_ID:
       return {
         ...state,
-        product: action.payload
-      }
+        product: action.payload,
+      };
     case NEW_PRODUCT:
       return {
         ...state,
-        allProducts: [...state.allProducts, action.payload]
-      }
+        allProducts: [...state.allProducts, action.payload],
+      };
     case EDIT_PRODUCT:
       return {
         ...state,
-        allProducts: state.allProducts?.map(product => {
+        allProducts: state.allProducts?.map((product) => {
           if (product._id === action.payload._id) {
-            return action.payload
+            return action.payload;
           }
-          return product
-        })
-      }
+          return product;
+        }),
+      };
     case DELETE_PRODUCT:
-      return {  
+      return {
         ...state,
-        allProducts: state.allProducts.filter(product => product._id !== action.payload._id)
-      }
-      
+        allProducts: state.allProducts.filter((product) => product._id !== action.payload._id),
+      };
+
     default:
-      return state
+      return state;
   }
 }

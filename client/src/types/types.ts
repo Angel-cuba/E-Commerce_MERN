@@ -8,23 +8,22 @@ export interface IProducts {
   category: string;
 }
 
-
 export type DecodedUser = {
   id: string;
-  email: string
-  iat: string
-  exp: string
-  role: string
-  picture: string
-}
+  email: string;
+  iat: string;
+  exp: string;
+  role: string;
+  picture: string;
+};
 
 export type DataOfUser = {
   // name: string
-  picture: string
-  id: string
-  email: string
-  role: string
-}
+  picture: string;
+  id: string;
+  email: string;
+  role: string;
+};
 
 export type IUser = {
   _id: string;
@@ -34,7 +33,7 @@ export type IUser = {
   picture: string;
   role: string;
   band: boolean;
-}
+};
 
 //Cart item properties
 export type ICartItem = {
@@ -47,4 +46,4 @@ export type ICartItem = {
   category: string;
   amount: number;
   total?: number;
-}
+};

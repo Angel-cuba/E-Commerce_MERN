@@ -1,29 +1,29 @@
-.users{
+.users {
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: calc(100vh - 142px);
   background-color: #ffc9c90d;
-  .each_user{
+  .each_user {
     position: relative;
     width: 360px;
     height: 70px;
     background-color: #fff;
     border-radius: 20px;
     margin: 15px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.142);
-    transition: .5s;
-    &:hover{
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.142);
+    transition: 0.5s;
+    &:hover {
       height: 100px;
       cursor: pointer;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.342);
-    .content{
-        .details{
-            transform: translateY(40px);
-          }
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.342);
+      .content {
+        .details {
+          transform: translateY(40px);
+        }
+      }
     }
-    }
-    .img{
+    .img {
       position: absolute;
       top: -20px;
       left: 5px;
@@ -31,10 +31,10 @@
       height: 80px;
       background-color: #000000;
       border-radius: 20px;
-      box-shadow: 0 16px 60px rgba(0,0,0,0.342);
+      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.342);
       overflow: hidden;
       transition: all 0.5s;
-      img{
+      img {
         position: absolute;
         top: 0;
         left: 0;
@@ -42,7 +42,7 @@
         height: 100%;
         object-fit: cover;
       }
-         &:hover{
+      &:hover {
         width: 100px;
         height: 100px;
       }
@@ -55,21 +55,21 @@
       font-weight: bold;
       color: #000000;
       transition: all 0.5s;
-      &:hover{
+      &:hover {
         color: #2a2a2ad0;
       }
     }
-    .content{
+    .content {
       position: absolute;
       width: 100%;
       height: 95%;
       bottom: 0;
       display: flex;
       justify-content: center;
-      align-items: flex-end; 
+      align-items: flex-end;
       overflow: hidden;
-      
-      .details{
+
+      .details {
         display: flex;
         align-items: center;
         justify-content: space-around;
@@ -77,9 +77,9 @@
         text-align: center;
         width: 100%;
         transition: all 0.5s;
-         transform: translateY(100px);
+        transform: translateY(100px);
         color: #747474;
-        .btn{
+        .btn {
           width: 100px;
           height: 30px;
           border: none;
@@ -92,14 +92,14 @@
           text-transform: uppercase;
           transition: all 0.25s;
           cursor: pointer;
-          &:hover{
+          &:hover {
             color: #fff;
             background-color: #262525;
           }
         }
       }
     }
-    .user_banned{
+    .user_banned {
       position: absolute;
       width: 230px;
       top: 25px;
@@ -110,26 +110,26 @@
       background-color: #e70c0c;
       border-radius: 10px;
       transition: all 1s;
-      padding: .51rem 1rem;
+      padding: 0.51rem 1rem;
       text-align: center;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      &:hover{
+      &:hover {
         color: #2a2a2ad0;
       }
-      .btn{
+      .btn {
         border: none;
         outline: none;
         border-radius: 2px;
         margin: 2px;
-        padding: .21rem .41rem;
-        &:hover{
+        padding: 0.21rem 0.41rem;
+        &:hover {
           box-shadow: 0 1px 6px 2px rgba(0, 0, 0, 0.392);
         }
       }
     }
-    .user_ban{
+    .user_ban {
       position: absolute;
       width: 260px;
       top: 25px;
@@ -140,12 +140,12 @@
       background-color: #e70c0c;
       border-radius: 10px;
       transition: all 1s;
-      padding: .51rem 1rem;
+      padding: 0.51rem 1rem;
       text-align: center;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      &:hover{
+      &:hover {
         color: #2a2a2ad0;
       }
     }
