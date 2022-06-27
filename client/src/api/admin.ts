@@ -24,7 +24,6 @@ export const getAllHistory = async (email: any) => {
       user: `${email}`,
     },
   });
-  console.log(response.data);
   return response.data;
 };
 

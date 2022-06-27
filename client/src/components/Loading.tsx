@@ -1,11 +1,17 @@
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/components/Loading.scss';
+import { AppState } from '../types/ProductType';
 import { handleToast } from '../util/helpers';
 
 const Loading = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  //Cart history
+const {inCart}: any = useSelector((state: AppState) => state.cart);
   React.useEffect(() => {
     const token = localStorage.getItem('token') as any;
     const goBack = () => {
@@ -13,18 +19,19 @@ const Loading = () => {
     };
     setTimeout(() => {
       if (!token) {
-        console.log('no hay token');
         handleToast('Redirect');
         goBack();
       }
     }, 1000);
-  }, [navigate]);
+  }, [navigate, location]);
 
   return (
     <div className="loading">
       <div className="loading-spinner"></div>
       <div className="loading-text">
-        <h1>Loading...</h1>
+        {location.pathname === '/history' ? <h1>Waiting for users details</h1> : <h1>Loading...</h1>}
+        {location.pathname === '/history' && inCart?.length > 0 ? <h1>Waiting for user purchase</h1> : null}
+        
       </div>
       <div className="loading-spinner-circle"></div>
       <div className="loading-spinner-line"></div>
@@ -34,3 +41,10 @@ const Loading = () => {
 };
 
 export default Loading;
+
+export const styles = {
+  loading: {
+    height: '100vh',
+    color: '#dd0e0e',
+  }
+}

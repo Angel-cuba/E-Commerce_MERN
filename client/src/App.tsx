@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTheme } from './context/ThemeProvider';
-import './styles/App.scss';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Admin from './pages/Admin';
 import Home from './pages/Home';
@@ -10,6 +9,8 @@ import ProductForm from './components/Admin/ProductForm';
 import NotUserFound from './pages/NotUserFound';
 import Payment from './components/Products/Payment';
 import UsersHistory from './components/Admin/UsersHistory';
+import './styles/App.scss';
+
 
 export default function App() {
   const { theme } = useTheme();

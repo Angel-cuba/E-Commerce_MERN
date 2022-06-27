@@ -2,7 +2,7 @@
 .users {
   width: 100%;
   min-height: 100vh;
-  margin-top: 160px;
+  margin-top: 80px;
   a {
     @include link('rgb(237, 2, 2)');
     // background-color: rgb(237, 2, 2);
@@ -16,14 +16,21 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #2d1f1f24;
+      flex-direction: column;
+      background-color: #232d1ffd;
       border-radius: 10px;
-      padding: 10px;
+      padding: 5px;
       margin: 10px;
 
-      h1 {
+    .user-face{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+        h1 {
         font-size: 1.5rem;
-        color: #fff;
+        color: rgb(206, 26, 26);
         margin-bottom: 10px;
       }
       .user-image {
@@ -38,6 +45,10 @@
           border-radius: 50%;
         }
       }
+    }
+    .user-history{
+      color: #ffffffc8;
+    }
     }
   }
 }

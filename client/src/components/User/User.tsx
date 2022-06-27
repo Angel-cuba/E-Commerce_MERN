@@ -16,7 +16,7 @@ const User = ({ user }: any) => {
   return (
     <div className="each_user">
       <div className="img">
-        <img src={user.picture} alt="" />
+        <img src={user && user.picture} alt="" />
       </div>
       <div className="full_name">
         <h2>
