@@ -4,51 +4,127 @@
   min-height: 100vh;
   margin-top: 80px;
   a {
-    @include link('rgb(237, 2, 2)');
-    // background-color: rgb(237, 2, 2);
+    @include link(rgba(223, 0, 0, 0.746), #ffffffc8, 4%, 2%);
+    border-radius: 5px;
+    padding: 1px 20px;
   }
   .user_content {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    .user {
-      width: 200px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-direction: column;
-      background-color: #232d1ffd;
-      border-radius: 10px;
-      padding: 5px;
-      margin: 10px;
+    .user-container {
+      position: relative;
+      .user {
+        position: relative;
+        width: 200px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        background-color: #232d1ffd;
+        border-radius: 10px;
+        padding: 5px;
+        margin: 10px;
 
-    .user-face{
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-        h1 {
-        font-size: 1.5rem;
-        color: rgb(206, 26, 26);
-        margin-bottom: 10px;
-      }
-      .user-image {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-bottom: 10px;
-        cursor: pointer;
-        img {
+        .user-face {
           width: 100%;
           height: 100%;
-          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          h1 {
+            font-size: 1.5rem;
+            color: rgb(206, 26, 26);
+            margin-bottom: 10px;
+          }
+          .user-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            cursor: pointer;
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+            }
+          }
         }
       }
-    }
-    .user-history{
-      color: #ffffffc8;
-    }
+      .user-history {
+        background-color: #0000006e;
+        color: #f4f4f4c8;
+        border-radius: 10px;
+        text-align: center;
+        width: fit-content;
+        margin: auto;
+        h3 {
+          color: rgb(255, 111, 0);
+          font-size: 20px;
+        }
+        .user-history-info {
+          position: relative;
+          width: 500px;
+          min-height: 300px;
+          max-height: 400px;
+          background-color: rgb(17, 17, 230);
+          overflow-y: scroll;
+            .singleHistory-info {
+              // position: absolute;
+              // top: -1rem;
+              // left: -12.5rem;
+              // z-index: 1;
+              color: #000000;
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              .single {
+                border-radius: 10px;
+                width: fit-content;
+                background-color: #09add6;
+                // display: flex;
+                // justify-content: space-between;
+                // align-items: center;
+                // padding: 10px;
+
+                margin: 5px;
+                .user-details {
+                  min-width: 300px;
+                  background-color: #d60909;
+                  display: flex;
+                  flex-direction: column;
+                }
+              }
+              .btn-close {
+                position: absolute;
+                z-index: 1;
+                top: -2.5rem;
+                left: 2rem;
+                background-color: #000000d0;
+                color: #f4f4f4c8;
+                border-radius: 5px;
+                padding: 2px 5px;
+                cursor: pointer;
+                font-size: 1.5rem;
+                &:hover {
+                  background-color: #f4f4f4c8;
+                  color: #000000;
+                }
+              }
+              .line {
+                width: 100%;
+                height: 1px;
+                background-color: rgba(255, 255, 255, 0.219);
+                margin-top: 2px;
+              }
+            }
+          }
+        }
+      }
+      .user-history-hidden {
+        display: none;
+        background-color: #ff0808fd;
+      }
     }
   }
-}
+

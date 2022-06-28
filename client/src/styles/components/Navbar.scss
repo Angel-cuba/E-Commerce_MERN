@@ -54,8 +54,7 @@
         li {
           list-style: none;
           a {
-            @include link('#fff');
-            // background-color: ;
+            @include link(rgba(255, 255, 255, 0), #ffffffc8, 2px, 1px);
           }
         }
       }
