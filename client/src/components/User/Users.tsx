@@ -19,7 +19,7 @@ const Users = () => {
       {!fetchUsers ? (
         <h1>Users here</h1>
       ) : (
-        fetchUsers?.map((u: IUser, index: number) => <User key={index} user={u} />)
+        fetchUsers?.map((u: IUser) => <User key={u._id} user={u} />)
       )}
     </div>
   );

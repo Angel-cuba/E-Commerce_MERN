@@ -7,9 +7,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { DeletingProduct } from '../../api/requests';
 import { fetchAllProducts } from '../../redux/actions/products.action';
 import { AppState } from '../../types/ProductType';
-import { handleToast } from '../../util/helpers';
 import { verifyTokenExpiration } from '../../util/tokenExpired';
 import UserButtons from './UserButtons';
+import { handleToast } from '../../util/helpers';
 
 const Products = ({ product }: any) => {
   const location = useLocation();
@@ -75,7 +75,7 @@ const Products = ({ product }: any) => {
               <button className="btn btn-edit">Edit</button>
             </Link>
           )}
-          <Link to={`/products/${product._id}`}>
+          <Link to={`/product/${product._id}`}>
             <button className="btn btn-details">Details</button>
           </Link>
         </div>

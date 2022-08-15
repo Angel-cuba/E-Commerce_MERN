@@ -2,12 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { orderHistory } from '../../api/orders';
 import { AppState } from '../../types/ProductType';
-import '../../styles/components/User/History.scss';
 import Loading from '../Loading';
+import '../../styles/components/User/History.scss';
 
 const History = () => {
   const [open, setOpen] = React.useState<boolean>(false);
-  const { user } = useSelector((state: AppState) => state.user);
+  const { user }: any = useSelector((state: AppState) => state.user);
   const [history, setHistory] = React.useState<any>();
 
   React.useEffect(() => {
@@ -36,7 +36,14 @@ const History = () => {
     <div className={open ? 'history' : 'history_show'}>
       <div className="content">
         <div className="content-header">
-          <img src={user?.picture} alt={user?.email} />
+          <img
+            src={
+              user && user.picture
+                ? user.picture
+                : 'https://res.cloudinary.com/dqaerysgb/image/upload/v1648218398/istockphoto-1132926013-612x612_t1xwec.jpg'
+            }
+            alt={user?.email}
+          />
         </div>
         <button className="btn" onClick={handle}>
           {open ? 'Hide' : 'Show'}
@@ -47,9 +54,9 @@ const History = () => {
           {!history ? (
             <Loading />
           ) : (
-            history.map((product: any, index: number) => {
+            history.map((product: any) => {
               return (
-                <div key={index} className="each">
+                <div key={product._id} className="each">
                   <div className="dateOfEachProd">
                     <h2>
                       Date of purchase:

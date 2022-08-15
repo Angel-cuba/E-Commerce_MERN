@@ -17,7 +17,7 @@ const UserButtons = ({ product }: any) => {
   return (
     <div className="btn-add">
       <FaPlus className="fa-plus" onClick={addToCart} />
-      <FaMinus className="fa-minus" onClick={() => removingFromCart()} />
+      <FaMinus className="fa-minus" onClick={removingFromCart} />
     </div>
   );
 };

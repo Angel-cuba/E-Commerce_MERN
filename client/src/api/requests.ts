@@ -35,7 +35,7 @@ export const NewProduct = async (product: IProducts, email: any) => {
   const { isVerified } = await verifyTokenExpiration(token);
   if (!isVerified) return;
   //Continue here if token is verified
-  const response = await axios.post(`${BASE_URL}/products/create`, product, {
+  const response = await axios.post(`${BASE_URL}/products`, product, {
     headers: {
       Authorization: `Bearer ${token}`,
       user: `${email}`,

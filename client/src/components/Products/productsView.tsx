@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../types/ProductType';
 import { IProducts } from '../../types/types';
 import Products from './product';
-import '../../styles/components/Products/Products.scss';
 import { signInSuccess } from '../../redux/actions/user.actions';
 import { Input } from '../Input';
 import { Styles } from '../User/User';
+import '../../styles/components/Products/Products.scss';
 
 const ProductsView = () => {
   const { allProducts } = useSelector((state: AppState) => state.products);
@@ -19,7 +19,6 @@ const ProductsView = () => {
   const handleSearchProperties = () =>
     allProducts
       ?.filter((product: IProducts) => {
-        // return product.name.toLowerCase().includes(search.toLowerCase())
         const byName = product.name.toLowerCase().includes(search.toLowerCase());
         const byCategory = product.category.toLowerCase().includes(search.toLowerCase());
         // return byName || byCategory
@@ -29,6 +28,7 @@ const ProductsView = () => {
         if (byCategory) {
           return byCategory;
         }
+        return null;
       })
       .map((product: IProducts) => {
         return <Products key={product._id} product={product} />;

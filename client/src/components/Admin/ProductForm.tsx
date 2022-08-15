@@ -26,14 +26,7 @@ const ProductForm = () => {
   const [price, setPrice] = useState(0);
 
   const body = { name, description, image, category, rating, price };
-  if (
-    name === '' ||
-    description === '' ||
-    image === '' ||
-    category === '' ||
-    rating === 0 ||
-    price === 0
-  ) {
+  if (!name || !description || !image || !category || (!rating && price < 0)) {
     handleToast('Please fill all fields');
   }
 

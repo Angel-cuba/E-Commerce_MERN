@@ -3,11 +3,11 @@ import { Toaster } from 'react-hot-toast';
 import { FaCartPlus } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import '../../styles/components/Cart.scss';
 import { AppState } from '../../types/ProductType';
 import { ICartItem } from '../../types/types';
 import { handleToast } from '../../util/helpers';
 import UserButtons from './UserButtons';
+import '../../styles/components/Cart.scss';
 
 const Cart = () => {
   const [cart, setCart] = React.useState<boolean>(false);
@@ -15,6 +15,12 @@ const Cart = () => {
   const { inCart } = useSelector((state: AppState) => state.cart);
   const toggleCart = () => {
     setCart(!cart);
+  };
+
+  const emptyCart = () => {
+    if (cart && !inCart) {
+      handleToast('Empty cart');
+    }
   };
   //Function to calculate the total price of the items in the cart
   const amountToPay = (items: ICartItem[]) =>
@@ -69,7 +75,7 @@ const Cart = () => {
             </>
           )}
         </>
-        {cart && !inCart ? handleToast('Empty cart') : null}
+        {cart && !inCart ? emptyCart() : null}
 
         {cart && inCart?.length ? (
           <div className="basket">

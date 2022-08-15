@@ -11,7 +11,6 @@ import Payment from './components/Products/Payment';
 import UsersHistory from './components/Admin/UsersHistory';
 import './styles/App.scss';
 
-
 export default function App() {
   const { theme } = useTheme();
   const userToken = localStorage.getItem('token');
@@ -28,7 +27,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/#/login" element={<Login />} />
 
-        <Route path="/products/:productId" element={<ProductId />} />
+        <Route path="/product/:productId" element={<ProductId />} />
         <Route path="/history" element={<UsersHistory />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/notfound" element={<NotUserFound />} />

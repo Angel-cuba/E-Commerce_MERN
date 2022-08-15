@@ -2,16 +2,12 @@ import React from 'react';
 import UserDetails from './UserDetails';
 
 const SingleUserHistory = ({ history, setOpenHistory }: any) => {
-  const [open, setOpen] = React.useState(false);
   const handleClose = () => {
     setOpenHistory(false);
   };
-  const handleOpen = () => {
-    setOpen(!open);
-  }
+
   return (
-    <div className="outside">
-      <div className="singleHistory-info">
+    <div className="singleHistory-info">
       <button onClick={handleClose} className="btn-close">
         Close
       </button>
@@ -19,16 +15,15 @@ const SingleUserHistory = ({ history, setOpenHistory }: any) => {
         history.map((single: any) => {
           return (
             <div className="single">
-              {' '}
-              {/* <div className="line"></div> */}
-              {single.createdAt.split('T')[0]} <span  onClick={handleOpen}>Purchases: {single.products.length}</span>
-              { single.products.map((product: any, index: number) => (
-                <UserDetails product={product} index={index} />
+              {single.createdAt.split('T')[0]} <span>Purchases: {single.products.length}</span>
+              {single.products.map((product: any, index: number) => (
+                <div className="" key={index}>
+                  <UserDetails product={product} />
+                </div>
               ))}
             </div>
           );
         })}
-    </div>
     </div>
   );
 };

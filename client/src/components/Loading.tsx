@@ -11,9 +11,9 @@ const Loading = () => {
   const location = useLocation();
 
   //Cart history
-const {inCart}: any = useSelector((state: AppState) => state.cart);
+  const { inCart }: any = useSelector((state: AppState) => state.cart);
   React.useEffect(() => {
-    const token = localStorage.getItem('token') as any;
+    const token = localStorage.getItem('token') as string;
     const goBack = () => {
       navigate('/login');
     };
@@ -29,9 +29,16 @@ const {inCart}: any = useSelector((state: AppState) => state.cart);
     <div className="loading">
       <div className="loading-spinner"></div>
       <div className="loading-text">
-        {location.pathname === '/history' ? <h1>Waiting for users details</h1> : <h1>Loading...</h1>}
-        {location.pathname === '/history' && inCart?.length > 0 ? <h1>Waiting for user purchase</h1> : null}
-        
+        {location.pathname === '/history' ? (
+          <h1>
+            Waiting for users details, <br /> this might take a few seconds...
+          </h1>
+        ) : (
+          <h1>Loading...</h1>
+        )}
+        {location.pathname === '/history' && inCart?.length > 0 ? (
+          <h1>Waiting for user purchase</h1>
+        ) : null}
       </div>
       <div className="loading-spinner-circle"></div>
       <div className="loading-spinner-line"></div>
@@ -46,5 +53,5 @@ export const styles = {
   loading: {
     height: '100vh',
     color: '#dd0e0e',
-  }
-}
+  },
+};

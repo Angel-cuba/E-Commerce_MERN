@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getAllHistory } from '../../api/admin';
+import { Link } from 'react-router-dom';
 import { AppState } from '../../types/ProductType';
 import Navbar from '../Navbar';
-import '../../styles/components/User/UsersHistory.scss';
-import { Link } from 'react-router-dom';
 import Loading from '../Loading';
 import SingleUserHistory from './SingleUserHistory';
+import '../../styles/components/User/UsersHistory.scss';
 
 const UsersHistory = () => {
   const { user } = useSelector((state: AppState) => state.user);
@@ -64,7 +64,7 @@ const UsersHistory = () => {
           <Loading />
         ) : (
           filtered.map((product: any, index: number) => (
-            <div className="user-container">
+            <div className="user-container" key={product._id}>
               <div key={index} className="user">
                 <div className="user-face">
                   <div className="user-image">
@@ -77,9 +77,13 @@ const UsersHistory = () => {
                   </div>
                 </div>
                 {/* button to show all purchases of this user */}
-                  <button onClick={openHistory ? closePurchasesByUser : () => PurchasesByUser(product.user._id)}>
-                    {openHistory && history[0].user._id === product.user._id ? 'Close' : 'Open'}
-                  </button>
+                <button
+                  onClick={
+                    openHistory ? closePurchasesByUser : () => PurchasesByUser(product.user._id)
+                  }
+                >
+                  {openHistory && history[0].user._id === product.user._id ? 'Close' : 'Open'}
+                </button>
               </div>
               {openHistory && history[0].user._id === product.user._id ? (
                 <div
@@ -91,7 +95,7 @@ const UsersHistory = () => {
                   onClick={() => openSingleUserPurchase(product.user._id)}
                 >
                   <h3>Information </h3>
-                  <div className="user-history-info">
+                  <div className="user-history-info" key={product.user._id}>
                     <SingleUserHistory history={history} setOpenHistory={setOpenHistory} />
                   </div>
                 </div>

@@ -1,9 +1,16 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const UserDetails = ({product, index}: any) => {
+const UserDetails = ({ product }: any) => {
   return (
-    <div className="user-details" key={product._id}>{index + 1}-{product.name}</div>
-  )
-}
+    <div className="user-details">
+      <div className="user-image">
+        <img src={product.image} alt="user" />
+      </div>
+      <p>{product.name}</p>
+      <Link to={`/product/${product._id}`}>Details</Link>
+    </div>
+  );
+};
 
-export default UserDetails
+export default UserDetails;
